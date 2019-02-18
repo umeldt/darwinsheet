@@ -155,7 +155,7 @@ class Variable_sheet(object):
         variable : str
             The name of the variable
 
-        parameter_list : 
+        parameter_list :
             List of paramters to be added
 
         Returns
@@ -220,38 +220,38 @@ def make_dict_of_fields():
     return field_dict
 
 
-def read_xml(args, xmlfile):
-    """
-    Read the XML file containing the definition of the wanted output xlsx files
+# def read_xml(args, xmlfile):
+    # """
+    # Read the XML file containing the definition of the wanted output xlsx files
 
-    Parameters
-    ----------
-    args : argparse object
-        The input args
+    # Parameters
+    # ----------
+    # args : argparse object
+    # The input args
 
-    xmlfile : str
-        The xml file to be read
+    # xmlfile : str
+    # The xml file to be read
 
-    Returns
-    ----------
-    files : list
-        List of dictionaries with the file specifications
-    """
+    # Returns
+    # ----------
+    # files : list
+    # List of dictionaries with the file specifications
+    # """
 
-    files = []
+    # files = []
 
-    e = xml.etree.ElementTree.parse(xmlfile).getroot()
-    if args.verbose > 0:
-        print("Reading")
-    for file in e.findall('file'):
-        new = {}
-        new['name'] = file.attrib['name']
-        new['disp_name'] = file.find('disp_name').text
-        new['fields'] = [
-            child.text for child in file.find('fields').getchildren()]
+    # e = xml.etree.ElementTree.parse(xmlfile).getroot()
+    # if args.verbose > 0:
+    # print("Reading")
+    # for file in e.findall('file'):
+    # new = {}
+    # new['name'] = file.attrib['name']
+    # new['disp_name'] = file.find('disp_name').text
+    # new['fields'] = [
+    # child.text for child in file.find('fields').getchildren()]
 
-        files.append(new)
-    return files
+    # files.append(new)
+    # return files
 
 
 def write_conversion(args, workbook):
@@ -340,7 +340,7 @@ def write_metadata(args, workbook, field_dict):
         The workbook for the metadata sheet
 
     field_dict : dict
-        Contains a dictionary of Field objects and their name, made with 
+        Contains a dictionary of Field objects and their name, made with
         make_dict_of _fields()
 
     """
@@ -396,32 +396,39 @@ def write_metadata(args, workbook, field_dict):
                     ii, ii, cell_format=cell_format)
 
 
-def make_xlsx(args, file, field_dict):
+def make_xlsx(args, file_def, field_dict, metadata, conversions):
     """
-    Writes the xlsx file based on the the wanted fields
+    Writes the xlsx file based on the wanted fields
 
     Parameters
     ----------
     args : argparse object
         The input arguments
 
-    file : dict
+    file_def : dict
         The definition of the file wanted, generate this with read_xml
 
     field_dict : dict
-        Contains a dictionary of Field objects and their name, made with 
+        Contains a dictionary of Field objects and their name, made with
         make_dict_of _fields()
+
+    metadata: Boolean
+        Should the metadata sheet be written
+
+    conversions: Boolean
+        Should the conversions sheet be written
 
     """
 
-    output = os.path.join(args.dir, file['name'] + '.xlsx')
+    output = os.path.join(args.dir, file_def['name'] + '.xlsx')
     workbook = xlsxwriter.Workbook(output)
 
     # Set font
     workbook.formats[0].set_font_name(DEFAULT_FONT)
     workbook.formats[0].set_font_size(DEFAULT_SIZE)
 
-    write_metadata(args, workbook, field_dict)
+    if metadata:
+        write_metadata(args, workbook, field_dict)
     # Create sheet for data
     data_sheet = workbook.add_worksheet('Data')
     variable_sheet_obj = Variable_sheet(workbook)
@@ -453,9 +460,10 @@ def make_xlsx(args, file, field_dict):
     parameter_row = title_row + 1  # Parameter row, hidden
     end_row = 20000  # ending row
 
-    for ii in range(len(file['fields'])):  # Loop over all the variables needed
+    # Loop over all the variables needed
+    for ii in range(len(file_def['fields'])):
         # Get the wanted field object
-        field = field_dict[file['fields'][ii]]
+        field = field_dict[file_def['fields'][ii]]
 
         # Write title row
         data_sheet.write(title_row, ii, field.disp_name, field_format)
@@ -465,7 +473,7 @@ def make_xlsx(args, file, field_dict):
         # Write validation
         if field.validation is not None:
             if args.verbose > 0:
-                print("Writing validation for", file['fields'][ii])
+                print("Writing validation for", file_def['fields'][ii])
 
             if field.long_list:
                 # We need to add the data to the validation sheet
@@ -507,7 +515,7 @@ def make_xlsx(args, file, field_dict):
             data_sheet.set_column(first_col=ii, last_col=ii, width=field.width)
 
     # Add header, done after the other to get correct format
-    data_sheet.write(0, 0, file['disp_name'], header_format)
+    data_sheet.write(0, 0, file_def['disp_name'], header_format)
     # Add hint about pasting
     data_sheet.merge_range(0, 1, 0, 7,
                            "When pasting only use 'paste special' / 'paste only', selecting numbers and/or text ",
@@ -528,12 +536,13 @@ def make_xlsx(args, file, field_dict):
 #         data_sheet.set_row(row, cell_format=row_col)
 #         worksheet.write(row, 0, '')
 
-    write_conversion(args, workbook)
+    if conversions:
+        write_conversion(args, workbook)
 
     workbook.close()
 
 
-def write_file(url, fields, field_dict):
+def write_file(url, fields, field_dict, metadata=True, conversions=True):
     """
     Method for calling from other python programs
 
@@ -548,80 +557,88 @@ def write_file(url, fields, field_dict):
     fields: dict
         A list of the wanted fields on the format shown in config.fields
 
+    metadata: Boolean
+        Should the metadata sheet be written
+        Default: True
+
+    conversions: Boolean
+        Should the conversions sheet be written
+        Default: True
+
     """
     args = Namespace()
     args.verbose = 0
     args.dir = os.path.dirname(url)
-    file = {'name': os.path.basename(url).split('.')[0],
-            'disp_name': 'Replace with measurement type',
-            'fields': fields}
+    file_def = {'name': os.path.basename(url).split('.')[0],
+                'disp_name': 'Replace with measurement type',
+                'fields': fields}
 
-    make_xlsx(args, file, field_dict)
-
-
-def main(argv=None):  # IGNORE:C0111
-    '''Command line options.'''
-    try:
-        args = parse_options()
-        xmlfile = args.input
-    #         save_pages(output, N=args.n)
-
-        files = read_xml(args, xmlfile)
-        for file in files:
-            if args.verbose > 0:
-                print("Writing file", file['disp_name'])
-            field_list = make_dict_of_fields()
-            make_xlsx(args, file, field_list)
-
-        return 0
-    except KeyboardInterrupt:
-        ### handle keyboard interrupt ###
-        return 0
+    make_xlsx(args, file_def, field_dict, metadata, conversions)
 
 
-def parse_options():
-    """
-    Parse the command line options and return these. Also performs some basic
-    sanity checks, like checking number of arguments.
-    """
-    program_version = "v%s" % __version__
-    program_build_date = str(__updated__)
-    program_version_message = '%%(prog)s %s (%s)' % (
-        program_version, program_build_date)
-    program_shortdesc = __import__('__main__').__doc__.split("\n")[1]
-    program_license = '''%s
+# def main(argv=None):  # IGNORE:C0111
+    # '''Command line options.'''
+    # try:
+    # args = parse_options()
+    # xmlfile = args.input
+    # save_pages(output, N=args.n)
 
-    Created by Pål Ellingsen on %s.
-    
-    Distributed on an "AS IS" basis without warranties
-    or conditions of any kind, either express or implied.
-    
-    USAGE
-''' % (program_shortdesc, str(__date__))
+    # files = read_xml(args, xmlfile)
+    # for file in files:
+    # if args.verbose > 0:
+    # print("Writing file", file['disp_name'])
+    # field_list = make_dict_of_fields()
+    # make_xlsx(args, file, field_list)
+
+    # return 0
+    # except KeyboardInterrupt:
+    #### handle keyboard interrupt ###
+    # return 0
+
+
+# def parse_options():
+    # """
+    # Parse the command line options and return these. Also performs some basic
+    # sanity checks, like checking number of arguments.
+    # """
+    # program_version = "v%s" % __version__
+    # program_build_date = str(__updated__)
+    # program_version_message = '%%(prog)s %s (%s)' % (
+    # program_version, program_build_date)
+    # program_shortdesc = __import__('__main__').__doc__.split("\n")[1]
+    # program_license = '''%s
+
+    # Created by Pål Ellingsen on %s.
+
+    # Distributed on an "AS IS" basis without warranties
+    # or conditions of any kind, either express or implied.
+
+    # USAGE
+# ''' % (program_shortdesc, str(__date__))
 
     # Setup argument parser
-    parser = ArgumentParser(description=program_license,
-                            formatter_class=RawDescriptionHelpFormatter)
+    # parser = ArgumentParser(description=program_license,
+    # formatter_class=RawDescriptionHelpFormatter)
 
-    parser.add_argument("-v", "--verbose", dest="verbose", action="count", default=0,
-                        help="set verbosity level [default: %(default)s]")
-    parser.add_argument('-V', '--version', action='version',
-                        version=program_version_message)
-    parser.add_argument(
-        '-d', dest='dir', default='', type=str, help="Set the optput directory, [default: %(default)s]")
-    parser.add_argument('-i', dest='input', default=os.path.join(os.path.dirname(
-        sys.argv[0]), 'config', 'files.xml'), help='''The input xml file, [default: %(default)s]"''')
+    # parser.add_argument("-v", "--verbose", dest="verbose", action="count", default=0,
+    # help="set verbosity level [default: %(default)s]")
+    # parser.add_argument('-V', '--version', action='version',
+    # version=program_version_message)
+    # parser.add_argument(
+    # '-d', dest='dir', default='', type=str, help="Set the optput directory, [default: %(default)s]")
+    # parser.add_argument('-i', dest='input', default=os.path.join(os.path.dirname(
+    # sys.argv[0]), 'config', 'files.xml'), help='''The input xml file, [default: %(default)s]"''')
 
     # Process arguments
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
-    if args.verbose > 0:
-        print("Verbose mode on")
+    # if args.verbose > 0:
+    # print("Verbose mode on")
 
-    return args
+    # return args
 
 
-if __name__ == "__main__":
-    if DEBUG:
-        sys.argv.append("-v")
-    sys.exit(main())
+# if __name__ == "__main__":
+    # if DEBUG:
+    # sys.argv.append("-v")
+    # sys.exit(main())

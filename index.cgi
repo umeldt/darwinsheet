@@ -224,7 +224,6 @@ templates = TemplateLookup(
 
 
 # method = 'POST'
-# method = 'Test'
 
 
 if method == "GET":  # This is for getting the page
@@ -310,7 +309,15 @@ elif method == "POST":
 
 #     print(depth.name, depth.disp_name, depth.validation)
 #     print(terms)
-    mx.write_file(path, terms, field_dict)
+    metadata = False
+    conversions = False
+    if 'extrasheet' in config:
+        if 'metadata' in config['extrasheet']:
+            metadata = True
+        if 'conversions' in config['extrasheet']:
+            conversions = True
+
+    mx.write_file(path, terms, field_dict, metadata, conversions)
 
     with open(path, "rb") as f:
         sys.stdout.flush()
