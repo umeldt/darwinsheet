@@ -20,18 +20,18 @@ from xlrd import XLRDError
 from argparse import ArgumentParser, RawDescriptionHelpFormatter, Namespace
 
 
-from os.path import os
-
-aen_config_dir = (os.path.abspath(os.path.join(os.path.dirname(__file__), )))
+import os.path
+aen_config_dir = (os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..')))
 
 sys.path.append(aen_config_dir)
-import config.fields as fields
-from make_xlsx import Field
+from scripts.make_xlsx import Field  # noqa: E402
+import config.fields as fields  # noqa: E402
 
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-08-11'
-__updated__ = '2018-09-27'
+__updated__ = '2019-02-18'
 
 DEBUG = 1
 
@@ -534,26 +534,27 @@ def check_array(data, checker_list, skiprows):
     errors = []
 
     # Check that all the required columns are there
-    can_miss=True
+    can_miss = True
     try:
         evID = np.where(data[0, :] == 'eventID')[0][0]
         pID = np.where(data[0, :] == 'parentEventID')[0][0]
         # If there are no samples without parent IDs we allow inhrited values to be missing
-        for row in range (1,data.shape[0]):
+        for row in range(1, data.shape[0]):
             if not(is_nan(data[row, evID])) and is_nan(data[row, pID]):
                 # We have a line with ID but not a parent, we stop here
-                can_miss = False 
+                can_miss = False
                 break
     except IndexError:
         # Either eventID or parentEventID is missing
         # We are continuing as we know that there are missing columns
-        good=False
+        good = False
 
     for req in REQUIERED:
-        if not(req in data[0, :]) and not(can_miss and checker_list[req].inherit) :
+        if not(req in data[0, :]) and not(can_miss and checker_list[req].inherit):
             # print("Missing "+req)
             good = False
-            errors.append("Missing required column (parent UUIDs missing?): " + req)
+            errors.append(
+                "Missing required column (parent UUIDs missing?): " + req)
 
     if not(good):
         errors.append(
@@ -616,7 +617,7 @@ def check_array(data, checker_list, skiprows):
                         if checker.name != 'parentEventID' and 'remarks' not in checker.name.lower():
                             mis.append(row+skiprows+2)
         if rows != []:
-            print("Testing",rows)
+            print("Testing", rows)
             errors.append(checker.disp_name + ' ('+checker.name + ')'+", Rows: " +
                           to_ranges_str(rows) + ' Error: Content in wrong format')
         if missing != []:
@@ -892,15 +893,16 @@ def run(input, return_data=False):
 
     return args
 
+
 def main(argv=None):  # IGNORE:C0111
     '''Command line options.'''
     try:
         args = parse_options()
         infile = args.input
     #         save_pages(output, N=args.n)
-        good,error = run(infile)
+        good, error = run(infile)
         if good:
-            print ("File OK:)")
+            print("File OK:)")
         else:
             print("Errors found. They were:")
             for line in error:
@@ -945,6 +947,7 @@ def parse_options():
     args = parser.parse_args()
 
     return args
+
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -15,16 +15,16 @@ from argparse import ArgumentParser, RawDescriptionHelpFormatter, Namespace
 
 from os.path import os
 
-aen_config_dir = (os.path.abspath(os.path.join(os.path.dirname(__file__), )) +
-                  '/config/')
+config_dir = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), '..', 'config'))
 
-sys.path.append(aen_config_dir)
-import fields as fields
+sys.path.append(config_dir)
+import fields  # noqa: E402
 
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-05-22'
-__updated__ = '2018-07-06'
+__updated__ = '2019-02-18'
 
 DEBUG = 1
 
@@ -253,6 +253,7 @@ def read_xml(args, xmlfile):
         files.append(new)
     return files
 
+
 def write_conversion(args, workbook):
     """
     Adds a conversion sheet to workbook
@@ -312,18 +313,18 @@ def write_conversion(args, workbook):
     heigth = 15
     sheet.set_column(0, 2, width=30)
 
-    sheet.write(1,0, "Coordinate conversion ",parameter_format)
-    sheet.merge_range(2,0,2,1, "Degree Minutes Seconds ",center_format)
-    sheet.write(3,0, "Degrees ",parameter_format)
-    sheet.write(4,0, "Minutes ",parameter_format)
-    sheet.write(5,0, "Seconds ",parameter_format)
-    sheet.write(6,0, "Decimal degrees ",output_format)
-    sheet.write(6,1, "=B4+B5/60+B6/3600 ",output_format)
-    sheet.merge_range(7,0,7,1, "Degree decimal minutes",center_format)
-    sheet.write(8,0, "Degrees ",parameter_format)
-    sheet.write(9,0, "Decimal minutes ",parameter_format)
-    sheet.write(10,0, "Decimal degrees ",output_format)
-    sheet.write(10,1, "=B9+B10/60 ",output_format)
+    sheet.write(1, 0, "Coordinate conversion ", parameter_format)
+    sheet.merge_range(2, 0, 2, 1, "Degree Minutes Seconds ", center_format)
+    sheet.write(3, 0, "Degrees ", parameter_format)
+    sheet.write(4, 0, "Minutes ", parameter_format)
+    sheet.write(5, 0, "Seconds ", parameter_format)
+    sheet.write(6, 0, "Decimal degrees ", output_format)
+    sheet.write(6, 1, "=B4+B5/60+B6/3600 ", output_format)
+    sheet.merge_range(7, 0, 7, 1, "Degree decimal minutes", center_format)
+    sheet.write(8, 0, "Degrees ", parameter_format)
+    sheet.write(9, 0, "Decimal minutes ", parameter_format)
+    sheet.write(10, 0, "Decimal degrees ", output_format)
+    sheet.write(10, 1, "=B9+B10/60 ", output_format)
 
 
 def write_metadata(args, workbook, field_dict):

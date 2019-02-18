@@ -26,13 +26,13 @@ import xlsxwriter
 import shutil
 import http.cookies as Cookie
 import textwrap
-import AeN.scripts.config.fields as fields
-import AeN.scripts.make_xlsx as mx
+import scripts.make_xlsx as mx
+import config.fields as fields
 
-__updated__ = '2018-08-28'
+__updated__ = '2019-02-18'
 
 
-# cgitb.enable()
+#cgitb.enable()
 SETUP_DEFAULT = 'default'
 
 cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))

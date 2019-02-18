@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 # encoding: utf-8
-
-
 '''
  -- Web interface for printing labels
 
@@ -16,8 +14,8 @@ import io
 import sys
 import cgi
 import cgitb
-import AeN.scripts.process_xlsx as px
-__updated__ = '2018-08-13'
+import scripts.process_xlsx as px
+__updated__ = '2019-02-18'
 
 
 cgitb.enable()
