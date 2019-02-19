@@ -9,12 +9,12 @@ cores:
     sheets:
       - name: aen
         extrasheet: [metadata, conversions]
-        required: [eventID ]
-        recommended: [eventRemarks,eventDate, eventTime,  samplingProtocol,parentEventID, sampleLocation, pi_name, pi_email, pi_institution, recordedBy, sampleType]
-        grouping: [required,recommended, event, storage,identification, description, measurement, trawl_or_net, ice, water, sediment,paleo, instrumentation, sample_responsible, comments ]
+        required: [eventID, eventRemarks, eventDate, eventTime,  samplingProtocol,parentEventID, sampleLocation, pi_name, pi_email, pi_institution, recordedBy, sampleType]
+        recommended: []
+        grouping: [required,recommended, event, storage,identification, description, measurement, trawl_or_net, ice, water, sediment, paleo, instrumentation, sample_responsible, comments ]
         terms:
-          required: [eventID,parentEventID ,samplingProtocol, sampleLocation, pi_name, pi_email, pi_institution, recordedBy, sampleType]
-          recommended: [cruiseNumber, stationName,eventDate, eventTime, decimalLatitude, decimalLongitude, bottomDepthInMeters]
+          required: [eventID,parentEventID ,eventDate, eventTime, samplingProtocol, sampleLocation, pi_name, pi_email, pi_institution, recordedBy, sampleType, eventRemarks]
+          recommended: [cruiseNumber, stationName, decimalLatitude, decimalLongitude, bottomDepthInMeters]
           event: [ start_date, end_date,
             statID, recordNumber,
             sampleDepthInMeters, maximumDepthInMeters, minimumDepthInMeters,
@@ -30,10 +30,10 @@ cores:
           paleo: [sedimentCoreMinimumDepthInCentiMeters, sedimentCoreMaximumDepthInCentiMeters, sedimentCoreLengthInMeters]
           instrumentation: [dataFilename, serialNumber]
           sample_responsible: [ pi_address ]
-          comments: [occurrenceRemarks, fieldNotes, eventRemarks]
-  - name: default
+          comments: [occurrenceRemarks, fieldNotes ]
+  - name: darwin
     sheets:
-      - name: default
+      - name: darwin
         required: [ occurrenceID, basisOfRecord, eventDate, scientificName ]
         recommended: [ occurrenceID, basisOfRecord, eventDate, kingdom, scientificName, taxonRank, decimalLatitude, decimalLongitude, geodeticDatum, coordinateUncertaintyInMeters, countryCode, individualCount, organismQuantity, organismQuantityType ]
         grouping: [ recordLevel, occurrence, event, location, identification, taxon, organism, other]
