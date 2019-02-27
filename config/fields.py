@@ -63,14 +63,14 @@ __updated__ = '2018-07-05'
 
 
 uuid = {'name': 'eventID',
-        'disp_name': 'Sample ID',
+        'disp_name': 'Event ID',
         'width': 38,
         'dwcid': 'http://rs.tdwg.org/dwc/terms/eventID',
         'valid': {
             'validate': 'length',
             'criteria': '==',
             'value': 36,
-            'input_title': 'Sample ID',
+            'input_title': 'Event ID',
             'input_message': '''Should be a 36 character long UUID including 4 '-'.
 Could be read in with a code reader.''',
             'error_title': 'Error',
@@ -80,14 +80,14 @@ Could be read in with a code reader.''',
 
 
 puuid = {'name': 'parentEventID',
-         'disp_name': 'Parent sample UUID',
+         'disp_name': 'Parent event UUID',
          'width': 38,
          'dwcid': 'http://rs.tdwg.org/dwc/terms/parentEventID',
          'valid': {
              'validate': 'length',
              'criteria': '==',
              'value': 36,
-             'input_title': 'Parent sample UUID',
+             'input_title': 'Parent event UUID',
              'input_message': '''ID of the sample this subsample was taken from.
 Should be a 36 characters long UUID including 4 '-'
 Could be read in with a code reader.''',
@@ -588,7 +588,7 @@ recordNumber = {'name': 'recordNumber',
                     'validate': 'any',
                     'input_title': 'Recorded Number',
                     'input_message': '''This is an additional number used to identify the sample.
-This is in addition to the sample ID (event ID)'''
+This is in addition to the event ID'''
                 }
                 }
 # number = {'name': 'number',
