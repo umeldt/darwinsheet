@@ -33,7 +33,7 @@ __updated__ = '2019-02-18'
 
 
 #cgitb.enable()
-SETUP_DEFAULT = 'default'
+SETUP_DEFAULT = 'darwin'
 
 cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 

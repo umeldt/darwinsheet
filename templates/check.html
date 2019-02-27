@@ -33,12 +33,23 @@ main{
 }
 </style>
 <main>
-<h1>Nansen Legacy Excel sheet checker</h1>
+<h1>Excel sheet checker</h1>
 <a href="../../">Back to index</a><br>
-<p>Choose the correct file and upload it</p>
+<p>Choose the correct file, upload it and what to check it against</p>
 <form method="post" enctype="multipart/form-data">
     <input id="fileupload" name="myfile" type="file" />
     <input type="submit" value="submit" id="submit" />
+    <br>
+    Check against: 
+    <select name=setup>
+      % for name in names:
+        <option 
+        % if name == 'aen':
+          selected 
+        % endif
+        value='${name}'>${name}</option>
+      % endfor
+    </select>
 </form>
 </main>
 

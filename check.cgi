@@ -14,8 +14,9 @@ import io
 import sys
 import cgi
 import cgitb
+import yaml
 import scripts.process_xlsx as px
-__updated__ = '2019-02-18'
+__updated__ = '2019-02-19'
 
 
 cgitb.enable()
@@ -29,11 +30,14 @@ templates = TemplateLookup(
     directories=['templates'], output_encoding='utf-8')
 
 
-# method = 'POST'
-# method = 'Test'
+cores = yaml.load(
+    open(os.path.join("config", "config.yaml"), encoding='utf-8'))['cores']
 
-#if method == "GET":  # This is for getting the page
-
+names = []  # For holding a list over the possible setups
+for core in cores:
+    names.append(core['name'])
+    if core['name'] == setup:
+        config = core['sheets'][0]
 
 # Using sys, as print doesn't work for cgi in python3
 template = templates.get_template("check.html")
@@ -41,10 +45,10 @@ template = templates.get_template("check.html")
 sys.stdout.flush()
 sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
 
-def write_page():
+def write_page(names):
     # Write the page
     sys.stdout.buffer.write(
-        template.render())
+        template.render(names=names))
 
 
 def warn(message,color='red'):
@@ -53,12 +57,18 @@ def warn(message,color='red'):
 
 if method == "POST":
     
+    form = cgi.FieldStorage()
+
+    # For determining what to check against
+
+    setup = form['setup'].value
+
     sys.stdout.buffer.write(b"<!doctype html>\n<html>\n <meta charset='utf-8'>")
     form = cgi.FieldStorage()
     warn(form['myfile'].filename,color='black')
     # print(form['myfile'].value)
     # warn(form)
-    good, error = px.run(io.BytesIO(form['myfile'].value))
+    good, error = px.run(io.BytesIO(form['myfile'].value),setup=setup)
     if good:
         warn("File OK :)",color='green')
     else:
@@ -69,4 +79,4 @@ if method == "POST":
         
     sys.stdout.buffer.write(b'</html>')
 elif method == "GET":
-    write_page()
+    write_page(names)

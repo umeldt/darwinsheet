@@ -11,6 +11,7 @@
 import sys
 import uuid
 import io
+import yaml
 import pandas as pd
 import numpy as np
 import datetime as dt
@@ -31,27 +32,27 @@ import config.fields as fields  # noqa: E402
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-08-11'
-__updated__ = '2019-02-18'
+__updated__ = '2019-02-19'
 
 DEBUG = 1
 
-REQUIERED = ['eventID',
-             'cruiseNumber',
-             'stationName',
-             'eventTime',
-             'eventDate',
-             'decimalLatitude',
-             'decimalLongitude',
-             'bottomDepthInMeters',
-             'eventRemarks',
-             'samplingProtocol',
-             'parentEventID',
-             'sampleLocation',
-             'pi_name',
-             'pi_email',
-             'pi_institution',
-             'recordedBy',
-             'sampleType']
+# REQUIERED = ['eventID',
+# 'cruiseNumber',
+# 'stationName',
+# 'eventTime',
+# 'eventDate',
+# 'decimalLatitude',
+# 'decimalLongitude',
+# 'bottomDepthInMeters',
+# 'eventRemarks',
+# 'samplingProtocol',
+# 'parentEventID',
+# 'sampleLocation',
+# 'pi_name',
+# 'pi_email',
+# 'pi_institution',
+# 'recordedBy',
+# 'sampleType']
 
 
 def make_valid_dict():
@@ -86,12 +87,12 @@ def make_valid_dict():
 
 def xlsx_to_array(url, sheetname='Data', skiprows=1, **kwds):
     """
-    Convert xlsx to numpy 2D array of objects 
+    Convert xlsx to numpy 2D array of objects
 
     Parameters
     ---------
 
-    url: string or io 
+    url: string or io
         Can either be a path or and io object
 
     sheetname: str
@@ -99,7 +100,7 @@ def xlsx_to_array(url, sheetname='Data', skiprows=1, **kwds):
         Default: 'Data'
 
     skiprows: int
-        The numper of rows to skip 
+        The numper of rows to skip
         Default: 2
 
     **kwds : dict
@@ -108,8 +109,8 @@ def xlsx_to_array(url, sheetname='Data', skiprows=1, **kwds):
     Returns
     ---------
 
-    data: numpy ndarray 
-        A numpy ndarray of objects for the sheet. 
+    data: numpy ndarray
+        A numpy ndarray of objects for the sheet.
     """
 
     if isinstance(url, str):
@@ -124,7 +125,7 @@ def xlsx_to_array(url, sheetname='Data', skiprows=1, **kwds):
 
 def format_num(num):
     """
-    Convert a string with a number to a number by removing common mistakes 
+    Convert a string with a number to a number by removing common mistakes
     in Excel.
     Converts ',' to '.'
     Removes leading "'"
@@ -137,7 +138,7 @@ def format_num(num):
     ---------
 
     num: object
-        The number to be converted. 
+        The number to be converted.
         If it is an int or float, nothing is done with it.
         Needs to be convertible into a string.
     Returns
@@ -161,18 +162,18 @@ def format_num(num):
 
 def is_nan(value):
     """
-    Checks if value is 'nan' or NaT 
+    Checks if value is 'nan' or NaT
 
     Parameters
     ---------
 
-    value: object 
+    value: object
         The object to be checked that it is not nan
 
     Returns
     ---------
 
-    isnan: Boolean 
+    isnan: Boolean
         True: nan
         False: not nan
     """
@@ -196,14 +197,14 @@ class Evaluator(object):
 
         validation: dict
             A dict containing the validation information.
-            Can be used in evaluator function by referencing the property 
-            self.validation 
+            Can be used in evaluator function by referencing the property
+            self.validation
 
         func: lambda function, optional
             This function should take two inputs, self and a value.
             If this is not set here, it needs to be set using the set_func
             method
-            Should return a boolean, where True means the value has passed the 
+            Should return a boolean, where True means the value has passed the
             test
             An example of a functions is:
             lambda self,x : self.valid['value'] < len(x)
@@ -225,7 +226,7 @@ class Evaluator(object):
             This function should take two inputs, self and a value.
             If this is not set here, it needs to be set using the set_func
             method
-            Should return a boolean, where True means the value has passed the 
+            Should return a boolean, where True means the value has passed the
             test
             An example of a functions is:
             lambda self, x : self.valid['value'] < len(x)
@@ -349,7 +350,7 @@ class Checker(Field):
 
         def _formula_to_date(formula):
             """
-            Internal function for converting validation date functions (Excel 
+            Internal function for converting validation date functions (Excel
             function) to a datetime date object
 
             Parameters
@@ -362,7 +363,7 @@ class Checker(Field):
             Returns
             ---------
 
-            date: datetime date object  
+            date: datetime date object
                 The resulting date from the fomula
             """
 
@@ -500,7 +501,7 @@ def check_value(value, checker):
         return checker.validator.evaluate(value)
 
 
-def check_array(data, checker_list, skiprows):
+def check_array(data, checker_list, skiprows, config):
     """
     Checks the data according to the validators in the checker_list
     Returns True if the data is good, as well as an empty string
@@ -513,12 +514,15 @@ def check_array(data, checker_list, skiprows):
         The first row should contain the names of the fields as specified in fields.py
 
     checker_list : dict of Checker objects
-        This is a list of the possible checkers made by make_valid_dict 
+        This is a list of the possible checkers made by make_valid_dict
 
     skiprows: int
         The number of rows skipped when reading in the data with pandas
         If something else is used this should be 1 less, as pandas skips one row
         This is needed to give the excel reference correct
+
+    config: yaml config
+        The yaml configuration for the file.
 
     Returns
     ---------
@@ -535,26 +539,33 @@ def check_array(data, checker_list, skiprows):
 
     # Check that all the required columns are there
     can_miss = True
-    try:
-        evID = np.where(data[0, :] == 'eventID')[0][0]
-        pID = np.where(data[0, :] == 'parentEventID')[0][0]
-        # If there are no samples without parent IDs we allow inhrited values to be missing
-        for row in range(1, data.shape[0]):
-            if not(is_nan(data[row, evID])) and is_nan(data[row, pID]):
-                # We have a line with ID but not a parent, we stop here
-                can_miss = False
-                break
-    except IndexError:
-        # Either eventID or parentEventID is missing
-        # We are continuing as we know that there are missing columns
-        good = False
+    if config['name'] == 'aen':
+        try:
+            evID = np.where(data[0, :] == 'eventID')[0][0]
+            pID = np.where(data[0, :] == 'parentEventID')[0][0]
+            # If there are no samples without parent IDs we allow inherited values to be missing
+            for row in range(1, data.shape[0]):
+                if not(is_nan(data[row, evID])) and is_nan(data[row, pID]):
+                    # We have a line with ID but not a parent, we stop here
+                    can_miss = False
+                    break
+        except IndexError:
+            # Either eventID or parentEventID is missing
+            # We are continuing as we know that there are missing columns
+            good = False
 
-    for req in REQUIERED:
+    required = config['required'][:]
+
+    for req in required:
         if not(req in data[0, :]) and not(can_miss and checker_list[req].inherit):
             # print("Missing "+req)
             good = False
-            errors.append(
-                "Missing required column (parent UUIDs missing?): " + req)
+            if config['name'] == 'aen':
+                errors.append(
+                    "Missing required column (parent UUIDs missing?): " + req)
+            else:
+                errors.append(
+                    'Missing required column: ' + req)
 
     if not(good):
         errors.append(
@@ -567,15 +578,16 @@ def check_array(data, checker_list, skiprows):
     except IndexError:
         gear = None
 
-    # Check that parent and event are not the same uuid
-    sim = []
-    for row in range(1, data.shape[0]):
-        if data[row, evID] == data[row, pID]:
-            sim.append(row+skiprows+2)
-    if sim != []:
-        good = False
-        errors.append(to_ranges_str(sim) +
-                      ' Error: eventID (sampleID) is the same as parent ID')
+    if config['name'] == 'aen':
+        # Check that parent and event are not the same uuid
+        sim = []
+        for row in range(1, data.shape[0]):
+            if data[row, evID] == data[row, pID]:
+                sim.append(row+skiprows+2)
+        if sim != []:
+            good = False
+            errors.append(to_ranges_str(sim) +
+                          ' Error: eventID (sampleID) is the same as parent ID')
 
     for col in range(data.shape[1]):
         if is_nan(data[0, col]):
@@ -591,7 +603,7 @@ def check_array(data, checker_list, skiprows):
         rows = []
         missing = []
         mis = []  # For ones that can't be inherited
-        req = checker.name in REQUIERED
+        req = checker.name in required
         # Checking type
         for row in range(1, data.shape[0]):
             if not(check_value(data[row, col], checker)):
@@ -599,7 +611,7 @@ def check_array(data, checker_list, skiprows):
                     errors.append("Content errors")
                 good = False
                 rows.append(row+skiprows+2)
-            if req and (is_nan(data[row, col]) or data[row, col] == ''):
+            if config['name'] == 'aen' and req and (is_nan(data[row, col]) or data[row, col] == ''):
                 if not(is_nan(data[row, evID])):
                     if checker.inherit:
                         if is_nan(data[row, pID]):
@@ -617,7 +629,7 @@ def check_array(data, checker_list, skiprows):
                         if checker.name != 'parentEventID' and 'remarks' not in checker.name.lower():
                             mis.append(row+skiprows+2)
         if rows != []:
-            print("Testing", rows)
+            #print("Testing", rows)
             errors.append(checker.disp_name + ' ('+checker.name + ')'+", Rows: " +
                           to_ranges_str(rows) + ' Error: Content in wrong format')
         if missing != []:
@@ -662,7 +674,7 @@ def check_meta(metadata, checker_list, skipcols=1):
         The first column should contain the names of the fields as specified in fields.py
 
     checker_list : dict of Checker objects
-        This is a list of the possible checkers made by make_valid_dict 
+        This is a list of the possible checkers made by make_valid_dict
 
     skipcols: int, optional
         The number of columns skipped when reading in the data with pandas
@@ -713,8 +725,8 @@ def to_ranges_str(lis):
     Returns
     ---------
 
-    out: string 
-        The resulting string with ranges for sequences consisting of more than 
+    out: string
+        The resulting string with ranges for sequences consisting of more than
         two steps. Enclosed in swuare ([]) brackets
     """
 
@@ -735,7 +747,7 @@ def to_ranges_str(lis):
                 if ii > 2:
                     out = out + ' - ' + str(prev)
                 # else:
-                    #out = out +', '+str(prev)
+                    # out = out +', '+str(prev)
                 prev = l
                 first = l
                 out = out + ', ' + str(first)
@@ -743,7 +755,7 @@ def to_ranges_str(lis):
         if ii > 2:
             out = out + ' - ' + str(prev)
         # else:
-            #out = out +', '+str(prev)
+            # out = out +', '+str(prev)
 
     out = out + ']'
     return out
@@ -763,7 +775,7 @@ def prune(data):
     ---------
 
     data: numpy ndarray of objects
-        The data to be pruned. 
+        The data to be pruned.
 
 
     Returns
@@ -820,30 +832,35 @@ def clean(data):
     return cleaned_data
 
 
-def run(input, return_data=False):
+def run(fname, return_data=False, setup='aen'):
     """
     Method for running the checker on the given input.
-    If importing in another program, this should be called instead of the main 
+    If importing in another program, this should be called instead of the main
     function
     Can be used to return the data as well
 
     Parameters
     ---------
 
-    input: string or file like object
-        The file to be checked. Can be anything the pandas read_excel method 
+    fname: string or file like object
+        The file to be checked. Can be anything the pandas read_excel method
         excepts (string url, file like object,...)
 
     return_data: Boolean
         Should the data and metadata be returned
         Default: False
 
+    setup: str
+        type of setup to check against.
+        Has to be one of the ones in the config.yaml file
+        Default: aen
+
     Returns
     ---------
 
     good: Boolean
         The result.
-        True: pass 
+        True: pass
         False: fail
 
     errors: string
@@ -861,37 +878,45 @@ def run(input, return_data=False):
         The second the values
     """
 
+    cores = yaml.load(
+        open(os.path.join('config', 'config.yaml', encoding='utf-8'))['cores'))
+    for core in cores:
+        if core['name'] == setup:
+            config = core['sheets'][0]
+
     checker_list = make_valid_dict()
     # Read in data and prune of custom columns
     skiprows = 1
     try:
-        data = prune(xlsx_to_array(input, skiprows=1))
+        data = prune(xlsx_to_array(fname, skiprows=1))
         data = clean(data)
     except XLRDError:
         return False, ["Does not contain the 'Data' sheet. Is this the correct file?"]
-    # Check the dat array
-    good, error = check_array(data, checker_list, skiprows)
+    # Check the data array
+    good, error = check_array(data, checker_list, skiprows, config)
 
-    # Read in metadata and check it
-    try:
-        if isinstance(input, io.BytesIO):
-            input.seek(0)
-        metadata = xlsx_to_array(
-            input, sheetname="Metadata", skiprows=None, header=None)
-        # print(metadata[:,1])
-    except XLRDError:
-        return False, ["Does not contain the 'Metadata' sheet. Is this the correct file?"]
+    # Check if we should look for the metadata sheet
+    if 'extrasheet' in config and 'metadata' in config['extrasheet']:
+        # Read in metadata and check it
+        try:
+            if isinstance(fname, io.BytesIO):
+                fname.seek(0)
+            metadata = xlsx_to_array(
+                fname, sheetname="Metadata", skiprows=None, header=None)
+            # print(metadata[:,1])
+        except XLRDError:
+            return False, ["Does not contain the 'Metadata' sheet. Is this the correct file?"]
 
-    g, e = check_meta(metadata[:, 1:3], checker_list)
-    good = good and g
-    for it in e:
-        error.append(it)
+        g, e = check_meta(metadata[:, 1:3], checker_list)
+
+        good = good and g
+        for it in e:
+            error.append(it)
+
     if return_data:
         return good, error, data, metadata[:, 1:3]
     else:
         return good, error
-
-    return args
 
 
 def main(argv=None):  # IGNORE:C0111
@@ -900,7 +925,7 @@ def main(argv=None):  # IGNORE:C0111
         args = parse_options()
         infile = args.input
     #         save_pages(output, N=args.n)
-        good, error = run(infile)
+        good, error = run(infile, setup=arg.type)
         if good:
             print("File OK:)")
         else:
@@ -927,10 +952,10 @@ def parse_options():
     program_license = '''%s
 
     Created by Pål Ellingsen on %s.
-    
+
     Distributed on an "AS IS" basis without warranties
     or conditions of any kind, either express or implied.
-    
+
     USAGE
 ''' % (program_shortdesc, str(__date__))
 
@@ -940,6 +965,8 @@ def parse_options():
 
     parser.add_argument("input", type=str,
                         help="The input xlsx file to check")
+    parser.add_argument('-t', "type", type=str, default='aen'
+                        help="The type of input file, [aen or darwin], Default: aen ")
     parser.add_argument('-V', '--version', action='version',
                         version=program_version_message)
 

@@ -24,7 +24,7 @@ import fields  # noqa: E402
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-05-22'
-__updated__ = '2019-02-18'
+__updated__ = '2019-02-19'
 
 DEBUG = 1
 
@@ -156,7 +156,7 @@ class Variable_sheet(object):
             The name of the variable
 
         parameter_list :
-            List of paramters to be added
+            List of parameters to be added
 
         Returns
         ----------
@@ -498,6 +498,12 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions):
                     valid_copy['input_message'] = valid_copy[
                         'input_message'][:252] + '...'
                 valid_copy['input_message'].replace('\n', '\n\r')
+                # Need to make sure that 'input_title' is not more than 32
+                # characters long
+                if len(valid_copy['input_title']) > 32:
+                    valid_copy['input_title'] = valid_copy[
+                        'input_title'][:32]
+
                 data_sheet.data_validation(first_row=start_row,
                                            first_col=ii,
                                            last_row=end_row,
