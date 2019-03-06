@@ -11,6 +11,7 @@
 import sys
 import uuid
 import io
+import rdflib
 import yaml
 import pandas as pd
 import numpy as np
@@ -32,7 +33,7 @@ import config.fields as fields  # noqa: E402
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-08-11'
-__updated__ = '2019-02-19'
+__updated__ = '2019-03-06'
 
 DEBUG = 1
 
@@ -55,10 +56,61 @@ DEBUG = 1
 # 'sampleType']
 
 
+class Term:
+    '''
+    Class for reading holding rdf terms
+    '''
+
+    terms = []
+
+    @staticmethod
+    def get(id):
+        for t in Term.terms:
+            if t.uri == id or t.name == id:
+                return t
+        return Term(id)
+
+    def __init__(self, uri):
+        self.uri = uri
+        self.name = uri.rsplit("/", 1)[-1]
+        self.labels = {}
+        self.examples = {}
+        self.definitions = {}
+        self.validations = {}
+        Term.terms.append(self)
+
+    def __lt__(self, other):
+        #         print(self.uri, other.uri)
+        return self.name.casefold() < other.name.casefold()
+
+    def __eq__(self, other):
+        return self.name.casefold() == other.name.casefold()
+
+    def translate(self, d, lang):
+        if lang in d:
+            return d[lang]
+        if '_' in d:
+            return d['_']
+        return ""
+
+    def label(self, lang=None):
+        return self.translate(self.labels, lang)
+
+    def example(self, lang=None):
+        return self.translate(self.examples, lang)
+
+    def definition(self, lang=None):
+        return self.translate(self.definitions, lang)
+
+    def validation(self, lang=None):
+        return self.translate(self.validations, lang)
+
+
 def make_valid_dict():
     """
     Makes a dictionary of the possible fields with their validation.
-    Does this by reading the fields list from the fields.py library
+    Does this by reading the fields list from the fields.py library, the 
+    dwcterms.rdf (Darwin core) file  and dcterms.rdf (Dublin Core) 
 
     Returns
     ---------
@@ -68,11 +120,9 @@ def make_valid_dict():
 
 
     """
-
+    # First we go through the fields.py
     field_dict = {}
     for field in fields.fields:
-        field['name'] = field['name']
-        # print(field['name'])
         new = Checker(name=field['name'], disp_name=field['disp_name'])
         if 'valid' in field:
             new.set_validation(field['valid'])
@@ -82,6 +132,33 @@ def make_valid_dict():
             new.units = field['units']
 #             print(new.validation)
         field_dict[field['name']] = new
+
+    g = rdflib.Graph()
+    g.load("dwcterms.rdf")
+    def_valid = {'validate': 'any'}
+    # Populate the terms with the terms from dwc
+    for s, p, o in g:
+        if str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
+            term = Term.get(s)
+            term.labels['en'] = str(o)
+            if term.name not in field_dict.keys():
+                new = Checker(
+                    name=term.name, disp_name=term.labels['en'])
+                new.set_validation(def_valid)
+                field_dict[term.name] = new
+
+    g.load("dcterms.rdf")
+    # Populate the terms with the terms from dublin core
+    for s, p, o in g:
+        if str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
+            term = Term.get(s)
+            term.labels['en'] = str(o)
+            if term.name not in field_dict.keys():
+                new = Checker(
+                    name=term.name, disp_name=term.labels['en'])
+                new.set_validation(def_valid)
+                field_dict[term.name] = new
+
     return field_dict
 
 
@@ -364,7 +441,7 @@ class Checker(Field):
             ---------
 
             date: datetime date object
-                The resulting date from the fomula
+                The resulting date from the formula
             """
 
             form = formula.replace('=', '')
@@ -557,7 +634,11 @@ def check_array(data, checker_list, skiprows, config):
     required = config['required'][:]
 
     for req in required:
-        if not(req in data[0, :]) and not(can_miss and checker_list[req].inherit):
+        if not(req in checker_list):
+            inherit = False
+        else:
+            inherit = checker_list[req].inherit
+        if not(req in data[0, :]) and not(can_miss and inherit):
             # print("Missing "+req)
             good = False
             if config['name'] == 'aen':
@@ -621,7 +702,7 @@ def check_array(data, checker_list, skiprows, config):
                                     # Gear doesn't need to have sampleType and location
                             if (checker.name == "sampleType" or checker.name == "sampleLocation") and gear is not None:
                                 if is_nan(data[row, gear]):
-                                    print("Here")
+                                    # print("Here")
                                     missing.append(row+skiprows+2)
                                     continue
                                 else:
@@ -629,7 +710,7 @@ def check_array(data, checker_list, skiprows, config):
                         if checker.name != 'parentEventID' and 'remarks' not in checker.name.lower():
                             mis.append(row+skiprows+2)
         if rows != []:
-            #print("Testing", rows)
+            # print("Testing", rows)
             errors.append(checker.disp_name + ' ('+checker.name + ')'+", Rows: " +
                           to_ranges_str(rows) + ' Error: Content in wrong format')
         if missing != []:
@@ -879,7 +960,7 @@ def run(fname, return_data=False, setup='aen'):
     """
 
     cores = yaml.load(
-        open(os.path.join('config', 'config.yaml', encoding='utf-8'))['cores'))
+        open(os.path.join('config', 'config.yaml'), encoding='utf-8'))['cores']
     for core in cores:
         if core['name'] == setup:
             config = core['sheets'][0]
@@ -965,7 +1046,7 @@ def parse_options():
 
     parser.add_argument("input", type=str,
                         help="The input xlsx file to check")
-    parser.add_argument('-t', "type", type=str, default='aen'
+    parser.add_argument('-t', "type", type=str, default='aen',
                         help="The type of input file, [aen or darwin], Default: aen ")
     parser.add_argument('-V', '--version', action='version',
                         version=program_version_message)

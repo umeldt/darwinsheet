@@ -27,9 +27,10 @@ import shutil
 import http.cookies as Cookie
 import textwrap
 import scripts.make_xlsx as mx
+from scripts.process_xlsx import Term
 import config.fields as fields
 
-__updated__ = '2019-02-18'
+__updated__ = '2019-03-06'
 
 
 #cgitb.enable()
@@ -52,52 +53,6 @@ if 'setup' in form:
 else:
     setup = SETUP_DEFAULT
 # print(setup)
-
-
-class Term:
-    terms = []
-
-    @staticmethod
-    def get(id):
-        for t in Term.terms:
-            if t.uri == id or t.name == id:
-                return t
-        return Term(id)
-
-    def __init__(self, uri):
-        self.uri = uri
-        self.name = uri.rsplit("/", 1)[-1]
-        self.labels = {}
-        self.examples = {}
-        self.definitions = {}
-        self.validations = {}
-        Term.terms.append(self)
-
-    def __lt__(self, other):
-        #         print(self.uri, other.uri)
-        return self.name.casefold() < other.name.casefold()
-
-    def __eq__(self, other):
-        return self.name.casefold() == other.name.casefold()
-
-    def translate(self, d, lang):
-        if lang in d:
-            return d[lang]
-        if '_' in d:
-            return d['_']
-        return ""
-
-    def label(self, lang=None):
-        return self.translate(self.labels, lang)
-
-    def example(self, lang=None):
-        return self.translate(self.examples, lang)
-
-    def definition(self, lang=None):
-        return self.translate(self.definitions, lang)
-
-    def validation(self, lang=None):
-        return self.translate(self.validations, lang)
 
 
 cores = yaml.load(

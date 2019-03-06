@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # encoding: utf-8
 '''
- -- Web interface for printing labels
+ -- Web interface for checking darwin core and Nansen legacy files
 
 
 @author:     Pål Ellingsen
@@ -16,7 +16,7 @@ import cgi
 import cgitb
 import yaml
 import scripts.process_xlsx as px
-__updated__ = '2019-02-19'
+__updated__ = '2019-03-06'
 
 
 cgitb.enable()
@@ -36,8 +36,6 @@ cores = yaml.load(
 names = []  # For holding a list over the possible setups
 for core in cores:
     names.append(core['name'])
-    if core['name'] == setup:
-        config = core['sheets'][0]
 
 # Using sys, as print doesn't work for cgi in python3
 template = templates.get_template("check.html")
@@ -64,7 +62,6 @@ if method == "POST":
     setup = form['setup'].value
 
     sys.stdout.buffer.write(b"<!doctype html>\n<html>\n <meta charset='utf-8'>")
-    form = cgi.FieldStorage()
     warn(form['myfile'].filename,color='black')
     # print(form['myfile'].value)
     # warn(form)
