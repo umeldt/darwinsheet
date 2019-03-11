@@ -28,9 +28,9 @@ Optional fields are:
              If it is not present its default is False
 
     inherit_weak : Boolean
-             Only used if inherit is true. If set to True values already 
+             Only used if inherit is true. If set to True values already
              entered in the children will be kept.
-             This is useful for instance in the case of multinets where the 
+             This is useful for instance in the case of multinets where the
              individual nets have different max and min depths.
              If it is not present its default is False
 
@@ -440,7 +440,6 @@ maximumDepthInMeters = {'name': 'maximumDepthInMeters',
                         }
                         }
 
-# If using indirect this needs to be follow directly after deepest depth for the function to work
 minimumDepthInMeters = {'name': 'minimumDepthInMeters',
                         'disp_name': 'Minimum depth (m)',
                         'inherit': True,
@@ -463,6 +462,61 @@ Needs to be smaller than the maximum depth''',
                             'error_message': 'Decimal [0, 9999]'
                         }
                         }
+# ==== Altitudes ====
+altitudeInMeters = {'name': 'altitudeInMeters',
+                    'disp_name': 'Altitude (m)',
+                    'inherit': True,
+                    'units': 'm',
+                    'cf_name': 'altitude',
+                    'valid': {
+                        'validate': 'decimal',
+                        'criteria': '>=',
+                        'value': 0,
+                        'input_title': 'Altitude (m)',
+                        'input_message': '''The sample altitude in meters.
+0 m is the surface. Positive upwards''',
+                        'error_title': 'Error',
+                        'error_message': 'Float >= 0'
+                    }
+                    }
+
+
+maximumElevationInMeters = {'name': 'maximumElevationInMeters',
+                            'disp_name': 'Maximum elevation(m)',
+                            'inherit': True,
+                            'inherit_weak': True,
+                            'units': 'm',
+                            'dwcid': 'http://rs.tdwg.org/dwc/terms/maximumElevationInMeters',
+                            'valid': {
+                                'validate': 'decimal',
+                                'criteria': '>=',
+                                'value': 0,
+                                'input_title': 'Maximum elevation in (m)',
+                                'input_message': '''The maximum elevation (altitude) in meters.
+0 m is the surface.''',
+                                'error_title': 'Error',
+                                'error_message': 'Float >=0'
+                            }
+                            }
+
+minimumElevationInMeters = {'name': 'minimumElevationInMeters',
+                            'disp_name': 'Minimum elevation(m)',
+                            'inherit': True,
+                            'inherit_weak': True,
+                            'units': 'm',
+                            'dwcid': 'http://rs.tdwg.org/dwc/terms/minimumElevationInMeters',
+                            'valid': {
+                                'validate': 'decimal',
+                                'criteria': '>=',
+                                'value': 0,
+                                'input_title': 'Minimum elevation in (m)',
+                                'input_message': '''The minimum elevation (altitude) in meters.
+0 m is the surface. Needs to be smaller than the maximum elevation.''',
+                                'error_title': 'Error',
+                                'error_message': 'Float >=0'
+                            }
+                            }
+
 # PALEO
 sedimentCoreLengthInMeters = {'name': 'sedimentCoreLengthInMeters',
                               'disp_name': 'Sediment Core Length (m)',
