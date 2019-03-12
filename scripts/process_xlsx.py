@@ -960,7 +960,7 @@ def run(fname, return_data=False, setup='aen'):
     """
 
     cores = yaml.load(
-        open(os.path.join('config', 'config.yaml'), encoding='utf-8'))['cores']
+        open(os.path.join(aen_config_dir, 'config', 'config.yaml'), encoding='utf-8'))['cores']
     for core in cores:
         if core['name'] == setup:
             config = core['sheets'][0]
