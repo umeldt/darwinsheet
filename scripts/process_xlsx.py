@@ -147,7 +147,7 @@ def make_valid_dict():
                 new.set_validation(def_valid)
                 field_dict[term.name] = new
 
-    g.load(os.path.joing(aen_config_dir, "dcterms.rdf"))
+    g.load(os.path.join(aen_config_dir, "dcterms.rdf"))
     # Populate the terms with the terms from dublin core
     for s, p, o in g:
         if str(p) == "http://www.w3.org/2000/01/rdf-schema#label":
