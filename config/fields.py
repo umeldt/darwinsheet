@@ -62,39 +62,39 @@ __updated__ = '2018-07-05'
 # ==============================================================================
 
 
-uuid = {'name': 'eventID',
-        'disp_name': 'Event ID',
-        'width': 38,
-        'dwcid': 'http://rs.tdwg.org/dwc/terms/eventID',
-        'valid': {
-            'validate': 'length',
-            'criteria': '==',
-            'value': 36,
-            'input_title': 'Event ID',
-            'input_message': '''Should be a 36 character long UUID including 4 '-'.
+eventID = {'name': 'eventID',
+           'disp_name': 'Event ID',
+           'width': 38,
+           'dwcid': 'http://rs.tdwg.org/dwc/terms/eventID',
+           'valid': {
+               'validate': 'length',
+               'criteria': '==',
+               'value': 36,
+               'input_title': 'Event ID',
+               'input_message': '''Should be a 36 character long UUID including 4 '-'.
 Could be read in with a code reader.''',
-            'error_title': 'Error',
-            'error_message': "Needs to be a 36 characters long UUID including 4 '- '"
-        }
-        }
+               'error_title': 'Error',
+               'error_message': "Needs to be a 36 characters long UUID including 4 '- '"
+           }
+           }
 
 
-puuid = {'name': 'parentEventID',
-         'disp_name': 'Parent event UUID',
-         'width': 38,
-         'dwcid': 'http://rs.tdwg.org/dwc/terms/parentEventID',
-         'valid': {
-             'validate': 'length',
-             'criteria': '==',
-             'value': 36,
-             'input_title': 'Parent event UUID',
-             'input_message': '''ID of the sample this subsample was taken from.
+parentEventID = {'name': 'parentEventID',
+                 'disp_name': 'Parent event UUID',
+                 'width': 38,
+                 'dwcid': 'http://rs.tdwg.org/dwc/terms/parentEventID',
+                 'valid': {
+                     'validate': 'length',
+                     'criteria': '==',
+                     'value': 36,
+                     'input_title': 'Parent event UUID',
+                     'input_message': '''ID of the sample this subsample was taken from.
 Should be a 36 characters long UUID including 4 '-'
 Could be read in with a code reader.''',
-             'error_title': 'Error',
-             'error_message': "Needs to be a 36 characters long UUID including 4 '- '"
-         }
-         }
+                     'error_title': 'Error',
+                     'error_message': "Needs to be a 36 characters long UUID including 4 '- '"
+                 }
+                 }
 
 
 cruiseNumber = {'name': 'cruiseNumber',
@@ -1020,6 +1020,17 @@ sampleType = {'name': 'sampleType',
               }
               }
 
+tissueType = {'name': 'tissueType',
+              'disp_name': 'Tissue Type',
+              'valid': {
+                  'validate': 'any',
+                  'input_title': 'Tissue Type',
+                  'input_message': '''The type of tissue in the sample.
+If multiple tissue types, organs etc. separate with ';'.
+Examples: 'heart', 'liver; brain', 'liver section' '''
+              }
+              }
+
 seaIceCoreType = {'name': 'seaIceCoreType',
                   'disp_name': 'Sea Ice Core Type',
                   'valid': {
@@ -1065,7 +1076,7 @@ seaIceFreeboardInMeters = {'name': 'seaIceFreeboardInMeters',
                                'validate': 'decimal',
                                'criteria': '>',
                                'value': 0,
-                               'input_title': 'Sea Ice Freecoard (cm)',
+                               'input_title': 'Sea Ice Freeboard (cm)',
                                'input_message': '''Sea ice freeboard in decimal centimeters.
  Float number larger than 0 ''',
                                'error_title': 'Error',
