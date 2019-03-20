@@ -33,7 +33,7 @@ import config.fields as fields
 __updated__ = '2019-03-06'
 
 
-#cgitb.enable()
+cgitb.enable()
 SETUP_DEFAULT = 'darwin'
 
 cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))
@@ -42,7 +42,7 @@ cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 method = os.environ.get("REQUEST_METHOD", "GET")
 
 # method = "POST"
-# sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
+#sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
 
 form = cgi.FieldStorage()
 
@@ -112,18 +112,18 @@ for s, p, o in t:
 
 
 # Make variable to hold terms not specified in config
-dwcterms = Term.terms.copy()
 
 # Remove terms in config
 
-
+dwcnames = []
+for term in Term.terms:
+    if term.name != '':
+        dwcnames.append(term.name)
+dwcnames = sorted(dwcnames, key=lambda s: s.lower())
 for group in config['grouping']:
-    for term in dwcterms:
-        if term.name in config['terms'][group] or term.name == '':
-            #             print("Removing", term.name)
-            dwcterms.remove(term)
-
-dwcterms.sort()
+    for term in config['terms'][group]:
+        if term in dwcnames:
+            dwcnames.remove(term) 
 
 # Append these to the config under new headline
 fill_name = 'Other'
@@ -137,11 +137,11 @@ config['grouping'].append(dwc_name2)
 config['terms'][dwc_name1] = []
 config['terms'][dwc_name2] = []
 ii = 0
-for term in dwcterms:
-    if ii < len(dwcterms) / 2:
-        config['terms'][dwc_name1].append(term.name)
+for name in dwcnames:
+    if ii < len(dwcnames) / 2:
+        config['terms'][dwc_name1].append(name)
     else:
-        config['terms'][dwc_name2].append(term.name)
+        config['terms'][dwc_name2].append(name)
     ii = ii + 1
 
 # print("New config\n", config)
@@ -182,12 +182,13 @@ templates = TemplateLookup(
 
 
 if method == "GET":  # This is for getting the page
+
+    sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
     # Using sys, as print doesn't work for cgi in python3
     fname = os.path.basename(setup)  # Stop any reference to other places
     template = templates.get_template(fname + ".html")
 
     sys.stdout.flush()
-    sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
     sys.stdout.buffer.write(
         template.render(config=config, Term=Term, lang=language, names=names))
 
@@ -199,7 +200,7 @@ elif method == "POST":
         print("Location: %s\n" % os.environ["HTTP_REFERER"])
         sys.exit(0)
 
-    reserved = []  # ['measurementorfact', 'uuid']
+    reserved = [setup]  # ['measurementorfact', 'uuid']
 #     form = ['uuid', 'shipid', 'eventDate',
 #             'decimalLatitude', 'decimalLongitude']
     terms = []
@@ -216,6 +217,8 @@ elif method == "POST":
 #     print(terms_config)
 #     print(terms)
     # Use the config terms to sort the terms from the form
+    #sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
+    #print(form)
     for term in terms_config:
         if term in form and term not in reserved:
             terms.append(term)
