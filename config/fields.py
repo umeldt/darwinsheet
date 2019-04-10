@@ -994,7 +994,8 @@ gearType = {'name': 'gearType',
                             "WP2",
                             "WP3"],
                         'input_title': 'Gear Type',
-                        'input_message': '''Choose the gear used to retrieve the sample''',
+                        'input_message': 'Choose the gear used to retrieve the sample.\n' +
+                                         'Listed at: https://github.com/SIOS-Svalbard/AeN_doc/blob/master/list_gear_types.csv',
                         'error_title': 'Error',
                         'error_message': 'Not a valid gear type'
                     }
@@ -1152,7 +1153,8 @@ sampleType = {'name': 'sampleType',
                       'Whole individual',
                       'Whole individuals'],
                   'input_title': 'Sample type',
-                  'input_message': '''Choose the sample type''',
+                  'input_message': 'Choose the sample type.\n' +
+                                   'Listed at: https://github.com/SIOS-Svalbard/AeN_doc/blob/master/list_sample_types.csv',
                   'error_title': 'Error',
                   'error_message': 'Not a valid sample type'
               }
