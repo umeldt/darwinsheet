@@ -33,7 +33,7 @@ import config.fields as fields
 __updated__ = '2019-03-06'
 
 
-cgitb.enable()
+#cgitb.enable()
 SETUP_DEFAULT = 'darwin'
 
 cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))

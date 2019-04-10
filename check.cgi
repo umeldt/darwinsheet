@@ -19,7 +19,7 @@ import scripts.process_xlsx as px
 __updated__ = '2019-03-06'
 
 
-cgitb.enable()
+#cgitb.enable()
 
 method = os.environ.get("REQUEST_METHOD", "GET")
 
