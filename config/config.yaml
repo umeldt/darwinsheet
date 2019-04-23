@@ -16,7 +16,7 @@ cores:
           required: [eventID,parentEventID ,eventDate, eventTime,sampleType, samplingProtocol, sampleLocation, recordedBy, pi_name, pi_email, pi_institution , eventRemarks]
           recommended: [cruiseNumber, stationName, decimalLatitude, decimalLongitude, bottomDepthInMeters]
           event: [ start_date, end_date,
-            statID, recordNumber,
+            statID, recordNumber, intendedMethod,
             sampleDepthInMeters, maximumDepthInMeters, minimumDepthInMeters,
             gearType, bottleNumber, shipSpeedInMetersPerSecond]
           identification: [Taxon, phylum, class, order, family]
