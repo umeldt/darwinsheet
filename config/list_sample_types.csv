@@ -16,9 +16,9 @@ Copepods,X Rename to Mesozooplankton ?? and move taxonomy ,
 CTD profile,CTD,CTD or Hydrography ?
 CTD w/bottles,,CTD or Hydrography ?. Using this to distinguish if there were bottles
 Ctenophores,X  Rename to ???? and move taxonomy,Sample type (?) instead of species name
-d13C DIC,Primary production with 13C in method,
+d13C DIC,,These are not taken for primary production
 dCSP,,dissolved Coomassie stainable particles
-dD and d18O,d18 Oxygen,
+dD and d18O,, Samples taken for both dD and d18O
 DIC conc,DIC/AT? (d18 Oxygen),
 DIC/Alk,DIC/AT,
 Dinocysts,X  Protist abundance and taxonomy; method = microscope, Is it correct to rename the old ones?
