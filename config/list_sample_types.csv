@@ -1,27 +1,27 @@
-Sample type,Action / Rename to,Comment
+Sample type,Action / Rename to (X = remove),Comment
 ,,
 aDNA,,Ancient DNA
 Algae aggregates,,
 Bacterial production,,3H-Leucine in intended Method  
-Bio bulk,,?
-Biological,,Need to specify
-Bottom ice,,Sample type (?) instead of part of ice core
-brine,,Sample type (?) instead of material
-Bulk zooplankton,,Sample type (?) instead of taxa
+Bio bulk,X,?
+Biological,X,Need to specify
+Bottom ice,X,Sample type (?) instead of part of ice core
+brine,X,Sample type (?) instead of material
+Bulk zooplankton,X,Sample type (?) instead of taxa
 CARD FISH EPS,,?
-Careproctus,,Sample type (?) instead of species name
+Careproctus,X,Sample type (?) instead of species name
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
 CNP,Particulate CN,Carbon:Nitrogen:Phosphorous ratio
-Copepods, Rename to Mesoizooplankton ?? and move taxonomy ,
+Copepods,X Rename to Mesozooplankton ?? and move taxonomy ,
 CTD profile,CTD,CTD or Hydrography ?
 CTD w/bottles,,CTD or Hydrography ?. Using this to distinguish if there were bottles
-Ctenophores, Rename to ???? and move taxonomy,Sample type (?) instead of species name
+Ctenophores,X  Rename to ???? and move taxonomy,Sample type (?) instead of species name
 d13C DIC,Primary production with 13C in method,
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,d18 Oxygen,
 DIC conc,DIC/AT? (d18 Oxygen),
 DIC/Alk,DIC/AT,
-Dinocysts, Protist abundance and taxonomy; method = microscope, Is it correct to rename the old ones?
+Dinocysts,X  Protist abundance and taxonomy; method = microscope, Is it correct to rename the old ones?
 Dissolved trace elements,,
 DNA,,
 dO2,,dissolved oxygen
@@ -34,13 +34,13 @@ FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
 fixed net sample,X,Sample type (?) instead of gear and treatment
 For dating,X,
-GC catcher sample,,
-GC cutter sample,,
-GC section archive half,,
-GC section working half,,
-GC section,,
+GC catcher sample,, Gravity core
+GC cutter sample,, Gravity core
+GC section archive half,, Gravity core
+GC section working half,, Gravity core
+GC section,, Gravity core
 Gel trap,X, Gel collecting particles from short time sediment trap
-Gelatinous seasnail, Rename to ??? and move to taxonomy,Sample type (?) instead of taxa
+Gelatinous seasnail,X Rename to ??? and move to taxonomy,Sample type (?) instead of taxa
 GF/F filter,,Sample type (?) instead of filter type
 Glass vial,X,Sample type (?) instead of vial type
 Grain size,, Sediment grain size
@@ -49,12 +49,12 @@ Ice core,, Needed to link sections to one common ice core
 Ice meiofauna,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
-Isotope (muscle tissue), Rename to tissue and move to tissueType,
+Isotope (muscle tissue),X Rename to tissue and move to tissueType,
 Isotopes,, Carbon and nitrogen stable isotopes
 Juveniles Rep1,X,Sample type (?) instead of developmental stage
 Juveniles Rep2,X,Sample type (?) instead of developmental stage
 Juveniles sieved 250um,X,Sample type (?) instead of developmental stage
-Limacina/Foraminifera, Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
+Limacina/Foraminifera,X Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
 Macrofauna taxonomy,,
 Macrozooplankton abundance,,
 Macrozooplankton biomass,,
@@ -66,37 +66,37 @@ Mesozooplankton ecotoxology,,
 Mesozooplankton genetics,,
 Mesozooplankton taxonomy,,
 Microbial activity (RNA) ,,New
-Microbial biomass production,Bacterial production; method=3H-Leucine,
-Microbial,Rename to ???,
+Microbial biomass production, X Bacterial production; method=3H-Leucine,
+Microbial,X Rename to ???,
 Mixotrophy FISH,,Fluorescence in situ hybridization of mixotrophy samples
-Mixrozooplankton taxonomy,Protist abundance and taxonomy; method=microscopy,
+Mixrozooplankton taxonomy,X Protist abundance and taxonomy; method=microscopy,
 Multicore archive half,, Half a multicore
 Multicore work half,, Half a multicore
 Multicore,, One core from a multicore (i.e. a sample)
 MZP profile,X,What is this?
 Niskin Bottle,, One bottle from a set of bottles 
 Nutrients,, "Nitrate, nitrite,phosphate and silicic acid"
-O18,d18 Oxygen,
+O18,X d18 Oxygen,
 Organic matter characterization,,Samples taken from Niskin
 Pale eelpout,X Rename to ??? and move to Description???,Sample type (?) instead of taxa
 Particulate absorption,,
 Particulate elements,, Needed to differentiate from trace
 PC Bottle,X, From GOFLO?. PC?
-PC section,Piston core section,
+PC section,,Piston core section
 PCR tube,X,Sample type (?) instead of gear
 pCSP,,particulate Coomassie stainable particles
 PET Bottle,X,PET?. From GOFLO
 Pigments,Sediment pigments,
 Plankton barcoding,,
 Plankton metabarcoding,,
-Plankton Net, Move to Gear type: Phytoplankton net ? ,
+Plankton Net, Move to Gear type: Phytoplankton net ? , Needed as it is one net out of a multinet
 Plankton sample,X,
 POC/PON,,
 POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possible
 POM,Particulate CN,"Sample type (?) instead of ""material"""
-Pore water d13C,d13C description=pore,
-Pore water nutrients,nutrients description=pore,
-Pore-water ICP,ICP description=pore,
+Pore water d13C,X d13C description=pore,
+Pore water nutrients, X nutrients description=pore,
+Pore-water ICP,X ICP description=pore,
 Porosity,Sediment porosity,
 Primary production (14C-CO2),,New
 Profile,, Drone
@@ -111,8 +111,8 @@ Sediment slice,, Part of a sediment core used for further splitting
 Sediment,X,"Sample type (?) instead of ""material"""
 SEM filter,Electron microscopy (SEM filter),
 Seston elemental composition,, Method can be XRF
-Silicate,Nutrients; comment = silicate,
-Spotted snake blenny, Rename to Fish and move to taxonomy???, Species?
+Silicate,X Nutrients; comment = silicate,
+Spotted snake blenny,X  Rename to Fish and move to taxonomy???, Species?
 Station,,Needed for defining specific stations (NLEG01….)
 Sterivex filter,Microbial diversity (DNA and RNA),Sample type (?) instead of type of filter
 TOC,Total carbon,Total organic carbon
@@ -125,7 +125,7 @@ Viral production,,
 Virus diversity,Viral diversity (FeCl3),
 Virus,Viral diversity (FeCl3),
 VivaFlow,X,"This is a water concentrator, should probably not be here."
-Water sample,,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
-Water,,"Sample type (?) instead of ""material"""
-Whole individual,,Sample type (?) instead of tissue. Pål: should this be fish etc. instead?
-Whole individuals,,Sample type (?) instead of tissue
+Water sample,X ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
+Water,X,"Sample type (?) instead of ""material"""
+Whole individual,X,Sample type (?) instead of tissue. Pål: should this be fish etc. instead?
+Whole individuals,X,Sample type (?) instead of tissue
