@@ -10,11 +10,12 @@ brine,X,Sample type (?) instead of material
 Bulk zooplankton,X,Sample type (?) instead of taxa
 CARD FISH EPS,,?
 Careproctus,X,Sample type (?) instead of species name
+CDOM,, Colored dissolved organic matter
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
 CNP,Particulate CN,Carbon:Nitrogen:Phosphorous ratio
 Copepods,X Rename to Mesozooplankton ?? and move taxonomy ,
-CTD profile,CTD,CTD or Hydrography ?
-CTD w/bottles,,CTD or Hydrography ?. Using this to distinguish if there were bottles
+CTD profile,X, These should not be here as they are gear
+CTD w/bottles,X, These should not be here as they are gear
 Ctenophores,X  Rename to ???? and move taxonomy,Sample type (?) instead of species name
 d13C DIC,,These are not taken for primary production
 dCSP,,dissolved Coomassie stainable particles
