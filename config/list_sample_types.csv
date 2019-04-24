@@ -20,12 +20,13 @@ Ctenophores,X  Rename to ???? and move taxonomy,Sample type (?) instead of speci
 d13C DIC,,These are not taken for primary production
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
-DIC conc,DIC/AT? (d18 Oxygen),
-DIC/Alk,DIC/AT,
+DIC conc,AT/DIC/pH,
+DIC/Alk,AT/DIC/pH,
 Dinocysts,X  Protist abundance and taxonomy; method = microscope, Is it correct to rename the old ones?
 Dissolved trace elements,,
 DNA,,
-dO2,,dissolved oxygen
+DO,, dissolved oxygen
+dO2,DO,dissolved oxygen
 dTEP,,dissolved Transparent exopolymeric particles
 eDNA,,environmental DNA
 Fatty acids,,
@@ -83,7 +84,7 @@ Multicore,, One core from a multicore (i.e. a sample)
 MZP profile,X,What is this?
 Niskin Bottle,, One bottle from a set of bottles 
 Nutrients,, "Nitrate, nitrite,phosphate and silicic acid"
-O18,X d18 Oxygen or d18O,
+O18,X d18 d18O,
 Organic matter characterization,,Samples taken from Niskin
 Pale eelpout,X Rename to ??? and move to Description???,Sample type (?) instead of taxa
 Particulate absorption,,
