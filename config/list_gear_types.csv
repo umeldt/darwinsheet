@@ -1,45 +1,47 @@
-Gear type,Remark
-,
-ARGO,Float
-Beam trawl,
-Box core,
-Bucket,
-Calypso,Piston corer
-Campelen trawl,
-Campelen trawl with fish lift,
-Campelen trawl without fish lift,
-Cast away CTD,
-CMET Ballons,
-CTD,
-CTD w/bottles,
-Drone,
-EK80,Fish echo sounder
-EM302,Echo Sounder
-EM710,Echo Sounder
-GO-FLO,This is the product name
-GOFLO (5L Teflon Coated),Is this the same as GO-FLO?
-GO-flow bottle under ice,Should this be moved to GO-FLO?
-Gravity corer,
-Harstad trawl,
-Ice auger,
-Ice corer 9 cm,
-LADCP,
-Macroplankton trawl,
+Gear type,Action / Rename to (X = remove),Remark
+,,
+ARGO,,Float
+Beam trawl,,
+Box core,,
+Bucket,,
+Calypso,,Piston corer
+Campelen trawl,,
+Campelen trawl with fish lift,,
+Campelen trawl without fish lift,,
+Cast away CTD,,
+CMET Ballons,,
+CTD,,
+CTD w/bottles,,
+Drone,,
+EK80,,Fish echo sounder
+EM302,,Echo Sounder
+EM710,,Echo Sounder
+GO-FLO,,This is the product name
+GOFLO (5L Teflon Coated),X,Is this the same as GO-FLO?
+GO-flow bottle under ice,X,Should this be moved to GO-FLO?
+Gravity corer,,
+Harstad trawl,,
+Ice auger,,
+Ice corer 9 cm,,
+LADCP,,
+Macroplankton trawl,,
 MIK-net 1500 µm,
-Mooring,
-Multicorer,
-Multinet180,Alternative Multinet 180 µm
-Multinet64,Alternative Multinet 64 µm
-Niskin,
-Phytoplankton net,
-SBP300,Seismic echo sounder
-Sediment trap,
-Surface drifter,
-Topas40,Seismic echo sounder
-TS probe,Echo Sounder
-Tube,For sucking up water (from for instance a melt pond
-UIW,Under Ice water
-Vertical microstructure profiler,
-Weather station,
-WP2,Should this be split into 64 µm and 180 µm
-WP3,WP3 1000 µm
+Mooring,,
+Multicorer,,
+Multinet180,Check number of ts in database,Alternative Multinet 180 µm
+Multinet64,Check number of ts in database,Alternative Multinet 64 µm
+Niskin,,
+Phytoplankton net, Size?,
+SBP300,,Seismic echo sounder
+Sediment trap,,
+Surface drifter,,
+Topas40,,Seismic echo sounder
+TS probe,,Echo Sounder
+Tube,,For sucking up water (from for instance a melt pond
+UIW,,Under Ice water
+Vertical microstructure profiler,,
+Weather station,,
+WP2,X,Should this be split into 64 µm and 180 µm
+WP2 64 µm,,New
+WP2 180 µm,,New
+WP3,WP3 1000 µm,
