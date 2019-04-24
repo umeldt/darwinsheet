@@ -42,7 +42,10 @@ GC section working half,, Gravity core
 GC section,, Gravity core
 Gel trap,X, Gel collecting particles from short time sediment trap
 Gelatinous seasnail,X Rename to ??? and move to taxonomy,Sample type (?) instead of taxa
-GF/F filter,,Sample type (?) instead of filter type
+Gelatinous zooplankton taxonomy,,New
+Gelatinous zooplankton volume,,New
+Gelatinous zooplankton taxonomy,,New
+GF/F filter,X,Sample type (?) instead of filter type
 Glass vial,X,Sample type (?) instead of vial type
 Grain size,, Sediment grain size
 HPLC Pigments,,
@@ -57,15 +60,18 @@ Juveniles Rep2,X,Sample type (?) instead of developmental stage
 Juveniles sieved 250um,X,Sample type (?) instead of developmental stage
 Limacina/Foraminifera,X Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
 Macrofauna taxonomy,,
-Macrozooplankton abundance,,
+Macrozooplankton abundance, Macrozooplankton taxonomy,
 Macrozooplankton biomass,,
+Macrozooplankton metagenomics,,New
 Megafauna taxonomy,,
 Meiofauna taxonomy,, 
 Melt pond,,Used to join multiple samples from one melt pond
 Meroplankton taxonomy,,
+Small mesozooplankton taxonomy,,New
 Mesozooplankton ecotoxology,,
-Mesozooplankton genetics,,
+Mesozooplankton genetics, Mesozooplankton metagenomics,
 Mesozooplankton taxonomy,,
+Mesozooplankton biomass,,New
 Microbial activity (RNA) ,,New
 Microbial biomass production, X Bacterial production; method=3H-Leucine,
 Microbial,X Rename to ???,
@@ -77,7 +83,7 @@ Multicore,, One core from a multicore (i.e. a sample)
 MZP profile,X,What is this?
 Niskin Bottle,, One bottle from a set of bottles 
 Nutrients,, "Nitrate, nitrite,phosphate and silicic acid"
-O18,X d18 Oxygen,
+O18,X d18 Oxygen or d18O,
 Organic matter characterization,,Samples taken from Niskin
 Pale eelpout,X Rename to ??? and move to Description???,Sample type (?) instead of taxa
 Particulate absorption,,
