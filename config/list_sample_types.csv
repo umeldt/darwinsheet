@@ -3,12 +3,12 @@ Sample type,Action / Rename to (X = remove),Comment
 aDNA,,Ancient DNA
 Algae aggregates,,
 Bacterial production,,3H-Leucine in intended Method  
-Bio bulk,X-S,?
+Bio bulk,,Ice cores for biological processing
 Biological,X-S,Need to specify
 Bottom ice,X-S,Sample type (?) instead of part of ice core
 brine,X-S,Sample type (?) instead of material
 Bulk zooplankton,X-S,Sample type (?) instead of taxa
-CARD FISH EPS,,?
+CARD FISH EPS,S,?
 CDOM,, Colored dissolved organic matter
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
 CNP,Particulate CN,Carbon:Nitrogen:Phosphorous ratio
@@ -43,7 +43,6 @@ GC section,, Gravity core
 Gel trap,, Gel collecting particles from short time sediment trap
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
-Gelatinous zooplankton taxonomy,,New
 GF/F filter,X-S,Sample type (?) instead of filter type
 Glass vial,X-S,Sample type (?) instead of vial type
 Grain size,, Sediment grain size
@@ -66,11 +65,10 @@ Megafauna taxonomy,,
 Meiofauna taxonomy,, 
 Melt pond,,Used to join multiple samples from one melt pond
 Meroplankton taxonomy,,
-Small mesozooplankton taxonomy,,New
+Mesozooplankton biomass,,New
 Mesozooplankton ecotoxology,,
 Mesozooplankton genetics, Mesozooplankton metagenomics,
 Mesozooplankton taxonomy,,
-Mesozooplankton biomass,,New
 Microbial activity (RNA) ,,New
 Microbial biomass production, X Bacterial production; method=3H-Leucine,
 Microbial,X Rename to Microbial diversity (DNA and RNA),
@@ -117,13 +115,14 @@ Sediment,X-S,"Sample type (?) instead of ""material"""
 SEM filter,Electron microscopy (SEM filter),
 Seston elemental composition,, Method can be XRF
 Silicate,X Nutrients; comment = silicate,
+Small mesozooplankton taxonomy,,New
 Station,,Needed for defining specific stations (NLEG01….)
 Sterivex filter,Microbial diversity (DNA and RNA),Sample type (?) instead of type of filter
+Tissue,, Specify type in tissueType
 TOC,Total carbon,Total organic carbon
 Total carbon (TC) filter,Particulate CN,Is it the same as total organic carbon
 Total organic carbon,,
 Trace elements,,sampling with GO-FLO in a clean lab
-Under ice water,X-S,"Sample type (?) instead of ""material"""
 Viral decay,,
 Viral production,,
 Virus diversity,Viral diversity (FeCl3),
