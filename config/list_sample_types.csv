@@ -3,19 +3,19 @@ Sample type,Action / Rename to (X = remove),Comment
 aDNA,,Ancient DNA
 Algae aggregates,,
 Bacterial production,,3H-Leucine in intended Method  
-Bio bulk,X,?
-Biological,X,Need to specify
-Bottom ice,X,Sample type (?) instead of part of ice core
-brine,X,Sample type (?) instead of material
-Bulk zooplankton,X,Sample type (?) instead of taxa
+Bio bulk,X-S,?
+Biological,X-S,Need to specify
+Bottom ice,X-S,Sample type (?) instead of part of ice core
+brine,X-S,Sample type (?) instead of material
+Bulk zooplankton,X-S,Sample type (?) instead of taxa
 CARD FISH EPS,,?
 CDOM,, Colored dissolved organic matter
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
 CNP,Particulate CN,Carbon:Nitrogen:Phosphorous ratio
-Copepods,X Rename to Mesozooplankton ?? and move taxonomy ,
+Copepods,X-S Rename to Mesozooplankton ?? and move taxonomy ,
 CTD profile,X, These should not be here as they are gear
 CTD w/bottles,X, These should not be here as they are gear
-Ctenophores,X-S  Rename to ???? and move taxonomy,Sample type (?) instead of species name
+Ctenophores,X-S  sampleType = Mesozooplankton taxonomy - Taxon = Ctenophore,Sample type (?) instead of species name
 d13C DIC,,These are not taken for primary production
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
@@ -33,19 +33,19 @@ Fecal pellet abundance,Fecal pellet flux, Taken from sediment traps
 Fish,,
 FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
-fixed net sample,X,Sample type (?) instead of gear and treatment
-For dating,X,
+fixed net sample,X-S,Sample type (?) instead of gear and treatment
+For dating,X-S,
 GC catcher sample,, Gravity core
 GC cutter sample,, Gravity core
 GC section archive half,, Gravity core
 GC section working half,, Gravity core
 GC section,, Gravity core
-Gel trap,X, Gel collecting particles from short time sediment trap
+Gel trap,, Gel collecting particles from short time sediment trap
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
 Gelatinous zooplankton taxonomy,,New
-GF/F filter,X,Sample type (?) instead of filter type
-Glass vial,X,Sample type (?) instead of vial type
+GF/F filter,X-S,Sample type (?) instead of filter type
+Glass vial,X-S,Sample type (?) instead of vial type
 Grain size,, Sediment grain size
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
@@ -54,9 +54,9 @@ iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotope (muscle tissue),X Rename to tissue and move to tissueType,
 Isotopes,, Carbon and nitrogen stable isotopes
-Juveniles Rep1,X,Sample type (?) instead of developmental stage
-Juveniles Rep2,X,Sample type (?) instead of developmental stage
-Juveniles sieved 250um,X,Sample type (?) instead of developmental stage
+Juveniles Rep1,X-S,Sample type (?) instead of developmental stage
+Juveniles Rep2,X-S,Sample type (?) instead of developmental stage
+Juveniles sieved 250um,X-S,Sample type (?) instead of developmental stage
 Limacina/Foraminifera,X-S Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
 Macrofauna taxonomy,,
 Macrozooplankton abundance, Macrozooplankton taxonomy,
@@ -73,7 +73,7 @@ Mesozooplankton taxonomy,,
 Mesozooplankton biomass,,New
 Microbial activity (RNA) ,,New
 Microbial biomass production, X Bacterial production; method=3H-Leucine,
-Microbial,X Rename to ???,
+Microbial,X Rename to Microbial diversity (DNA and RNA),
 Mixotrophy FISH,,Fluorescence in situ hybridization of mixotrophy samples
 Mixrozooplankton taxonomy,X Protist abundance and taxonomy; method=microscopy,
 Multicore archive half,, Half a multicore
@@ -86,16 +86,16 @@ O18,X d18O,
 Organic matter characterization,,Samples taken from Niskin
 Particulate absorption,,
 Particulate elements,, Needed to differentiate from trace
-PC Bottle,X, From GOFLO?. PC?
+PC Bottle,X-S, From GOFLO?. PC?
 PC section,,Piston core section
-PCR tube,X,Sample type (?) instead of gear
+PCR tube,X-S,Sample type (?) instead of gear
 pCSP,,particulate Coomassie stainable particles
-PET Bottle,X,PET?. From GOFLO
+PET Bottle,X-S,PET?. From GOFLO
 Pigments,Sediment pigments,
 Plankton barcoding,,
 Plankton metabarcoding,,
 Plankton Net, Move to Gear type: Phytoplankton net ? , Needed as it is one net out of a multinet
-Plankton sample,X,
+Plankton sample,X-S,
 POC/PON,,
 POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possible
 POM,Particulate CN,"Sample type (?) instead of ""material"""
@@ -106,14 +106,14 @@ Porosity,Sediment porosity,
 Primary production (14C-CO2),,New
 Profile,, Drone
 pTEP,,particulate Transparent exopolymeric particles
-Quantitative species records,X,
+Quantitative species records,X-S,
 Racetrack,, Drone
 RNA,,
-sea ice,X,"Sample type (?) instead of ""material"""
-Seawater,X,"Sample type (?) instead of ""material"""
+sea ice,X-S,"Sample type (?) instead of ""material"""
+Seawater,X-S,"Sample type (?) instead of ""material"""
 Sediment incubation,,"Sample type (?) instead of ""material"""
 Sediment slice,, Part of a sediment core used for further splitting
-Sediment,X,"Sample type (?) instead of ""material"""
+Sediment,X-S,"Sample type (?) instead of ""material"""
 SEM filter,Electron microscopy (SEM filter),
 Seston elemental composition,, Method can be XRF
 Silicate,X Nutrients; comment = silicate,
@@ -123,13 +123,11 @@ TOC,Total carbon,Total organic carbon
 Total carbon (TC) filter,Particulate CN,Is it the same as total organic carbon
 Total organic carbon,,
 Trace elements,,sampling with GO-FLO in a clean lab
-Under ice water,X,"Sample type (?) instead of ""material"""
+Under ice water,X-S,"Sample type (?) instead of ""material"""
 Viral decay,,
 Viral production,,
 Virus diversity,Viral diversity (FeCl3),
 Virus,Viral diversity (FeCl3),
-VivaFlow,X,"This is a water concentrator, should probably not be here."
-Water sample,X ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
-Water,X,"Sample type (?) instead of ""material"""
-Whole individual,X-S,Sample type (?) instead of tissue. Pål: should this be fish etc. instead?
-Whole individuals,X-S,Sample type (?) instead of tissue
+VivaFlow,X-S,"This is a water concentrator, should probably not be here."
+Water sample,X-S ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
+Water,X-S,"Sample type (?) instead of ""material"""
