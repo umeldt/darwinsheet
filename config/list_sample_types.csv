@@ -9,14 +9,13 @@ Bottom ice,X,Sample type (?) instead of part of ice core
 brine,X,Sample type (?) instead of material
 Bulk zooplankton,X,Sample type (?) instead of taxa
 CARD FISH EPS,,?
-Careproctus,X,Sample type (?) instead of species name
 CDOM,, Colored dissolved organic matter
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
 CNP,Particulate CN,Carbon:Nitrogen:Phosphorous ratio
 Copepods,X Rename to Mesozooplankton ?? and move taxonomy ,
 CTD profile,X, These should not be here as they are gear
 CTD w/bottles,X, These should not be here as they are gear
-Ctenophores,X  Rename to ???? and move taxonomy,Sample type (?) instead of species name
+Ctenophores,X-S  Rename to ???? and move taxonomy,Sample type (?) instead of species name
 d13C DIC,,These are not taken for primary production
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
@@ -42,7 +41,6 @@ GC section archive half,, Gravity core
 GC section working half,, Gravity core
 GC section,, Gravity core
 Gel trap,X, Gel collecting particles from short time sediment trap
-Gelatinous seasnail,X Rename to ??? and move to taxonomy,Sample type (?) instead of taxa
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
 Gelatinous zooplankton taxonomy,,New
@@ -59,7 +57,7 @@ Isotopes,, Carbon and nitrogen stable isotopes
 Juveniles Rep1,X,Sample type (?) instead of developmental stage
 Juveniles Rep2,X,Sample type (?) instead of developmental stage
 Juveniles sieved 250um,X,Sample type (?) instead of developmental stage
-Limacina/Foraminifera,X Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
+Limacina/Foraminifera,X-S Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
 Macrofauna taxonomy,,
 Macrozooplankton abundance, Macrozooplankton taxonomy,
 Macrozooplankton biomass,,
@@ -81,12 +79,11 @@ Mixrozooplankton taxonomy,X Protist abundance and taxonomy; method=microscopy,
 Multicore archive half,, Half a multicore
 Multicore work half,, Half a multicore
 Multicore,, One core from a multicore (i.e. a sample)
-MZP profile,X,What is this?
+MZP profile,X-S,What is this?
 Niskin Bottle,, One bottle from a set of bottles 
 Nutrients,, "Nitrate, nitrite,phosphate and silicic acid"
-O18,X d18 d18O,
+O18,X d18O,
 Organic matter characterization,,Samples taken from Niskin
-Pale eelpout,X Rename to ??? and move to Description???,Sample type (?) instead of taxa
 Particulate absorption,,
 Particulate elements,, Needed to differentiate from trace
 PC Bottle,X, From GOFLO?. PC?
@@ -120,7 +117,6 @@ Sediment,X,"Sample type (?) instead of ""material"""
 SEM filter,Electron microscopy (SEM filter),
 Seston elemental composition,, Method can be XRF
 Silicate,X Nutrients; comment = silicate,
-Spotted snake blenny,X  Rename to Fish and move to taxonomy???, Species?
 Station,,Needed for defining specific stations (NLEG01….)
 Sterivex filter,Microbial diversity (DNA and RNA),Sample type (?) instead of type of filter
 TOC,Total carbon,Total organic carbon
@@ -135,5 +131,5 @@ Virus,Viral diversity (FeCl3),
 VivaFlow,X,"This is a water concentrator, should probably not be here."
 Water sample,X ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
 Water,X,"Sample type (?) instead of ""material"""
-Whole individual,X,Sample type (?) instead of tissue. Pål: should this be fish etc. instead?
-Whole individuals,X,Sample type (?) instead of tissue
+Whole individual,X-S,Sample type (?) instead of tissue. Pål: should this be fish etc. instead?
+Whole individuals,X-S,Sample type (?) instead of tissue
