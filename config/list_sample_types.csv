@@ -2,7 +2,8 @@ Sample type,Action / Rename to (X = remove),Comment
 ,,
 aDNA,,Ancient DNA
 Algae aggregates,,
-Bacterial production,,3H-Leucine in intended Method  
+AT/DIC/pH,,
+Bacterial production,, Set intendedMethod to for instance 3H-Leucine
 Bio bulk,,Ice cores for biological processing
 Bottom ice,X-S,Sample type (?) instead of part of ice core
 brine,X-S,Sample type (?) instead of material
@@ -10,25 +11,22 @@ Bulk zooplankton,X-S,Sample type (?) instead of taxa
 CARD FISH EPS,S,?
 CDOM,, Colored dissolved organic matter
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
-CNP,Particulate CN,Carbon:Nitrogen:Phosphorous ratio
 Copepods,X-S Rename to Mesozooplankton ?? and move taxonomy ,
-CTD profile,X, These should not be here as they are gear
-CTD w/bottles,X, These should not be here as they are gear
 Ctenophores,X-S  sampleType = Mesozooplankton taxonomy - Taxon = Ctenophore,Sample type (?) instead of species name
 d13C DIC,,These are not taken for primary production
+d13C,,
+d18O,,
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
-DIC conc,AT/DIC/pH,
-DIC/Alk,AT/DIC/pH,
-Dinocysts,X  Protist abundance and taxonomy; method = microscope, Is it correct to rename the old ones?
+Dinocysts,X  Protist abundance and taxonomy; method = microscope, This should be checked with Paleo
 Dissolved trace elements,,
 DNA,,
 DO,, dissolved oxygen
-dO2,DO,dissolved oxygen
 dTEP,,dissolved Transparent exopolymeric particles
 eDNA,,environmental DNA
+Electron microscopy (SEM filter),,
 Fatty acids,,
-Fecal pellet abundance,Fecal pellet flux, Taken from sediment traps
+Fecal pellet flux,, Taken from sediment traps
 Fish,,
 FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
@@ -48,18 +46,18 @@ Grain size,, Sediment grain size
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
 Ice meiofauna,,
+ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
-Isotope (muscle tissue),X Rename to tissue and move to tissueType,
 Isotopes,, Carbon and nitrogen stable isotopes
 Juveniles Rep1,X-S,Sample type (?) instead of developmental stage
 Juveniles Rep2,X-S,Sample type (?) instead of developmental stage
 Juveniles sieved 250um,X-S,Sample type (?) instead of developmental stage
 Limacina/Foraminifera,X-S Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
 Macrofauna taxonomy,,
-Macrozooplankton abundance, Macrozooplankton taxonomy,
 Macrozooplankton biomass,,
 Macrozooplankton metagenomics,,New
+Macrozooplankton taxonomy,,
 Megafauna taxonomy,,
 Meiofauna taxonomy,, 
 Melt pond,,Used to join multiple samples from one melt pond
@@ -69,39 +67,32 @@ Mesozooplankton ecotoxology,,
 Mesozooplankton genetics, Mesozooplankton metagenomics,
 Mesozooplankton taxonomy,,
 Microbial activity (RNA) ,,New
-Microbial biomass production, X Bacterial production; method=3H-Leucine,
-Microbial,X Rename to Microbial diversity (DNA and RNA),
+Microbial diversity (DNA and RNA),,
 Mixotrophy FISH,,Fluorescence in situ hybridization of mixotrophy samples
-Mixrozooplankton taxonomy,X Protist abundance and taxonomy; method=microscopy,
 Multicore archive half,, Half a multicore
 Multicore work half,, Half a multicore
 Multicore,, One core from a multicore (i.e. a sample)
 MZP profile,X-S,What is this?
 Niskin Bottle,, One bottle from a set of bottles 
 Nutrients,, "Nitrate, nitrite,phosphate and silicic acid"
-O18,X d18O,
 Organic matter characterization,,Samples taken from Niskin
 Particulate absorption,,
+Particulate CN,,Carbon:Nitrogen:Phosphorous ratio
 Particulate elements,, Needed to differentiate from trace
 PC Bottle,X-S, From GOFLO?. PC?
 PC section,,Piston core section
 PCR tube,X-S,Sample type (?) instead of gear
 pCSP,,particulate Coomassie stainable particles
 PET Bottle,X-S,PET?. From GOFLO
-Pigments,Sediment pigments,
 Plankton barcoding,,
 Plankton metabarcoding,,
 Plankton Net, Move to Gear type: Phytoplankton net ? , Needed as it is one net out of a multinet
 Plankton sample,X-S,
 POC/PON,,
 POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possible
-POM,Particulate CN,"Sample type (?) instead of ""material"""
-Pore water d13C,X d13C description=pore,
-Pore water nutrients, X nutrients description=pore,
-Pore-water ICP,X ICP description=pore,
-Porosity,Sediment porosity,
 Primary production (14C-CO2),,New
 Profile,, Drone
+Protist abundance and taxonomy,, Method is for instance microscopy,
 pTEP,,particulate Transparent exopolymeric particles
 Quantitative species records,X-S,
 Racetrack,, Drone
@@ -109,23 +100,19 @@ RNA,,
 sea ice,X-S,"Sample type (?) instead of ""material"""
 Seawater,X-S,"Sample type (?) instead of ""material"""
 Sediment incubation,,"Sample type (?) instead of ""material"""
+Sediment pigments,,
+Sediment porosity,,
 Sediment slice,, Part of a sediment core used for further splitting
 Sediment,X-S,"Sample type (?) instead of ""material"""
-SEM filter,Electron microscopy (SEM filter),
 Seston elemental composition,, Method can be XRF
-Silicate,X Nutrients; comment = silicate,
 Small mesozooplankton taxonomy,,New
 Station,,Needed for defining specific stations (NLEG01….)
-Sterivex filter,Microbial diversity (DNA and RNA),Sample type (?) instead of type of filter
 Tissue,, Specify type in tissueType
-TOC,Total carbon,Total organic carbon
-Total carbon (TC) filter,Particulate CN,Is it the same as total organic carbon
 Total organic carbon,,
 Trace elements,,sampling with GO-FLO in a clean lab
 Viral decay,,
+Viral diversity (FeCl3),,
 Viral production,,
-Virus diversity,Viral diversity (FeCl3),
-Virus,Viral diversity (FeCl3),
 VivaFlow,X-S,"This is a water concentrator, should probably not be here."
 Water sample,X-S ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
 Water,X-S,"Sample type (?) instead of ""material"""
