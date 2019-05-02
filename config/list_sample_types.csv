@@ -40,7 +40,6 @@ Gel trap,, Gel collecting particles from short time sediment trap
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
 GF/F filter,X-S,Sample type (?) instead of filter type
-Glass vial,X-S Total Mercury - remarks Glass vial,
 Grain size,, Sediment grain size
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
@@ -62,6 +61,7 @@ Mesozooplankton biomass,,New
 Mesozooplankton ecotoxology,,
 Mesozooplankton metagenomics,,
 Mesozooplankton taxonomy,,
+Methylmercury,, remarks can for instance be PET or PC Bottle,
 Microbial activity (RNA) ,,New
 Microbial diversity (DNA and RNA),,
 Mixotrophy FISH,,Fluorescence in situ hybridization of mixotrophy samples
@@ -75,11 +75,9 @@ Organic matter characterization,,Samples taken from Niskin
 Particulate absorption,,
 Particulate CN,,Carbon:Nitrogen:Phosphorous ratio
 Particulate elements,, Needed to differentiate from trace
-PC Bottle,X-S Methylmercury - remkars PC Bottle,
 PC section,,Piston core section
 PCR tube,X-S,Sample type (?) instead of gear
 pCSP,,particulate Coomassie stainable particles
-PET Bottle,X-S Methylmercury - remarks PET Bottle ,
 Plankton barcoding,,
 Plankton metabarcoding,,
 Plankton sample,X-S,
@@ -101,6 +99,7 @@ Seston elemental composition,, Method can be XRF
 Small mesozooplankton taxonomy,,New
 Station,,Needed for defining specific stations (NLEG01….)
 Tissue,, Specify type in tissueType
+Total Mercury,, Remarks can be Glass vial
 Total organic carbon,,
 Trace elements,,sampling with GO-FLO in a clean lab
 Viral decay,,
