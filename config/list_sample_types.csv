@@ -1,5 +1,6 @@
 Sample type,Action / Rename to (X = remove),Comment
 ,,
+14C AMS dating,,
 aDNA,,Ancient DNA
 Algae aggregates,,
 AT/DIC/pH,,
@@ -7,12 +8,10 @@ Bacterial production,, Set intendedMethod to for instance 3H-Leucine
 Bio bulk,,Ice cores for biological processing
 Bottom ice,X-S,Sample type (?) instead of part of ice core
 brine,X-S,Sample type (?) instead of material
-Bulk zooplankton,X-S Meroplankton taxonomy,Sample type (?) instead of taxa
 CARD FISH EPS,S,?
 CDOM,, Colored dissolved organic matter
 Chlorophyll a,"Rename to Chlorophyll a tot, add Chlorophyll a >10",Size specified in protocol
 Copepods,X-S Rename to Mesozooplankton ?? and move taxonomy ,
-Ctenophores,X-S  sampleType = Mesozooplankton taxonomy - Taxon = Ctenophore,Sample type (?) instead of species name
 d13C DIC,,These are not taken for primary production
 d13C,,
 d18O,,
@@ -31,7 +30,6 @@ Fish,,
 FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
 fixed net sample,X-S,Sample type (?) instead of gear and treatment
-For dating,X-S 14C AMS dating,
 GC catcher sample,, Gravity core
 GC cutter sample,, Gravity core
 GC section archive half,, Gravity core
@@ -41,7 +39,7 @@ Gel trap,, Gel collecting particles from short time sediment trap
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
 GF/F filter,X-S,Sample type (?) instead of filter type
-Glass vial,X-S,Sample type (?) instead of vial type
+Glass vial,X-S Total Mercury - remarks Glass vial,
 Grain size,, Sediment grain size
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
@@ -50,9 +48,6 @@ ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
-Juveniles Rep1,X-S Meiofauna taxonomy,Sample type (?) instead of developmental stage
-Juveniles Rep2,X-S Meiofauna taxonomy, Sample type (?) instead of developmental stage
-Juveniles sieved 250um,X-S Macrofauna taxonomy,Sample type (?) instead of developmental stage
 Limacina/Foraminifera,X-S Rename to ??? and move to taxonomy???,Sample type (?) instead of taxa
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
@@ -64,7 +59,7 @@ Melt pond,,Used to join multiple samples from one melt pond
 Meroplankton taxonomy,,
 Mesozooplankton biomass,,New
 Mesozooplankton ecotoxology,,
-Mesozooplankton genetics, Mesozooplankton metagenomics,
+Mesozooplankton metagenomics,,
 Mesozooplankton taxonomy,,
 Microbial activity (RNA) ,,New
 Microbial diversity (DNA and RNA),,
@@ -79,14 +74,13 @@ Organic matter characterization,,Samples taken from Niskin
 Particulate absorption,,
 Particulate CN,,Carbon:Nitrogen:Phosphorous ratio
 Particulate elements,, Needed to differentiate from trace
-PC Bottle,X-S, From GOFLO?. PC?
+PC Bottle,X-S Methylmercury - remkars PC Bottle,
 PC section,,Piston core section
 PCR tube,X-S,Sample type (?) instead of gear
 pCSP,,particulate Coomassie stainable particles
-PET Bottle,X-S,PET?. From GOFLO
+PET Bottle,X-S Methylmercury - remarks PET Bottle ,
 Plankton barcoding,,
 Plankton metabarcoding,,
-Plankton Net, Move to Gear type: Phytoplankton net ? , Needed as it is one net out of a multinet
 Plankton sample,X-S,
 POC/PON,,
 POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possible
@@ -97,7 +91,7 @@ pTEP,,particulate Transparent exopolymeric particles
 Racetrack,, Drone
 RNA,,
 sea ice,X-S,"Sample type (?) instead of ""material"""
-Seawater,X-S,"Sample type (?) instead of ""material"""
+Dissolved Organic Carbon,,
 Sediment incubation,,"Sample type (?) instead of ""material"""
 Sediment pigments,,
 Sediment porosity,,
