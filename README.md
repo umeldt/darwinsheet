@@ -19,7 +19,7 @@ The python3 code requires:
 * pandas
 * rdflib
 * xlrd
-* xlsxwriter
+* xlsxwriter>=1.0.6
 * yaml
 
 ## Running
