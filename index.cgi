@@ -30,7 +30,7 @@ import scripts.make_xlsx as mx
 from scripts.process_xlsx import Term
 import config.fields as fields
 
-__updated__ = '2019-03-06'
+__updated__ = '2019-05-03'
 
 
 #cgitb.enable()
@@ -69,10 +69,10 @@ for core in cores:
 config['languages'] = yaml.load(
     open(os.path.join("config", "config.yaml"), encoding='utf-8'))['languages']
 
-if 'language' in cookie:
-    language = cookie['language'].value
+if 'site_language' in cookie:
+    site_language = cookie['site_language'].value
 else:
-    language = 'en'
+    site_language = 'en'
 
 
 g = rdflib.Graph()
@@ -190,11 +190,11 @@ if method == "GET":  # This is for getting the page
 
     sys.stdout.flush()
     sys.stdout.buffer.write(
-        template.render(config=config, Term=Term, lang=language, names=names))
+        template.render(config=config, Term=Term, lang=site_language, names=names))
 
 elif method == "POST":
-    if 'language' in form:
-        cookie['language'] = form['language'].value
+    if 'site_language' in form:
+        cookie['site_language'] = form['site_language'].value
         print(cookie.output())
         print("Status: 303 See other")
         print("Location: %s\n" % os.environ["HTTP_REFERER"])
@@ -241,25 +241,25 @@ elif method == "POST":
     for t in Term.terms:
         #         print(field)
         if t.name in field_dict.keys():
-            if t.definition(language):
+            if t.definition(site_language):
                 #                 print(t.name)
                 valid = field_dict[t.name].validation
 
                 valid['input_message'] = valid['input_message'] + \
                     '\n\nDarwin core supl. info:\n' + \
                     textwrap.fill(
-                        ' '.join(t.definition(language).split()), width=40)
+                        ' '.join(t.definition(site_language).split()), width=40)
                 field_dict[t.name].set_validation(valid)
         else:
             field_dict[t.name] = mx.Field(
                 name=t.name,
-                disp_name=t.label(language),
-                width=len(t.label(language)),
+                disp_name=t.label(site_language),
+                width=len(t.label(site_language)),
                 validation={'validate': 'any',
-                            'input_title': t.label(language),
+                            'input_title': t.label(site_language),
                             'input_message': 'Darwin core supl. info:\n' +
                             textwrap.fill(
-                                ' '.join(t.definition(language).split()),
+                                ' '.join(t.definition(site_language).split()),
                                 width=40)
                             }
 
