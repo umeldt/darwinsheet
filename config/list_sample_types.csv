@@ -41,7 +41,6 @@ GC section,, Gravity core
 Gel trap,, Gel collecting particles from short time sediment trap
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
-GF/F filter,X-S Rename to Chlorophyll a tot,Sample type (?) instead of filter type
 Grain size,, Sediment grain size
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
@@ -50,7 +49,6 @@ ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
-Limacina/Foraminifera,X-S Rename to Mesozooplankton taxonomy and move to taxonomy,
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
 Macrozooplankton metagenomics,,New

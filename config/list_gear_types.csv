@@ -5,12 +5,12 @@ Beam trawl,,
 Box core,,
 Bucket,,
 Calypso,,Piston corer
-Campelen trawl,, without fish lift
 Campelen trawl with fish lift,,
+Campelen trawl,, without fish lift
 Cast away CTD,,
 CMET Ballons,,
-CTD,,
 CTD w/bottles,,
+CTD,,
 Drone,,
 EK80,,Fish echo sounder
 EM302,,Echo Sounder
@@ -30,8 +30,8 @@ Multinet 64 um,,
 Niskin,,
 Phytoplankton net, Size?,
 SBP300,,Seismic echo sounder
-Short term sediment trap,,   
-Long term sediment trap,, 1 year+
+Sediment trap (long term),,1 year+
+Sediment trap (short term),,   
 Surface drifter,,
 Topas40,,Seismic echo sounder
 TS probe,,Echo Sounder
@@ -39,7 +39,8 @@ Tube,,For sucking up water (from for instance a melt pond
 UIW,,Under Ice water
 Vertical microstructure profiler,,
 Weather station,,
-WP2,X,Should this be split into 64 um and 180 um
+WP2 180 um,,New
 WP2 64 um,,New
-WP2 180 im,,New
-WP3,WP3 1000 µm,
+WP2 90 um,,New
+WP2,X,Should this be split into 64 um and 90 um and 180 um
+WP3 1000 um,,
