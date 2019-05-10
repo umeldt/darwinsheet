@@ -176,16 +176,24 @@ eventDate = {'name': 'eventDate',
 
 start_date = copy.deepcopy(eventDate)
 start_date['name'] = 'start_date'
-start_date['disp_name'] = 'Start date'
+start_date['disp_name'] = 'Start Date'
 start_date['inherit'] = True
-start_date['valid']['input_title'] = 'Extraction start date'
+start_date['valid']['input_title'] = 'Start Date'
 start_date.pop('dwcid')
+
+middle_date = copy.deepcopy(start_date)
+middle_date['name'] = 'middle_date'
+middle_date['disp_name'] = 'Middle Date'
+middle_date['inherit'] = True
+middle_date['valid']['input_title'] = 'Middle Date'
+middle_date['valid']['input_message'] = 'Middle date for event, for instance for noting the deepest point of a trawl or net haul\n' + \
+    start_date['valid']['input_message']
 
 end_date = copy.deepcopy(start_date)
 end_date['name'] = 'end_date'
-end_date['disp_name'] = 'End date'
+end_date['disp_name'] = 'End Date'
 end_date['inherit'] = True
-end_date['valid']['input_title'] = 'Extraction end date'
+end_date['valid']['input_title'] = 'End Date'
 
 
 eventTime = {'name': 'eventTime',
@@ -218,18 +226,18 @@ If MM > 59, HH will be HH + 1 ''',
 # start_time.pop('dwcid')
 middle_time = copy.deepcopy(eventTime)
 middle_time['name'] = 'middle_time'
-middle_time['disp_name'] = 'Middle time'
+middle_time['disp_name'] = 'Middle Time'
 middle_time['inherit'] = True
-middle_time['valid']['input_title'] = 'Middle time'
+middle_time['valid']['input_title'] = 'Middle Time'
 middle_time['valid']['input_message'] = 'Middle time for event, for instance for noting the deepest point of a trawl or net haul' + \
     eventTime['valid']['input_message']
 middle_time.pop('dwcid')
 
 end_time = copy.deepcopy(eventTime)
 end_time['name'] = 'end_time'
-end_time['disp_name'] = 'End time'
+end_time['disp_name'] = 'End Time'
 end_time['inherit'] = True
-end_time['valid']['input_title'] = 'End time'
+end_time['valid']['input_title'] = 'End Time'
 end_time['valid']['input_message'] = 'End time for event, for instance for use with a trawl or net haul' + \
     eventTime['valid']['input_message']
 end_time.pop('dwcid')
@@ -1573,6 +1581,39 @@ Integer >= 0''',
                      'error_message': 'Int range [0, 7]'
                  }
                  }
+
+
+# For BIG
+instrument = {'name': 'instrument',
+              'disp_name': 'Instrument Name',
+              'valid': {
+                  'validate': 'any',
+                  'input_title': 'Instrument Name',
+                  'input_message': '''This is the instrument name with brand
+Example: Camera (Nikon D7000), Temperature logger (Onset HOBO)'''
+              }
+              }
+
+objective = {'name': 'objective',
+             'disp_name': 'Objective',
+             'valid': {
+                 'validate': 'any',
+                 'input_title': 'Objective',
+                 'input_message': '''Could be one word describing what the objective is.
+Example: Melting, Reindeer,....'''
+             }
+             }
+
+risID = {'name': 'risID',
+         'disp_name': 'RISID',
+         'valid': {
+                 'validate': 'any',
+                 'input_title': 'RIS ID(s)',
+                 'input_message': '''The RIS ID(s).
+The Research in Svalbard ID(s), comma separated if there is more than one'''
+         }
+         }
+
 # List of all the available fields
 fields = [getattr(sys.modules[__name__], item) for item in dir() if not item.startswith(
     "__") and isinstance(getattr(sys.modules[__name__], item), dict)]
