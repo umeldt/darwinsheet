@@ -8,16 +8,16 @@ Bacterial production,, Set intendedMethod to for instance 3H-Leucine
 Bio bulk,,Ice cores for biological processing
 Bottom ice,X-S,Sample type (?) instead of part of ice core
 brine,X-S,Sample type (?) instead of material
-CARD FISH EPS,S,?
 CDOM,, Colored dissolved organic matter
-Chlorophyll a tot,,
 Chlorophyll a > 10 um,,For use on sediment traps
+Chlorophyll a tot,,
 Copepods,X-S Rename to Mesozooplankton ?? and move taxonomy ,
 d13C DIC,,These are not taken for primary production
 d13C,,
 d18O,,
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
+Dilution culture,,
 Dinocysts,,Recorded from Paleo cores
 Dissolved Organic Carbon,,
 Dissolved trace elements,,
@@ -61,8 +61,10 @@ Mesozooplankton ecotoxology,,
 Mesozooplankton metagenomics,,
 Mesozooplankton taxonomy,,
 Methylmercury,, remarks can for instance be PET or PC Bottle
+Microbial abundance,,
 Microbial activity (RNA) ,,New
 Microbial diversity (DNA and RNA),,
+Microzooplankton biomass,,
 Mixotrophy FISH,,Fluorescence in situ hybridization of mixotrophy samples
 Multicore archive half,, Half a multicore
 Multicore work half,, Half a multicore
