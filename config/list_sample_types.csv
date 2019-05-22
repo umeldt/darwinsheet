@@ -7,7 +7,7 @@ AT/DIC/pH,,
 Bacterial production,, Set intendedMethod to for instance 3H-Leucine
 Bio bulk,,Ice cores for biological processing
 Bottom ice,X-S,Sample type (?) instead of part of ice core
-brine,X-S,Sample type (?) instead of material
+brine,X-S Primary Production (14C-CO2),Sample type (?) instead of material
 CDOM,, Colored dissolved organic matter
 Chlorophyll a > 10 um,,For use on sediment traps
 Chlorophyll a tot,,
@@ -90,12 +90,12 @@ Protists <10 um,,
 pTEP,,particulate Transparent exopolymeric particles
 Racetrack,, Drone
 RNA,,
-sea ice,X-S,"Sample type (?) instead of ""material"""
+sea ice,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
 Sediment incubation,,"Sample type (?) instead of ""material"""
 Sediment pigments,,
 Sediment porosity,,
 Sediment slice,, Part of a sediment core used for further splitting
-Sediment,X-S,"Sample type (?) instead of ""material"""
+Sediment,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
 Seston elemental composition,, Method can be XRF
 Small mesozooplankton taxonomy,,New
 Station,,Needed for defining specific stations (NLEG01….)
@@ -108,4 +108,4 @@ Viral diversity (FeCl3),,
 Viral production,,
 VivaFlow,X-S,"This is a water concentrator, should probably not be here."
 Water sample,X-S ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
-Water,X-S,"Sample type (?) instead of ""material"""
+Water,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
