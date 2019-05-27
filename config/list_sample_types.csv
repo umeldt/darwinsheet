@@ -31,7 +31,7 @@ Fecal pellet flux,, Taken from sediment traps
 Fish,,
 FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
-fixed net sample,X-S,Sample type (?) instead of gear and treatment
+fixed net sample,X-S Protist diversity >10 um intendedMethod=Microscopy,Sample type (?) instead of gear and treatment
 GC catcher sample,, Gravity core
 GC cutter sample,, Gravity core
 GC section archive half,, Gravity core
@@ -70,7 +70,7 @@ Multicore archive half,, Half a multicore
 Multicore work half,, Half a multicore
 Multicore,, One core from a multicore (i.e. a sample)
 Niskin Bottle,, One bottle from a set of bottles 
-Nutrients,, "Nitrate, nitrite,phosphate and silicic acid"
+Nutrients,,"Nitrate, nitrite,phosphate and silicic acid"
 Organic matter characterization,,Samples taken from Niskin
 Particulate absorption,,
 Particulate CN,,Carbon:Nitrogen:Phosphorous ratio
@@ -106,6 +106,6 @@ Trace elements,,sampling with GO-FLO in a clean lab
 Viral decay,,
 Viral diversity (FeCl3),,
 Viral production,,
-VivaFlow,X-S,"This is a water concentrator, should probably not be here."
-Water sample,X-S ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
+VivaFlow,X-S Protist diversity <10 um intendedMethod= Microscopy,"This is a water concentrator, should probably not be here."
+Water sample,X-S Microalgal diversity intendedMethod=Culturing ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
 Water,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
