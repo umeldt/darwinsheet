@@ -7,7 +7,7 @@ AT/DIC/pH,,
 Bacterial production,, Set intendedMethod to for instance 3H-Leucine
 Bio bulk,,Ice cores for biological processing
 Bottom ice,X-S,Sample type (?) instead of part of ice core
-brine,X-S Primary Production (14C-CO2),Sample type (?) instead of material
+brine,X-S Talk to Anna as these are two Ice cores,Sample type (?) instead of material
 CDOM,, Colored dissolved organic matter
 Chlorophyll a > 10 um,,For use on sediment traps
 Chlorophyll a tot,,
@@ -31,7 +31,6 @@ Fecal pellet flux,, Taken from sediment traps
 Fish,,
 FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
-fixed net sample,X-S Protist diversity >10 um intendedMethod=Microscopy,Sample type (?) instead of gear and treatment
 GC catcher sample,, Gravity core
 GC cutter sample,, Gravity core
 GC section archive half,, Gravity core
@@ -61,6 +60,7 @@ Mesozooplankton ecotoxology,,
 Mesozooplankton metagenomics,,
 Mesozooplankton taxonomy,,
 Methylmercury,, remarks can for instance be PET or PC Bottle
+Microalgal diversity,, intendedMethod could be Culturing
 Microbial abundance,,
 Microbial activity (RNA) ,,New
 Microbial diversity (DNA and RNA),,
@@ -86,16 +86,15 @@ POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possibl
 Primary production (14C-CO2),,New
 Profile,, Drone
 Protist abundance and taxonomy,, Method is for instance microscopy
-Protists <10 um,,
+Protist diversity >10 um,,intendedMethod could be Microscopy
+Protist diversity <10 um,,intendedMethod could be Microscopy
 pTEP,,particulate Transparent exopolymeric particles
 Racetrack,, Drone
 RNA,,
-sea ice,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
 Sediment incubation,,"Sample type (?) instead of ""material"""
 Sediment pigments,,
 Sediment porosity,,
 Sediment slice,, Part of a sediment core used for further splitting
-Sediment,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
 Seston elemental composition,, Method can be XRF
 Small mesozooplankton taxonomy,,New
 Station,,Needed for defining specific stations (NLEG01….)
@@ -106,6 +105,3 @@ Trace elements,,sampling with GO-FLO in a clean lab
 Viral decay,,
 Viral diversity (FeCl3),,
 Viral production,,
-VivaFlow,X-S Protist diversity <10 um intendedMethod= Microscopy,"This is a water concentrator, should probably not be here."
-Water sample,X-S Microalgal diversity intendedMethod=Culturing ,"Sample type (?) instead of ""material"". Looks like most of it is from a net"
-Water,X-S Primary Production (14C-CO2),"Sample type (?) instead of ""material"""
