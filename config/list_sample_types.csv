@@ -76,26 +76,25 @@ Particulate absorption,,
 Particulate CN,,Carbon:Nitrogen:Phosphorous ratio
 Particulate elements,, Needed to differentiate from trace
 PC section,,Piston core section
-PCR tube,X-S,Sample type (?) instead of gear
 pCSP,,particulate Coomassie stainable particles
 Plankton barcoding,,
 Plankton metabarcoding,,
-Plankton sample,X-S,
 POC/PON,,
 POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possible
 Primary production (14C-CO2),,New
 Profile,, Drone
 Protist abundance and taxonomy,, Method is for instance microscopy
-Protist diversity >10 um,,intendedMethod could be Microscopy
 Protist diversity <10 um,,intendedMethod could be Microscopy
+Protist diversity >10 um,,intendedMethod could be Microscopy
 pTEP,,particulate Transparent exopolymeric particles
 Racetrack,, Drone
 RNA,,
-Sediment incubation,,"Sample type (?) instead of ""material"""
+Sediment incubation,S Missing samplingProtocol,"Sample type (?) instead of ""material"""
 Sediment pigments,,
 Sediment porosity,,
 Sediment slice,, Part of a sediment core used for further splitting
 Seston elemental composition,, Method can be XRF
+Single cell isolate,,
 Small mesozooplankton taxonomy,,New
 Station,,Needed for defining specific stations (NLEG01….)
 Tissue,, Specify type in tissueType
