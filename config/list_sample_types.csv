@@ -72,14 +72,12 @@ Niskin Bottle,, One bottle from a set of bottles
 Nutrients,,"Nitrate, nitrite,phosphate and silicic acid"
 Organic matter characterization,,Samples taken from Niskin
 Particulate absorption,,
-Particulate CN,,Carbon:Nitrogen:Phosphorous ratio
 Particulate elements,, Needed to differentiate from trace
 PC section,,Piston core section
 pCSP,,particulate Coomassie stainable particles
 Plankton barcoding,,
 Plankton metabarcoding,,
 POC/PON,,
-POC/PON/StabIso,,Should be split into POC/PON & Stable isotope Pål: Not possible
 Primary production (14C-CO2),,New
 Profile,, Drone
 Protist abundance and taxonomy,, Method is for instance microscopy
@@ -95,6 +93,7 @@ Sediment slice,, Part of a sediment core used for further splitting
 Seston elemental composition,, Method can be XRF
 Single cell isolate,,
 Small mesozooplankton taxonomy,,New
+Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)
 Tissue,, Specify type in tissueType
 Total Mercury,, Remarks can be Glass vial
