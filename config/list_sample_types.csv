@@ -95,8 +95,9 @@ Single cell isolate,,
 Small mesozooplankton taxonomy,,New
 Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)
-Tissue,, Specify type in tissueType
+Tissue,, Specify type in tissuetType
 Total Mercury,, Remarks can be Glass vial
+Total nitrogen,,
 Total organic carbon,,
 Trace elements,,sampling with GO-FLO in a clean lab
 Viral decay,,
