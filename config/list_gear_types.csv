@@ -29,7 +29,6 @@ Multicorer,,
 Multinet 180 um,,
 Multinet 64 um,,
 Niskin,,
-Phytoplankton net, Size?,
 Phytoplankton net 10 um,,
 Phytoplankton net 20 um,,
 ROV,,
@@ -47,5 +46,4 @@ Weather station,,
 WP2 180 um,,New
 WP2 64 um,,New
 WP2 90 um,,New
-WP2,X,Should this be split into 64 um and 90 um and 180 um
 WP3 1000 um,,
