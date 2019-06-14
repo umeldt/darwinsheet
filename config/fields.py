@@ -1317,6 +1317,52 @@ Float in range [-2, 16]''',
               }
               }
 
+sedimentTOC = {'name': 'sedimentTOC',
+               'disp_name': 'Sediment TOC (mg/L)',
+               'units': 'mg L-1',
+               'valid': {
+                   'validate': 'decimal',
+                   'criteria': '>=',
+                   'value': 0,
+                   'input_title': 'Sediment TOC (mg/L)',
+                   'input_message': '''
+Sediment Total Organic Carbon in milligrams per litre
+Positive float number''',
+                   'error_title': 'Error',
+                   'error_message': 'Float >= 0'
+               }
+               }
+
+sedimentTN = {'name': 'sedimentTN',
+              'disp_name': 'Sediment TN (mg/L)',
+              'units': 'mg L-1',
+              'valid': {
+                  'validate': 'decimal',
+                  'criteria': '>=',
+                  'value': 0,
+                  'input_title': 'Sediment TN (mg/L)',
+                  'input_message': '''
+Sediment Total Nitrogen in milligrams per litre
+Positive float number''',
+                  'error_title': 'Error',
+                  'error_message': 'Float >= 0'
+              }
+              }
+benthicRespiration = {'name': 'benthicRespiration',
+                      'disp_name': 'Benthic Respiration (mmol/m^2)',
+                      'units': 'mmol m-2',
+                      'valid': {
+                          'validate': 'decimal',
+                          'criteria': '>=',
+                          'value': 0,
+                          'input_title': 'Benthic Respiration (mmol/m^2)',
+                          'input_message': '''
+Benthic respiration of Oxygen in millimole per square meter
+Positive float number''',
+                          'error_title': 'Error',
+                          'error_message': 'Float >= 0'
+                      }
+                      }
 
 seaWaterTotalDIC = {'name': 'seaWaterTotalDIC',
                     'disp_name': 'Sea DIC (umol/kg)',

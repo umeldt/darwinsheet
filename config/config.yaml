@@ -26,7 +26,7 @@ cores:
           measurement: [individualCount, weightInGrams]
           water: [seaWaterAlkalinity, seaWaterChlorophyllA, seaWaterDeltaO18, seaWaterPH, seaWaterPOC, seaWaterPON, seaWaterPhaeopigment, seaWaterPressure, seaWaterPracticalSalinity, seaWaterAbsoluteSalinity, seaWaterElectricalConductivity, seaWaterTOC, seaWaterTemperatueInCelsius, seaWaterTotalDIC] 
           ice: [seaIceChlorophyllA, seaIceDeltaO18, seaIcePhaeopigment, seaIceTotalDIC, seaIceCoreType, seaIceCoreLengthInMeters, seaIceThicknessInMeters, seaIceFreeboardInMeters, seaIceMeltpondTemperatureInCelsius, seaIceMeltpondSalinity ]
-          sediment: [sedimentChlorophyllA, sedimentPhaeopigment, sedimentPH]
+          sediment: [sedimentChlorophyllA, sedimentPhaeopigment, sedimentPH, sedimentTOC, sedimentTN, benthicRespiration]
           paleo: [sedimentCoreMinimumDepthInCentiMeters, sedimentCoreMaximumDepthInCentiMeters, sedimentCoreLengthInMeters]
           air: [altitudeInMeters, minimumElevationInMeters, maximumElevationInMeters]
           instrumentation: [dataFilename, serialNumber]
