@@ -24,6 +24,7 @@ DO,, dissolved oxygen
 dTEP,,dissolved Transparent exopolymeric particles
 eDNA,,environmental DNA
 Electron microscopy (SEM filter),,
+Experiements,,For instance water samples to be used in experiements. IntendedMethod should be set
 Fatty acids,,
 Fecal pellet flux,, Taken from sediment traps
 Fish,,
@@ -54,7 +55,7 @@ Meiofauna taxonomy,,
 Melt pond,,Used to join multiple samples from one melt pond
 Meroplankton taxonomy,,
 Mesozooplankton biomass,,New
-Mesozooplankton ecotoxology,,
+Mesozooplankton ecotoxicology,,
 Mesozooplankton metagenomics,,
 Mesozooplankton taxonomy,,
 Methylmercury,, remarks can for instance be PET or PC Bottle
@@ -63,6 +64,7 @@ Microbial abundance,,
 Microbial activity (RNA) ,,New
 Microbial diversity (DNA and RNA),,
 Microzooplankton biomass,,
+Microzooplankton abundance,,
 Mixotrophy FISH,,Fluorescence in situ hybridization of mixotrophy samples
 Multicore archive half,, Half a multicore
 Multicore work half,, Half a multicore
@@ -94,7 +96,7 @@ Single cell isolate,,
 Small mesozooplankton taxonomy,,New
 Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)
-Tissue,, Specify type in tissuetType
+Tissue,, Specify type in tissueType
 Total Mercury,, Remarks can be Glass vial
 Total nitrogen,,
 Total organic carbon,,
