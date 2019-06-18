@@ -24,7 +24,7 @@ import fields  # noqa: E402
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-05-22'
-__updated__ = '2019-02-19'
+__updated__ = '2019-06-18'
 
 DEBUG = 1
 
@@ -576,7 +576,7 @@ def write_file(url, fields, field_dict, metadata=True, conversions=True):
     args.verbose = 0
     args.dir = os.path.dirname(url)
     file_def = {'name': os.path.basename(url).split('.')[0],
-                'disp_name': 'Replace with measurement type',
+                'disp_name': '',
                 'fields': fields}
 
     make_xlsx(args, file_def, field_dict, metadata, conversions)
