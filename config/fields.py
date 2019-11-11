@@ -569,7 +569,7 @@ sedimentCoreMaximumDepthInCentiMeters = {'name': 'sedimentCoreMaximumDepthInCent
                                              'criteria': 'between',
                                              'minimum': 0,
                                              'maximum': 3000,
-                                             'input_title': 'Sediment Core Maximum Depth (m)',
+                                             'input_title': 'Sediment Core Maximum Depth (cm)',
                                              'input_message': '''The sediment core maximum depth in centimeters.
 This is measured from the top of the core.
 Maximum for multicores is 60 cm
@@ -709,8 +709,23 @@ storageTemp = {'name': 'storageTemp',
                }
                }
 
+incubationTemperatureInCelsius = {'name': 'incubationTemperatureInCelsius',
+        'disp_name': 'Incubation Temperature (C)',
+        'units': 'Celsius',
+        'valid': {
+            'validate': 'decimal',
+            'criteria': '>',
+            'value': -10,
+            'input_title': 'Incubation Temperature(C)',
+            'input_message': '''Temperature at which the experiment is run
+ Float number larger than -10 ''',
+ 'error_title': 'Error',
+ 'error:message': 'Float > -10'
+ }
+        }
+
 fixative = {'name': 'fixative',
-            'disp_name': 'Fixative',
+        'disp_name': 'Fixative',
             'valid': {
                 'validate': 'any',
                 'input_title': 'Fixative',
@@ -1041,6 +1056,39 @@ seaIceCoreLengthInMeters = {'name': 'seaIceCoreLengthInMeters',
                                 'error_message': 'Float > 0'
                             }
                             }
+seaIceCoreMaximumDepthInCentiMeters = {'name': 'seaIceCoreMaximumDepthInCentiMeters',
+                                         'disp_name': 'Sea Ice Core Maximum Depth (cm)',
+                                         'units': 'cm',
+                                         'valid': {
+                                             'validate': 'decimal',
+                                             'criteria': 'between',
+                                             'minimum': 0,
+                                             'maximum': 3000,
+                                             'input_title': 'Sea Ice Core Maximum Depth (cm)',
+                                             'input_message': '''The sea ice core maximum depth in centimeters.
+This is measured from the top of the core, with 0 cm being the surface.
+Maximum is 3 000 cm.''',
+                                             'error_title': 'Error',
+                                             'error_message': 'Float[0, 3 000]'
+                                         }
+                                         }
+
+
+seaIceCoreMinimumDepthInCentiMeters = {'name': 'seaIceCoreMinimumDepthInCentiMeters',
+                                         'disp_name': 'Sea Ice Core Minimum Depth (cm)',
+                                         'units': 'cm',
+                                         'valid': {
+                                             'validate': 'decimal',
+                                             'criteria': 'between',
+                                             'minimum': 0,
+                                             'maximum': 3000,
+                                             'input_title': 'Sea Ice Core Minimum Depth (cm)',
+                                             'input_message': '''The sea ice core minimum depth in centimeters.
+This is measured from the top of the core, with 0 cm being the surface.''',
+                                             'error_title': 'Error',
+                                             'error_message': 'Float[0, 3 000]'
+                                         }
+                                         }
 
 seaIceThicknessInMeters = {'name': 'seaIceThicknessInMeters',
                            'disp_name': 'Sea Ice Thickness (cm)',
@@ -1070,7 +1118,21 @@ seaIceFreeboardInMeters = {'name': 'seaIceFreeboardInMeters',
                                'error:message': 'Float > 0'
                            }
                            }
-seaIceMeltpondTemperatureeInCelsius = {'name': 'seaIceMeltpondTemperatureInCelsius',
+seaIceCoreTemperatureInCelsius = {'name': 'seaIceCoreTemperatureInCelsius',
+                                       'disp_name': 'Sea Ice Core Temperature (C)',
+                                       'units': 'Celsius',
+                                       'valid': {
+                                           'validate': 'decimal',
+                                           'criteria': '>',
+                                           'value': -40,
+                                           'input_title': 'Sea Ice Core Temperature (C)',
+                                           'input_message': '''Sea ice core temperature in Celsius. Temperature measurements should be made in the field and the positions at which the measurements were made must be clearly specified.
+ Float number larger than -40 ''',
+                                           'error_title': 'Error',
+                                           'error:message': 'Float > -40'
+                                       }
+                                       }
+seaIceMeltpondTemperatureInCelsius = {'name': 'seaIceMeltpondTemperatureInCelsius',
                                        'disp_name': 'Sea Ice Meltpond Temperature (C)',
                                        'units': 'Celsius',
                                        'valid': {
@@ -1576,7 +1638,7 @@ somaticWeightInGrams = {'name': 'somaticWeightInGrams',
                         }
 
 forkLengthInMeters = {'name': 'forkLengthInMeters',
-                      'disp_name': 'Fork lenght (cm)',
+                      'disp_name': 'Fork length (cm)',
                       'units': 'cm',
                       #                  'dwcid': 'http://rs.tdwg.org/dwc/terms/dynamicProperties',
                       'valid': {
@@ -1590,19 +1652,49 @@ Positive decimal number''',
                           'error_message': 'Float > 0'
                       }
                       }
+totalFishLengthInMeters = {'name': 'totalFishLengthInMeters',
+                      'disp_name': 'Total fish length (cm)',
+                      'units': 'cm',
+                      #                  'dwcid': 'http://rs.tdwg.org/dwc/terms/dynamicProperties',
+                      'valid': {
+                          'validate': 'decimal',
+                          'criteria': '>',
+                          'value': 0,
+                          'input_title': 'Total lenght (cm)',
+                          'input_message': '''The length of a fish measured from the tip of the snout to the tip of the longer lobe of the caudal fin, usually measured with the lobes compressed along the midline. It is a straight-line measure, not measured over the curve of the body.
+Positive decimal number in cm.''',
+                          'error_title': 'Error',
+                          'error_message': 'Float > 0'
+                      }
+                      }
+lengthInMeters = {'name': 'lengthInMeters',
+                      'disp_name': 'Length (m)',
+                      'units': 'm',
+                      #                  'dwcid': 'http://rs.tdwg.org/dwc/terms/dynamicProperties',
+                      'valid': {
+                          'validate': 'decimal',
+                          'criteria': '>',
+                          'value': 0,
+                          'input_title': 'Length (m)',
+                          'input_message': '''A measurement of length in meters. This is a universal parameter and should only be used if there is not any other length parameter that fits.
+Positive decimal number in m.''',
+                          'error_title': 'Error',
+                          'error_message': 'Float > 0'
+                      }
+                      }
 maturationStage = {'name': 'maturationStage',
                    'disp_name': 'Maturation Stage',
                    'units': '1',
                    'valid': {
-                       'validate': 'integer',
+                       'validate': 'decimal',
                        'criteria': 'between',
                        'minimum': 0,
                        'maximum': 7,
                        'input_title': 'Maturation Stage',
-                       'input_message': '''On the basis of shape, size, color of the gonads and other morphological featuers, at least six maturity stages can be recongnized
-Value in range [0, 7]''',
+                       'input_message': '''On the basis of shape, size, color of the gonads and other morphological features, at least six maturity stages can be recognized
+Decimal value in range [0, 7]''',
                        'error_title': 'Error',
-                       'error_message': 'Int range [0, 7]'
+                       'error_message': 'Decimal range [0, 7]'
                    }
                    }
 
@@ -1611,13 +1703,14 @@ ectoparasites = {'name': 'ectoparasites',
                  'units': '1',
                  'valid': {
                      'validate': 'integer',
-                     'criteria': '>=',
-                     'value': 0,
+                       'criteria': 'between',
+                       'minimum': 0,
+                       'maximum': 1,
                      'input_title': 'Ectoparasites',
-                     'input_message': '''Number of ectoparasites visible on the fins and gills of the fish
-Integer >= 0''',
+                     'input_message': '''Presence (1) or absence (0) of visible parasites on the fins and gills of the fish
+Integer [0, 1]''',
                      'error_title': 'Error',
-                     'error_message': 'Int range [0, 7]'
+                     'error_message': 'Int range [0, 1]'
                  }
                  }
 
@@ -1626,13 +1719,14 @@ endoparasites = {'name': 'endoparasites',
                  'units': '1',
                  'valid': {
                      'validate': 'integer',
-                     'criteria': '>=',
-                     'value': 0,
+                       'criteria': 'between',
+                       'minimum': 0,
+                       'maximum': 1,
                      'input_title': 'Endoparasites',
-                     'input_message': '''Number of endoparasites visible in the body cavity of the fish
-Integer >= 0''',
+                     'input_message': '''Presence (1) or absence (0) of visible parasites of endoparasites visible in the body cavity of the fish
+Integer [0, 1]''',
                      'error_title': 'Error',
-                     'error_message': 'Int range [0, 7]'
+                     'error_message': 'Int range [0, 1]'
                  }
                  }
 
