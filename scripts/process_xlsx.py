@@ -27,7 +27,7 @@ aen_config_dir = (os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
 
 sys.path.append(aen_config_dir)
-from make_xlsx import Field  # noqa: E402
+from darwinsheet.scripts.make_xlsx import Field  # noqa: E402
 import config.fields as fields  # noqa: E402
 
 __all__ = []
