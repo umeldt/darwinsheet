@@ -26,9 +26,10 @@ import os.path
 aen_config_dir = (os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
 
-sys.path.append(aen_config_dir)
-from darwinsheet.scripts.make_xlsx import Field  # noqa: E402
-import config.fields as fields  # noqa: E402
+sys.path.append(aen_config_dir+'/scripts')
+sys.path.append(aen_config_dir+'/config')
+from make_xlsx import Field  # noqa: E402
+import fields as fields  # noqa: E402
 
 __all__ = []
 __version__ = 0.1
@@ -193,8 +194,8 @@ def xlsx_to_array(url, sheetname='Data', skiprows=1, **kwds):
     if isinstance(url, str):
 
         url = os.path.abspath(url)
-    data = pd.read_excel(url, sheetname=sheetname,
-                         skiprows=skiprows, **kwds).as_matrix()
+    data = pd.read_excel(url, sheet_name=sheetname,
+                         skiprows=skiprows, **kwds).values
 
     # Convert Timestamps to dates
     return data
@@ -959,7 +960,7 @@ def run(fname, return_data=False, setup='aen'):
         The second the values
     """
 
-    cores = yaml.load(
+    cores = yaml.full_load(
         open(os.path.join(aen_config_dir, 'config', 'config.yaml'), encoding='utf-8'))['cores']
     for core in cores:
         if core['name'] == setup:
@@ -1008,7 +1009,21 @@ def main(argv=None):  # IGNORE:C0111
     #         save_pages(output, N=args.n)
         good, error = run(infile, setup=arg.type)
         if good:
-            print("File OK:)")
+            print('''
+                  Your file has passed the checker!
+                  
+                  Please note that there are several things that have not been checked. Please ensure that each row in your sample log matches what is written on the physical sample labels.
+                  
+                  Human error is the biggest cause of mismatches between the sample logs and the physical sample labels. Please in particular check that any of these common errors have not been made. They are much more difficult to fix after the cruise has finished.
+                  
+                  1. Printing new sample labels and forgetting to re-scan them.
+                  2. Copy-paste errors.
+                  3. After printing labels, the information is preserved on the label printing page. Sometimes people forget to make all the necessary changes when printing new labels.
+                    
+                  Thanks for your efforts.
+                    
+                  Takk for hjelpe!
+                  ''')
         else:
             print("Errors found. They were:")
             for line in error:
