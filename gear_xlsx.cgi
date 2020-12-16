@@ -52,13 +52,6 @@ if method == "GET": # This is for getting the page
         template.render())
 
 if method == "POST":
-
-    form = cgi.FieldStorage()
-   
-    print("Content-Type: application/vnd.ms-excel")
-    print("Content-Disposition: attachment; filename=Master_Gear_Log.xlsx\n")
-    
-    path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
     
     #Pull data from IMR API in json format. IP address should match IMR API host.
     url = "http://158.39.47.78/api/activities/inCurrentCruise?format=json"
@@ -68,24 +61,51 @@ if method == "POST":
     url = "http://158.39.47.78/api/cruises/current?format=json"
     response = requests.get(url)
     json_cruise = response.json()
-    
-    data = tl.json_to_df(json_activities,json_cruise)
-    
-    if "editfile" in form:        
-        myfilename = form['myfile'].filename
-        with open(myfilename, 'wb') as f:
-            f.write(form['myfile'].file.read())                
-        data = pd.read_excel(myfilename, sheet_name='Data', header=2)
-        data = pd.concat([data_old,data],ignore_index=True).drop_duplicates('eventID', keep='first').reset_index(drop=True)
-
         
-    terms = list(data.columns)
-    field_dict = mx.make_dict_of_fields()
-    metadata = True
-    conversions = True # Include metadata sheet and conversions sheet
-    mx.write_file(path,terms,field_dict,metadata,conversions,data)
-
-    with open(path, "rb") as f:
-        sys.stdout.flush()
-        shutil.copyfileobj(f, sys.stdout.buffer)
+    form = cgi.FieldStorage()
+   
+    if "txtfile" in form:
+    
+    #    print('something')
+        print("Content-Type: text/plain")
+        print("Content-Disposition: attachment; filename=raw_gear_log.txt\n")
+        
+        path = "/tmp/" + next(tempfile._get_candidate_names()) + '.txt'
+        
+        json_out = [json_cruise] + json_activities 
+        
+        with open(path, 'w') as outfile:
+            json.dump(json_out, outfile)
+        
+        with open(path, "rb") as f:
+            sys.stdout.flush()
+            shutil.copyfileobj(f, sys.stdout.buffer)
+            
+    else:
+        print("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        #print("Content-Type: application/vnd.ms-excel")
+        print("Content-Disposition: attachment; filename=Master_Gear_Log.xlsx\n")
+        
+        path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
+        
+        data = tl.json_to_df(json_activities,json_cruise)
+        
+        if "editfile" in form:        
+            myfilename = form['myfile'].filename
+            with open(myfilename, 'wb') as f:
+                f.write(form['myfile'].file.read())                
+            data = pd.read_excel(myfilename, sheet_name='Data', header=2)
+            data = pd.concat([data_old,data],ignore_index=True).drop_duplicates('eventID', keep='first').reset_index(drop=True)
+    
+        
+            
+        terms = list(data.columns)
+        field_dict = mx.make_dict_of_fields()
+        metadata = True
+        conversions = True # Include metadata sheet and conversions sheet
+        mx.write_file(path,terms,field_dict,metadata,conversions,data)
+    
+        with open(path, "rb") as f:
+            sys.stdout.flush()
+            shutil.copyfileobj(f, sys.stdout.buffer)
     
