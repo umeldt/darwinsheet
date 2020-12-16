@@ -13,7 +13,6 @@ import time
 import sys
 import cgi
 import cgitb
-import cgitb
 import codecs
 import xlsxwriter
 import shutil
@@ -28,7 +27,6 @@ import scripts.make_xlsx as mx
 import tempfile
 import scripts.toktlogger_json_to_df as tl
 import pandas as pd
-import io
 
 cgitb.enable()
 
@@ -64,9 +62,8 @@ if method == "POST":
         
     form = cgi.FieldStorage()
    
-    if "txtfile" in form:
+    if "txtfile" in form: # Dumping the raw json data to a .txt file
     
-    #    print('something')
         print("Content-Type: text/plain")
         print("Content-Disposition: attachment; filename=raw_gear_log.txt\n")
         
@@ -76,18 +73,17 @@ if method == "POST":
         
         with open(path, 'w') as outfile:
             json.dump(json_out, outfile)
-        
             
-    else:
+    else: # Creating a .xlsx file of the gear log
+    
         print("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        #print("Content-Type: application/vnd.ms-excel")
         print("Content-Disposition: attachment; filename=Master_Gear_Log.xlsx\n")
         
         path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
         
         data = tl.json_to_df(json_activities,json_cruise)
         
-        if "editfile" in form:        
+        if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.        
             oldfilename = '/tmp/oldgearlog.xlsx'
             with open(oldfilename, 'wb') as f:
                 f.write(form['myfile'].file.read())                
