@@ -77,9 +77,6 @@ if method == "POST":
         with open(path, 'w') as outfile:
             json.dump(json_out, outfile)
         
-        with open(path, "rb") as f:
-            sys.stdout.flush()
-            shutil.copyfileobj(f, sys.stdout.buffer)
             
     else:
         print("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
@@ -91,21 +88,21 @@ if method == "POST":
         data = tl.json_to_df(json_activities,json_cruise)
         
         if "editfile" in form:        
-            myfilename = form['myfile'].filename
-            with open(myfilename, 'wb') as f:
+            oldfilename = '/tmp/oldgearlog.xlsx'
+            with open(oldfilename, 'wb') as f:
                 f.write(form['myfile'].file.read())                
-            data = pd.read_excel(myfilename, sheet_name='Data', header=2)
+            data_old = pd.read_excel(oldfilename, sheet_name='Data', header=2)
+            data_old = data_old.fillna('')
             data = pd.concat([data_old,data],ignore_index=True).drop_duplicates('eventID', keep='first').reset_index(drop=True)
-    
-        
             
         terms = list(data.columns)
         field_dict = mx.make_dict_of_fields()
         metadata = True
         conversions = True # Include metadata sheet and conversions sheet
         mx.write_file(path,terms,field_dict,metadata,conversions,data)
+        
     
-        with open(path, "rb") as f:
-            sys.stdout.flush()
-            shutil.copyfileobj(f, sys.stdout.buffer)
+    with open(path, "rb") as f:
+        sys.stdout.flush()
+        shutil.copyfileobj(f, sys.stdout.buffer)
     
