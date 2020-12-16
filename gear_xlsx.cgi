@@ -51,12 +51,16 @@ if method == "GET": # This is for getting the page
 
 if method == "POST":
     
+    #ip = '10.3.32.62' # GO Sars toktlogger
+    #ip = '10.3.64.57' # KPH toktlogger
+    ip = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
+    
     #Pull data from IMR API in json format. IP address should match IMR API host.
-    url = "http://158.39.47.78/api/activities/inCurrentCruise?format=json"
+    url = "http://"+ip+"/api/activities/inCurrentCruise?format=json"
     response = requests.get(url)
     json_activities = response.json()
     
-    url = "http://158.39.47.78/api/cruises/current?format=json"
+    url = "http://"+ip+"/api/cruises/current?format=json"
     response = requests.get(url)
     json_cruise = response.json()
         
