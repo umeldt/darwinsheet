@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset='utf-8'>
+<title>Nansen Legacy Master Gear Log Generator</title>
+<style>
+body{
+	font: 16px/1.4 "Helvetica Neue", helvetica, sans-serif;
+ 	width: 90%;
+ 	margin: 0 auto;
+ }
+fieldset{
+	float:left;
+	margin-top: 1em;
+	width: 45%;
+	box-sizing: border-box;
+}
+fieldset label{
+	display: block;
+	float: left;
+	width: 24em;
+	margin-right: 1em;
+}
+fieldset legend{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+main{
+	width: 60%;
+}
+.wrapper{
+    margin: auto;
+    width: 100%;
+    padding:10px;
+}
+
+</style>
+<main>
+<h1>Nansen Legacy Master Gear Log Generator</h1>
+<a href="../../index.html">Back to index</a><br>
+<p>Press the button below to generate a new version of the master gear log xlsx sheet.</p>
+<form method=post>
+<p><input type=submit value='Generate new version of master gear log' name='newfile'>
+<div class="wrapper">
+</div>
+</form>
+<br>
+<p>Or you can select the file you want new activities to be added to.</p>
+<p>In this case, any changes you have made to activities previously included will be translated to the new file.</p>
+<form method="post" enctype="multipart/form-data">
+    <input id="fileupload" name="myfile" type="file" />
+    <input value="Upload and append to this file" name='editfile' type="submit" />
+</form>
+<br>
+<h2>At the end of the cruise</h2>
+<p>Please press the button below to generate a .txt file of the raw data from the API.</p>
+<p>Send this to the data manager with the rest of your sample logs.</p>
+<form method="post">
+    <input type="submit" value="Generate .txt file" name="txtfile"/>
+</form>
+</main>
+
+<footer>
+
+</footer>

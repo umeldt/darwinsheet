@@ -28,6 +28,7 @@ Electron microscopy (SEM filter),,
 Experiments,,For instance water samples to be used in experiments. IntendedMethod should be set
 Fatty acids,,
 Fecal pellet flux,, Taken from sediment traps
+Female:egg ratio,,New
 Fish,,
 FISH-EPS,,"Fluorescent in situ hybridization, EPS is exopolymeric substances"
 FISH-Mixotrophy,,
@@ -49,21 +50,23 @@ IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
-Macrozooplankton metagenomics,,New
+Macrozooplankton diet,,New
+Macrozooplankton metagenomics,,
 Macrozooplankton taxonomy,,
 Megafauna taxonomy,,
 Meiofauna abundance,, 
 Meiofauna taxonomy,, 
 Melt pond,,Used to join multiple samples from one melt pond
 Meroplankton taxonomy,,
-Mesozooplankton biomass,,New
+Mesozooplankton biomass,,
+Mesozooplankton diet,,New
 Mesozooplankton ecotoxicology,,
 Mesozooplankton metagenomics,,
 Mesozooplankton taxonomy,,
 Methylmercury,, remarks can for instance be PET or PC Bottle
 Microalgal diversity,, intendedMethod could be Culturing
 Microbial abundance,,
-Microbial activity (RNA) ,,New
+Microbial activity (RNA) ,,
 Microbial diversity (DNA and RNA),,
 Microzooplankton biomass,,
 Microzooplankton abundance,,
@@ -81,7 +84,7 @@ pCSP,,particulate Coomassie stainable particles
 Plankton barcoding,,
 Plankton metabarcoding,,
 POC/PON,,
-Primary production (14C-CO2),,New
+Primary production (14C-CO2),,
 Profile,, Drone
 Protist abundance and taxonomy,, Method is for instance microscopy
 Protist diversity <10 um,,intendedMethod could be Microscopy
@@ -95,7 +98,11 @@ Sediment porosity,,
 Sediment slice,, Part of a sediment core used for further splitting
 Seston elemental composition,, Method can be XRF
 Single cell isolate,,
-Small mesozooplankton taxonomy,,New
+Small meiofauna abundance,,New
+Small meiofauna diet,,New
+Small meiofauna taxonomy,,New
+Small mesozooplankton diet,,New
+Small mesozooplankton taxonomy,,
 Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)
 Tissue,, Specify type in tissueType

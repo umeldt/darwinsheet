@@ -12,6 +12,7 @@ import sys
 import xlsxwriter
 import xml.etree.ElementTree
 from argparse import ArgumentParser, RawDescriptionHelpFormatter, Namespace
+import pandas as pd
 
 from os.path import os
 
@@ -396,7 +397,7 @@ def write_metadata(args, workbook, field_dict):
                     ii, ii, cell_format=cell_format)
 
 
-def make_xlsx(args, file_def, field_dict, metadata, conversions):
+def make_xlsx(args, file_def, field_dict, metadata, conversions, data='None'):
     """
     Writes the xlsx file based on the wanted fields
 
@@ -417,6 +418,9 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions):
 
     conversions: Boolean
         Should the conversions sheet be written
+        
+    data: pandas.core.frame.DataFrame
+        Optional parameter. Option to add data from a dataframe to the 'data' sheet.
 
     """
 
@@ -520,6 +524,11 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions):
         else:
             data_sheet.set_column(first_col=ii, last_col=ii, width=field.width)
 
+    # Write optional data to data sheet
+    if type(data) == pd.core.frame.DataFrame:
+        for col_num, field in enumerate(data):
+            data_sheet.write_column(start_row,col_num,list(data[field]))
+            
     # Add header, done after the other to get correct format
     data_sheet.write(0, 0, file_def['disp_name'], header_format)
     # Add hint about pasting
@@ -548,7 +557,7 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions):
     workbook.close()
 
 
-def write_file(url, fields, field_dict, metadata=True, conversions=True):
+def write_file(url, fields, field_dict, metadata=True, conversions=True, data='None'):
     """
     Method for calling from other python programs
 
@@ -579,7 +588,7 @@ def write_file(url, fields, field_dict, metadata=True, conversions=True):
                 'disp_name': '',
                 'fields': fields}
 
-    make_xlsx(args, file_def, field_dict, metadata, conversions)
+    make_xlsx(args, file_def, field_dict, metadata, conversions, data)
 
 
 # def main(argv=None):  # IGNORE:C0111
