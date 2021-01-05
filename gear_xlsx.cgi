@@ -87,6 +87,8 @@ if method == "POST":
         
         data = tl.json_to_df(json_activities,json_cruise)
         
+        metadata_df = False
+        
         if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.        
             oldfilename = '/tmp/oldgearlog.xlsx'
             with open(oldfilename, 'wb') as f:
@@ -94,12 +96,14 @@ if method == "POST":
             data_old = pd.read_excel(oldfilename, sheet_name='Data', header=2)
             data_old = data_old.fillna('')
             data = pd.concat([data_old,data],ignore_index=True).drop_duplicates('eventID', keep='first').reset_index(drop=True)
+            metadata_df = pd.read_excel(oldfilename, sheet_name='Metadata', usecols="B,C", index_col=0, header=None).transpose())
+            metadata_df = metadata_df.reset_index(drop=True)
             
         terms = list(data.columns)
         field_dict = mx.make_dict_of_fields()
         metadata = True
         conversions = True # Include metadata sheet and conversions sheet
-        mx.write_file(path,terms,field_dict,metadata,conversions,data)
+        mx.write_file(path,terms,field_dict,metadata,conversions,data, metadata_df)
         
     
     with open(path, "rb") as f:
