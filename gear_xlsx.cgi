@@ -76,7 +76,7 @@ if method == "POST":
         json_out = [json_cruise] + json_activities 
         
         with open(path, 'w') as outfile:
-            json.dump(json_out, outfile)
+            json.dump(json_out, outfile, indent=4)
             
     else: # Creating a .xlsx file of the gear log
     
@@ -87,20 +87,27 @@ if method == "POST":
         
         data = tl.json_to_df(json_activities,json_cruise)
         
+        #metadata_df = False
+        
         if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.        
             oldfilename = '/tmp/oldgearlog.xlsx'
             with open(oldfilename, 'wb') as f:
                 f.write(form['myfile'].file.read())                
+            #xls = pd.ExcelFile(oldfilename)
             data_old = pd.read_excel(oldfilename, sheet_name='Data', header=2)
             data_old = data_old.fillna('')
             data = pd.concat([data_old,data],ignore_index=True).drop_duplicates('eventID', keep='first').reset_index(drop=True)
+            metadata_df = pd.read_excel(oldfilename, sheet_name='Metadata', usecols="B,C", index_col=0, header=None).transpose()
+            metadata_df = metadata_df.reset_index(drop=True)
+        
+        if 'metadata_df' not in globals():
+            metadata_df = False
             
         terms = list(data.columns)
         field_dict = mx.make_dict_of_fields()
         metadata = True
         conversions = True # Include metadata sheet and conversions sheet
-        mx.write_file(path,terms,field_dict,metadata,conversions,data)
-        
+        mx.write_file(path,terms,field_dict,metadata,conversions,data, metadata_df)        
     
     with open(path, "rb") as f:
         sys.stdout.flush()
