@@ -729,7 +729,8 @@ def check_array(data, checker_list, skiprows, config):
         ind = pd.Index(data[1:, index].astype(np.str))
         if ind.has_duplicates:
             # We have found dupes
-            dups = ind.get_duplicates()
+            dups = ind[ind.duplicated()].unique()
+            #dups = ind.get_duplicates()
             first = True
             for dup in dups:
                 if not(is_nan(dup)):
