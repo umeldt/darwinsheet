@@ -1,9 +1,9 @@
 Sample type,Action / Rename to (X = remove),Comment
 ,,
 14C AMS dating,,
+ADCP,,For ADCP mounted on mooring (mooring is parent)
 aDNA,,Ancient DNA
 Algae aggregates,,
-ASSIST sea ice observations,,Notes on sea ice conditions and weather
 AT/DIC/pH,,
 Bacterial production,, Set intendedMethod to for instance 3H-Leucine
 Bio bulk,,Ice cores for biological processing
@@ -50,6 +50,7 @@ ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
+L-ADCP,,For where L-ADCP is together with CTD, therefore it's child
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
 Macrozooplankton diet,,New
