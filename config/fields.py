@@ -123,7 +123,12 @@ cruiseNumber = {'name': 'cruiseNumber',
                                '2019710',
                                '2019711',
                                '2020113',
-                               '2021604'
+                               '2021604',
+                               '2021702',
+                               '2021703',
+                               '2021704',
+                               '2021708',
+                               '2021710'
                                ],
                     'input_title': 'Cruise Number',
                     'input_message': '''This is the same for one cruise''',
