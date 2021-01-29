@@ -1,6 +1,7 @@
 Sample type,Action / Rename to (X = remove),Comment
 ,,
 14C AMS dating,,
+ADCP,,For ADCP mounted on mooring (mooring is parent)
 aDNA,,Ancient DNA
 Algae aggregates,,
 AT/DIC/pH,,
@@ -49,6 +50,7 @@ ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
+L-ADCP,,For where L-ADCP is together with CTD, therefore it's child
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
 Macrozooplankton diet,,New
@@ -103,6 +105,7 @@ Small meiofauna abundance,,New
 Small meiofauna diet,,New
 Small meiofauna taxonomy,,New
 Small mesozooplankton diet,,New
+Small mesozooplankton biomass,,New
 Small mesozooplankton taxonomy,,
 Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)

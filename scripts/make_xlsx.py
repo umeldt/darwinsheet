@@ -311,7 +311,7 @@ def write_conversion(args, workbook):
         'font_size': DEFAULT_SIZE
     })
 
-    heigth = 15
+    height = 15
     sheet.set_column(0, 2, width=30)
 
     sheet.write(1, 0, "Coordinate conversion ", parameter_format)
@@ -328,7 +328,7 @@ def write_conversion(args, workbook):
     sheet.write(10, 1, "=B9+B10/60 ", output_format)
 
 
-def write_metadata(args, workbook, field_dict):
+def write_metadata(args, workbook, field_dict, metadata_df):
     """
     Adds a metadata sheet to workbook
 
@@ -343,6 +343,9 @@ def write_metadata(args, workbook, field_dict):
     field_dict : dict
         Contains a dictionary of Field objects and their name, made with
         make_dict_of _fields()
+    
+    metadata_df: pandas.core.frame.DataFrame
+        Optional parameter. Option to add metadata from a dataframe to the 'metadata' sheet.
 
     """
 
@@ -369,7 +372,7 @@ def write_metadata(args, workbook, field_dict):
         'font_size': DEFAULT_SIZE
     })
 
-    heigth = 15
+    
     sheet.set_column(0, 0, width=30)
     sheet.set_column(2, 2, width=50)
     for ii, mfield in enumerate(metadata_fields):
@@ -377,8 +380,25 @@ def write_metadata(args, workbook, field_dict):
         sheet.write(ii, 0, field.disp_name, parameter_format)
         sheet.write(ii, 1, field.name, parameter_format)
         sheet.set_column(1, 1, None, None, {'hidden': True})
-        sheet.write(ii, 2, '', input_format)
-        sheet.set_row(ii, heigth)
+        
+        if type(metadata_df) == pd.core.frame.DataFrame:
+            try:
+                sheet.write(ii,2,metadata_df[mfield][0], input_format)
+            except:
+                sheet.write(ii, 2, '', input_format)
+                continue
+        else:
+            sheet.write(ii, 2, '', input_format)
+        
+        if ii == 0:
+            height = 30
+        elif ii == 1: # Making abstract row height larger to encourage researches to write more.
+            height = 150
+        else:
+            height = 15
+            
+        sheet.set_row(ii, height)
+        
         if field.validation:
             if args.verbose > 0:
                 print("Writing metadata validation")
@@ -397,7 +417,7 @@ def write_metadata(args, workbook, field_dict):
                     ii, ii, cell_format=cell_format)
 
 
-def make_xlsx(args, file_def, field_dict, metadata, conversions, data='None'):
+def make_xlsx(args, file_def, field_dict, metadata, conversions, data, metadata_df):
     """
     Writes the xlsx file based on the wanted fields
 
@@ -421,6 +441,9 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions, data='None'):
         
     data: pandas.core.frame.DataFrame
         Optional parameter. Option to add data from a dataframe to the 'data' sheet.
+    
+    metadata_df: pandas.core.frame.DataFrame
+        Optional parameter. Option to add metadata from a dataframe to the 'metadata' sheet.
 
     """
 
@@ -432,7 +455,7 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions, data='None'):
     workbook.formats[0].set_font_size(DEFAULT_SIZE)
 
     if metadata:
-        write_metadata(args, workbook, field_dict)
+        write_metadata(args, workbook, field_dict, metadata_df)
     # Create sheet for data
     data_sheet = workbook.add_worksheet('Data')
     variable_sheet_obj = Variable_sheet(workbook)
@@ -557,7 +580,7 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions, data='None'):
     workbook.close()
 
 
-def write_file(url, fields, field_dict, metadata=True, conversions=True, data='None'):
+def write_file(url, fields, field_dict, metadata=True, conversions=True, data=False, metadata_df=False):
     """
     Method for calling from other python programs
 
@@ -579,6 +602,14 @@ def write_file(url, fields, field_dict, metadata=True, conversions=True, data='N
     conversions: Boolean
         Should the conversions sheet be written
         Default: True
+        
+    data: pandas.core.frame.DataFrame
+        Optional parameter. Option to add data from a dataframe to the 'data' sheet.
+        Default: Not added
+        
+    metadata_df: pandas.core.frame.DataFrame
+        Optional parameter. Option to add metadata from a dataframe to the 'metadata' sheet.
+        Default: Not added
 
     """
     args = Namespace()
@@ -588,7 +619,7 @@ def write_file(url, fields, field_dict, metadata=True, conversions=True, data='N
                 'disp_name': '',
                 'fields': fields}
 
-    make_xlsx(args, file_def, field_dict, metadata, conversions, data)
+    make_xlsx(args, file_def, field_dict, metadata, conversions, data, metadata_df)
 
 
 # def main(argv=None):  # IGNORE:C0111
