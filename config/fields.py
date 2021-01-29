@@ -132,6 +132,21 @@ cruiseNumber = {'name': 'cruiseNumber',
                 }
                 }
 
+vesselName = {'name': 'vesselName',
+                'disp_name': 'Vessel name',
+                'inherit': True,
+                'valid': {
+                    'validate': 'list',
+                    'source': ['Kronprins Haakon',
+                               'G.O.Sars'
+                               ],
+                    'input_title': 'Vessel Name',
+                    'input_message': '''Name of the vessel''',
+                    'error_title': 'Error',
+                    'error_message': 'Not a valid vessel name '
+                }
+                }
+
 statID = {'name': 'statID',
           'disp_name': 'Local Station ID',
           'inherit': True,
