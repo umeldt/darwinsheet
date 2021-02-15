@@ -59,10 +59,12 @@ def json_to_df(json_activities, json_cruise):
 
     key_map = {
             'eventID': 'id',
-            'gearType': 'activityTypeName',
+            'description': 'name',
+            'gearType': '',
             'eventDate': 'startTime',
             'eventTime': 'startTime',
-            'cruiseNumber': 'json_cruise', # Cruise number is taken from separate JSON data
+            'cruiseNumber': 'json_cruise',
+            'vesselName': 'json_cruise', # Cruise number and vessel name are taken from separate JSON data
             'stationName': 'fields',
             'decimalLatitude': 'startPosition__coordinates',
             'decimalLongitude': 'startPosition__coordinates',
@@ -88,56 +90,61 @@ def json_to_df(json_activities, json_cruise):
     
     for idx, activity in enumerate(json_activities):
         
-        # Creating dictionary where key is column header and value is value to be written for that column and activity
-        dic = {}
+        if type(activity['endTime']) == str:
             
-        for key, val in key_map.items():
-                
-            if key in ['eventDate', 'end_date', 'start_date']:
-                dic[key] = date_only(activity[val])
-                
-            elif key in ['eventTime', 'end_time', 'start_time']:
-                dic[key] = time_only(activity[val])
-                
-            elif key in ['decimalLatitude','endDecimalLatitude']:
-                dic[key] = activity[val][1]
-                
-            elif key in ['decimalLongitude','endDecimalLongitude']:
-                dic[key] = activity[val][0]
-                
-            elif key in ['bottomDepthInMeters']:
-                numFields = len(activity['fields'])
-                depths = [] 
-                for fld in range(numFields):
-                    if type(activity['fields'][fld]['extendedValue']) == dict:
-                        if activity['fields'][fld]['extendedValue']['mapping']['nmeaIdentifier'] == 'EKDBS':
-                            if type(activity['fields'][fld]['extendedValue']['result']) == float:
-                                if 0 < activity['fields'][fld]['extendedValue']['result'] < 1e4: # Returns 0 when depth out of range of instrument. Removing 0s and spikes from data.
-                                    depths.append(activity['fields'][fld]['extendedValue']['result'])
-                if len(depths) >= 1:
-                    dic[key] = np.mean(depths)
-                else:
-                    dic[key] = ''
-                
-            elif key == 'stationName':
-                numFields = len(activity['fields'])
-                for fld in range(numFields):
-                    if "station" in activity['fields'][fld]['name'].lower():
-                        dic[key] = activity['fields'][fld]['value']
+            # Creating dictionary where key is column header and value is value to be written for that column and activity
+            dic = {}
+            
+            for key, val in key_map.items():
+                    
+                if key in ['eventDate', 'end_date', 'start_date']:
+                    dic[key] = date_only(activity[val])
+                    
+                elif key in ['eventTime', 'end_time', 'start_time']:
+                    dic[key] = time_only(activity[val])
+                    
+                elif key in ['decimalLatitude','endDecimalLatitude']:
+                    dic[key] = activity[val][1]
+                    
+                elif key in ['decimalLongitude','endDecimalLongitude']:
+                    dic[key] = activity[val][0]
+                    
+                elif key in ['bottomDepthInMeters']:
+                    numFields = len(activity['fields'])
+                    depths = [] 
+                    for fld in range(numFields):
+                        if type(activity['fields'][fld]['extendedValue']) == dict:
+                            if activity['fields'][fld]['extendedValue']['mapping']['nmeaIdentifier'] == 'EKDBS':
+                                if type(activity['fields'][fld]['extendedValue']['result']) == float:
+                                    if 0 < activity['fields'][fld]['extendedValue']['result'] < 1e4: # Returns 0 when depth out of range of instrument. Removing 0s and spikes from data.
+                                        depths.append(activity['fields'][fld]['extendedValue']['result'])
+                    if len(depths) >= 1:
+                        dic[key] = np.mean(depths)
                     else:
                         dic[key] = ''
-                if numFields == 0:
-                    dic[key] = ''
                     
-            elif key == 'cruiseNumber':
-                dic[key] = int(json_cruise['cruiseNumber'])
+                elif key == 'stationName':
+                    numFields = len(activity['fields'])
+                    for fld in range(numFields):
+                        if "station" in activity['fields'][fld]['name'].lower():
+                            dic[key] = activity['fields'][fld]['value']
+                        else:
+                            dic[key] = ''
+                    if numFields == 0:
+                        dic[key] = ''
+                        
+                elif key == 'cruiseNumber':
+                    dic[key] = int(json_cruise['cruiseNumber'])
+                    
+                elif key == 'vesselName':
+                    dic[key] = json_cruise['vesselName']
+                    
+                elif val == '':
+                    dic[key] = ''
                 
-            elif val == '':
-                dic[key] = ''
-            
-            else:
-                dic[key] = activity[val]
-                  
-        df = df.append(dic, ignore_index=True)
+                else:
+                    dic[key] = activity[val]
+                      
+            df = df.append(dic, ignore_index=True)
         
     return df

@@ -34,16 +34,16 @@ main{
 
 </style>
 <main>
-<h1>Nansen Legacy Master Gear Log Generator</h1>
+<h1>Nansen Legacy Activity Log Generator</h1>
 <a href="../../index.html">Back to index</a><br>
-<p>Press the button below to generate a new version of the master gear log xlsx sheet.</p>
+<p>Press the button below to generate a new version of the activity log xlsx sheet.</p>
 <form method=post>
-<p><input type=submit value='Generate new version of master gear log' name='newfile'>
+<p><input type=submit value='Generate new version of activity log' name='newfile'>
 <div class="wrapper">
 </div>
 </form>
 <br>
-<p>Or you can select the file you want new activities to be added to.</p>
+<p>Or you can select the file you want new activities to be appended to.</p>
 <p>In this case, any changes you have made to activities previously included will be translated to the new file.</p>
 <form method="post" enctype="multipart/form-data">
     <input id="fileupload" name="myfile" type="file" />
@@ -51,10 +51,10 @@ main{
 </form>
 <br>
 <h2>At the end of the cruise</h2>
-<p>Please press the button below to generate a .txt file of the raw data from the API.</p>
+<p>Please press the button below to generate a .json file of the raw data from the API.</p>
 <p>Send this to the data manager with the rest of your sample logs.</p>
 <form method="post">
-    <input type="submit" value="Generate .txt file" name="txtfile"/>
+    <input type="submit" value="Generate .json file" name="txtfile"/>
 </form>
 </main>
 

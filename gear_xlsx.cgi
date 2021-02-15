@@ -30,7 +30,7 @@ import pandas as pd
 
 cgitb.enable()
 
-__updated__ = '2020-12-10'
+__updated__ = '2021-02-15'
 
 cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 
@@ -51,16 +51,16 @@ if method == "GET": # This is for getting the page
 
 if method == "POST":
     
-    #ip = '10.3.32.62' # GO Sars toktlogger
-    #ip = '10.3.64.57' # KPH toktlogger
-    ip = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
+    #tokt = '10.3.32.62' # GO Sars toktlogger
+    tokt = 'toktlogger-khaakon.hi.no' # KPH toktlogger
+    #tokt = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
     
-    #Pull data from IMR API in json format. IP address should match IMR API host.
-    url = "http://"+ip+"/api/activities/inCurrentCruise?format=json"
+    #Pull data from IMR API in json format. URL should match IMR API host.
+    url = "http://"+tokt+"/api/activities/inCurrentCruise?format=json"
     response = requests.get(url)
     json_activities = response.json()
     
-    url = "http://"+ip+"/api/cruises/current?format=json"
+    url = "http://"+tokt+"/api/cruises/current?format=json"
     response = requests.get(url)
     json_cruise = response.json()
         
@@ -69,9 +69,9 @@ if method == "POST":
     if "txtfile" in form: # Dumping the raw json data to a .txt file
     
         print("Content-Type: text/plain")
-        print("Content-Disposition: attachment; filename=raw_gear_log.txt\n")
+        print("Content-Disposition: attachment; filename=raw_activity_log.json\n")
         
-        path = "/tmp/" + next(tempfile._get_candidate_names()) + '.txt'
+        path = "/tmp/" + next(tempfile._get_candidate_names()) + '.json'
         
         json_out = [json_cruise] + json_activities 
         
@@ -81,16 +81,14 @@ if method == "POST":
     else: # Creating a .xlsx file of the gear log
     
         print("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        print("Content-Disposition: attachment; filename=Master_Gear_Log.xlsx\n")
+        print("Content-Disposition: attachment; filename=Activity_Log.xlsx\n")
         
         path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
         
         data = tl.json_to_df(json_activities,json_cruise)
         
-        #metadata_df = False
-        
         if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.        
-            oldfilename = '/tmp/oldgearlog.xlsx'
+            oldfilename = '/tmp/oldactivitylog.xlsx'
             with open(oldfilename, 'wb') as f:
                 f.write(form['myfile'].file.read())                
             #xls = pd.ExcelFile(oldfilename)
