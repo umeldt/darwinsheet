@@ -7,8 +7,10 @@ Created on Thu Dec  3 09:54:15 2020
 """
 
 import pandas as pd
+import datetime
 from datetime import datetime as dt
 import numpy as np
+import requests
 
 def flattenjson( b, delim ):
     '''
@@ -37,24 +39,34 @@ def flattenjson( b, delim ):
 
     return val
 
-def date_only(datetime):
+def date_only(timestamp):
     '''
-    Reads string of datetime and returns string of only date
+    Reads string of timestamp and returns string of only date
     '''
-    return dt.strptime(datetime, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d')
+    return dt.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d')
 
-def time_only(datetime):
+def time_only(timestamp):
     '''
-    Reads string of datetime and returns string of only time
+    Reads string of timestamp and returns string of only time
     '''
-    return dt.strptime(datetime, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%H:%M:%S')
+    return dt.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%H:%M:%S')
 
-def json_to_df(json_activities, json_cruise):
+def json_to_df(toktlogger):
     '''
-    Provide json data relating to activities and cruise that you have read from IMR API
+    Provide IP or DNS of toktlogger to access IMR API
     
     Returns single dataframe that can be included in the gear log
     '''
+    
+    #Pull data from IMR API in json format. URL should match IMR API host.
+    url = "http://"+toktlogger+"/api/activities/inCurrentCruise?format=json"
+    response = requests.get(url)
+    json_activities = response.json()
+    
+    url = "http://"+toktlogger+"/api/cruises/current?format=json"
+    response = requests.get(url)
+    json_cruise = response.json()
+    
     json_activities = list(map( lambda x: flattenjson( x, "__" ), json_activities ))
 
     key_map = {
@@ -90,9 +102,8 @@ def json_to_df(json_activities, json_cruise):
     
     for idx, activity in enumerate(json_activities):
         
-        print(type(activity['endPosition__coordinates'][0]))
-        
         if type(activity['endTime']) == str and type(activity['endPosition__coordinates'][0]) == float:
+            
             
             # Creating dictionary where key is column header and value is value to be written for that column and activity
             dic = {}
@@ -112,16 +123,34 @@ def json_to_df(json_activities, json_cruise):
                     dic[key] = activity[val][0]
                     
                 elif key in ['bottomDepthInMeters']:
-                    numFields = len(activity['fields'])
-                    depths = [] 
-                    for fld in range(numFields):
-                        if type(activity['fields'][fld]['extendedValue']) == dict:
-                            if activity['fields'][fld]['extendedValue']['mapping']['nmeaIdentifier'] == 'EKDBS':
-                                if type(activity['fields'][fld]['extendedValue']['result']) == float:
-                                    if 0 < activity['fields'][fld]['extendedValue']['result'] < 1e4: # Returns 0 when depth out of range of instrument. Removing 0s and spikes from data.
-                                        depths.append(activity['fields'][fld]['extendedValue']['result'])
-                    if len(depths) >= 1:
-                        dic[key] = np.mean(depths)
+                    
+                    # Retrieving start time and end time of activity so it can be used to pull bottom depth between these times
+
+                    start_dt = dt.strptime(activity['startTime'], '%Y-%m-%dT%H:%M:%S.%fZ')
+                    end_dt = dt.strptime(activity['endTime'], '%Y-%m-%dT%H:%M:%S.%fZ')
+                    timediff = end_dt - start_dt
+                    
+                    # Start time and end time are sometimes the same so need to make them different to pull data.
+                    if (timediff).seconds < 2:
+                        start_dt = end_dt - datetime.timedelta(seconds=2)
+                    
+                    start_date = start_dt.strftime('%Y-%m-%d')
+                    sthh = "{:02d}".format(start_dt.hour)
+                    stmm = "{:02d}".format(start_dt.minute)
+                    stss = start_dt.strftime('%S.%f')[:-3]
+                    end_date = end_dt.strftime('%Y-%m-%d')
+                    ethh = "{:02d}".format(end_dt.hour)
+                    etmm = "{:02d}".format(end_dt.minute)
+                    etss = end_dt.strftime('%S.%f')[:-3]
+                    url = "http://"+toktlogger+"/api/instrumentData/inPeriod?after="+start_date+"T"+sthh+"%3A"+stmm+"%3A"+stss+"Z&before="+end_date+"T"+ethh+"%3A"+etmm+"%3A"+etss+"Z&mappingIds=depth&format=json"
+                    response = requests.get(url)
+                    json_bd = response.json()
+                    
+                    if len(json_bd) >= 1:
+                        bd = []
+                        for i, t in enumerate(json_bd):
+                            bd.append(t['numericValue'])
+                        dic[key] = np.median([bd])
                     else:
                         dic[key] = ''
                     
