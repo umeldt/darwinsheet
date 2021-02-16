@@ -1,57 +1,57 @@
-Gear type,Action / Rename to (X = remove),Remark
-,,
-Active water sampler,,In situ filtration of sea water
-ADCP,,
-ARGO,,Float
-ASSIST,,Arctic Shipborne Sea Ice Standardization Tool
-Beam trawl,,
-Bongonet 180 um,,
-Bongonet 64 um,,
-Box core,,
-Bucket,,
-Calypso,,Piston corer
-Campelen trawl with fish lift,,
-Campelen trawl,, without fish lift
-Cast away CTD,,
-CMET Ballons,,
-CTD w/bottles,,
-CTD,,
-Drone,,
-EK80,,Fish echo sounder
-EM302,,Echo Sounder
-EM710,,Echo Sounder
-Glider,,
-GO-FLO,,This is the product name
-Gravity corer,,
-Harstad trawl,,
-Ice auger,,
-Ice corer 9 cm,,
-L-ADCP,,
-Macroplankton trawl,,
-MIK-net 1500 um,,
-Mooring,,
-Multicorer,,
-Multinet 180 um,,
-Multinet 64 um,,
-Niskin,,
-Optical profiler,,
-pC02 underway,,
-Phytoplankton net 10 um,,
-Phytoplankton net 20 um,,
-ROV,,
-SBP300,,Seismic echo sounder
-Sea water intake,,
-Sediment trap (long term),,1 year+
-Sediment trap (short term),,   
-Surface drifter,,
-Thermosalinograph,,
-Topas40,,Seismic echo sounder
-TS probe,,Echo Sounder
-Tube,,For sucking up water (from for instance a melt pond
-UIW,,Under Ice water
-Vertical microstructure profiler,,
-Weather station,,
-WP2 180 um,,New
-WP2 64 um,,New
-WP2 90 um,,New
-WP3 1000 um,,
+Gear type,Action / Rename to (X = remove),Remark,IMR name
+,,,
+Active water sampler,,In situ filtration of sea water,
+ADCP,,,
+ARGO,,Float,
+ASSIST,,Arctic Shipborne Sea Ice Standardization Tool,
+Beam trawl,,,Bunntrål
+Bongonet 180 um,,,
+Bongonet 64 um,,,
+Box core,,,Box core
+Bucket,,,
+Calypso,,Piston corer,
+Campelen trawl with fish lift,,,
+Campelen trawl,, without fish lift,
+Cast away CTD,,,
+CMET Ballons,,,
+CTD w/bottles,,,CTD med vannhenter
+CTD,,,CTD
+Drone,,,
+EK80,,Fish echo sounder,
+EM302,,Echo Sounder,
+EM710,,Echo Sounder,
+Glider,,,
+GO-FLO,,This is the product name,
+Gravity corer,,,
+Harstad trawl,,,Pelagisk trål
+Ice auger,,,
+Ice corer 9 cm,,,
+L-ADCP,,,
+Macroplankton trawl,,,
+MIK-net 1500 um,,,Mik
+Mooring,,,
+Multicorer,,,Multicorer
+Multinet 180 um,,,
+Multinet 64 um,,,
+Niskin,,,
+Optical profiler,,,
+pC02 underway,,,
+Phytoplankton net 10 um,,,
+Phytoplankton net 20 um,,,
+ROV,,,ROV
+SBP300,,Seismic echo sounder,
+Sea water intake,,,
+Sediment trap (long term),,1 year+,
+Sediment trap (short term),,   ,
+Surface drifter,,,
+Thermosalinograph,,,
+Topas40,,Seismic echo sounder,
+TS probe,,Echo Sounder,TS probe
+Tube,,For sucking up water (from for instance a melt pond,
+UIW,,Under Ice water,
+Vertical microstructure profiler,,,
+Weather station,,,
+WP2 180 um,,New,
+WP2 64 um,,New,
+WP2 90 um,,New,
+WP3 1000 um,,,

@@ -11,6 +11,10 @@ import datetime
 from datetime import datetime as dt
 import numpy as np
 import requests
+from os.path import os
+
+config_dir = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), '..', 'config'))
 
 def flattenjson( b, delim ):
     '''
@@ -98,6 +102,8 @@ def json_to_df(toktlogger):
             'pi_institution': ''   
             }
     
+    gear_df = pd.read_csv(config_dir+'/list_gear_types.csv')
+    
     df = pd.DataFrame(columns=key_map.keys())
     
     for idx, activity in enumerate(json_activities):
@@ -169,6 +175,13 @@ def json_to_df(toktlogger):
                     
                 elif key == 'vesselName':
                     dic[key] = json_cruise['vesselName']
+                
+                # Getting gear type from IMR activities list if possible by using the mapping in the list_gear_types.csv file
+                elif key == 'gearType':
+                    if activity['activityTypeName'] in gear_df['IMR name'].values:
+                        dic[key] = gear_df.loc[gear_df['IMR name'] == activity['activityTypeName'], 'Gear type'].item()
+                    else:
+                        dic[key] = ''
                     
                 elif val == '':
                     dic[key] = ''
