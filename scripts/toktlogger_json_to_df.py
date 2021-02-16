@@ -90,7 +90,9 @@ def json_to_df(json_activities, json_cruise):
     
     for idx, activity in enumerate(json_activities):
         
-        if type(activity['endTime']) == str:
+        print(type(activity['endPosition__coordinates'][0]))
+        
+        if type(activity['endTime']) == str and type(activity['endPosition__coordinates'][0]) == float:
             
             # Creating dictionary where key is column header and value is value to be written for that column and activity
             dic = {}
