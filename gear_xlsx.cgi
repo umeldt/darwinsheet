@@ -51,22 +51,22 @@ if method == "GET": # This is for getting the page
 
 if method == "POST":
     
-    #tokt = '10.3.32.62' # GO Sars toktlogger
-    tokt = 'toktlogger-khaakon.hi.no' # KPH toktlogger
-    #tokt = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
-    
-    #Pull data from IMR API in json format. URL should match IMR API host.
-    url = "http://"+tokt+"/api/activities/inCurrentCruise?format=json"
-    response = requests.get(url)
-    json_activities = response.json()
-    
-    url = "http://"+tokt+"/api/cruises/current?format=json"
-    response = requests.get(url)
-    json_cruise = response.json()
+    #toktlogger = '10.3.32.62' # GO Sars toktlogger
+    toktlogger = 'toktlogger-khaakon.hi.no' # KPH toktlogger
+    #toktlogger = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
         
     form = cgi.FieldStorage()
    
     if "txtfile" in form: # Dumping the raw json data to a .txt file
+    
+        #Pull data from IMR API in json format. URL should match IMR API host.
+        url = "http://"+toktlogger+"/api/activities/inCurrentCruise?format=json"
+        response = requests.get(url)
+        json_activities = response.json()
+        
+        url = "http://"+toktlogger+"/api/cruises/current?format=json"
+        response = requests.get(url)
+        json_cruise = response.json()
     
         print("Content-Type: text/plain")
         print("Content-Disposition: attachment; filename=raw_activity_log.json\n")
@@ -85,7 +85,7 @@ if method == "POST":
         
         path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
         
-        data = tl.json_to_df(json_activities,json_cruise)
+        data = tl.json_to_df(toktlogger)
         
         if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.        
             oldfilename = '/tmp/oldactivitylog.xlsx'
