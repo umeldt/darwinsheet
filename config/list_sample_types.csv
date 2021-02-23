@@ -1,6 +1,8 @@
 Sample type,Action / Rename to (X = remove),Comment
 ,,
 14C AMS dating,,
+Acoustics recorder,,
+AADI,,
 ADCP,,For ADCP mounted on mooring (mooring is parent)
 aDNA,,Ancient DNA
 Algae aggregates,,
@@ -11,6 +13,7 @@ Brine,,Brine type Ice-cores
 CDOM,, Colored dissolved organic matter
 Chlorophyll a > 10 um,,For use on sediment traps
 Chlorophyll a tot,,
+CTD,,For CTDs attached to moorings
 d13C DIC,,These are not taken for primary production
 d13C,,
 d18O,,
@@ -50,6 +53,7 @@ ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
+ISUS,,
 L-ADCP,,For where L-ADCP is together with CTD, therefore it's child
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
@@ -109,6 +113,8 @@ Small mesozooplankton biomass,,New
 Small mesozooplankton taxonomy,,
 Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)
+Temperature logger,,attached to moorings
+Temperature and pressure logger,,
 Tissue,, Specify type in tissueType
 Total Mercury,, Remarks can be Glass vial
 Total nitrogen,,
