@@ -390,15 +390,6 @@ def write_metadata(args, workbook, field_dict, metadata_df):
         else:
             sheet.write(ii, 2, '', input_format)
         
-        if ii == 0:
-            height = 30
-        elif ii == 1: # Making abstract row height larger to encourage researches to write more.
-            height = 150
-        else:
-            height = 15
-            
-        sheet.set_row(ii, height)
-        
         if field.validation:
             if args.verbose > 0:
                 print("Writing metadata validation")
@@ -416,6 +407,14 @@ def write_metadata(args, workbook, field_dict, metadata_df):
                 sheet.set_row(
                     ii, ii, cell_format=cell_format)
 
+        if ii == 0:
+            height = 30
+        elif ii == 1: # Making abstract row height larger to encourage researches to write more.
+            height = 150
+        else:
+            height = 15
+            
+        sheet.set_row(ii, height)
 
 def make_xlsx(args, file_def, field_dict, metadata, conversions, data, metadata_df):
     """

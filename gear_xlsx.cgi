@@ -42,7 +42,7 @@ from mako.lookup import TemplateLookup
 templates = TemplateLookup(directories = ['templates'], output_encoding='utf-8')
 
 if method == "GET": # This is for getting the page
-    
+
     template = templates.get_template("gear_xlsx.html")
     sys.stdout.flush()
     sys.stdout.buffer.write(b"Content-Type: text/html\n\n")
@@ -50,64 +50,64 @@ if method == "GET": # This is for getting the page
         template.render())
 
 if method == "POST":
-    
+
     #toktlogger = '10.3.32.62' # GO Sars toktlogger
     toktlogger = 'toktlogger-khaakon.hi.no' # KPH toktlogger
     #toktlogger = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
-        
+
     form = cgi.FieldStorage()
-   
+
     if "txtfile" in form: # Dumping the raw json data to a .txt file
-    
+
         #Pull data from IMR API in json format. URL should match IMR API host.
         url = "http://"+toktlogger+"/api/activities/inCurrentCruise?format=json"
         response = requests.get(url)
         json_activities = response.json()
-        
+
         url = "http://"+toktlogger+"/api/cruises/current?format=json"
         response = requests.get(url)
         json_cruise = response.json()
-    
+
         print("Content-Type: text/plain")
         print("Content-Disposition: attachment; filename=raw_activity_log.json\n")
-        
+
         path = "/tmp/" + next(tempfile._get_candidate_names()) + '.json'
-        
-        json_out = [json_cruise] + json_activities 
-        
+
+        json_out = [json_cruise] + json_activities
+
         with open(path, 'w') as outfile:
             json.dump(json_out, outfile, indent=4)
-            
+
     else: # Creating a .xlsx file of the gear log
-    
+
         print("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         print("Content-Disposition: attachment; filename=Activity_Log.xlsx\n")
-        
+
         path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
-        
+
         data = tl.json_to_df(toktlogger)
-        
-        if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.        
+
+        if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.
             oldfilename = '/tmp/oldactivitylog.xlsx'
             with open(oldfilename, 'wb') as f:
-                f.write(form['myfile'].file.read())                
+                f.write(form['myfile'].file.read())
             #xls = pd.ExcelFile(oldfilename)
             data_old = pd.read_excel(oldfilename, sheet_name='Data', header=2)
-            data_old = data_old.fillna('')
             data = pd.concat([data_old,data],ignore_index=True).drop_duplicates('eventID', keep='first').reset_index(drop=True)
+            data = data.fillna('')
             metadata_df = pd.read_excel(oldfilename, sheet_name='Metadata', usecols="B,C", index_col=0, header=None).transpose()
             metadata_df = metadata_df.reset_index(drop=True)
-        
+            metadata_df = metadata_df.fillna('')
+
         if 'metadata_df' not in globals():
             metadata_df = False
-            
+
         terms = list(data.columns)
         field_dict = mx.make_dict_of_fields()
         metadata = True
         conversions = True # Include metadata sheet and conversions sheet
-        mx.write_file(path,terms,field_dict,metadata,conversions,data, metadata_df)        
-    
+        mx.write_file(path,terms,field_dict,metadata,conversions,data, metadata_df)
+
     with open(path, "rb") as f:
         sys.stdout.flush()
         shutil.copyfileobj(f, sys.stdout.buffer)
-    
