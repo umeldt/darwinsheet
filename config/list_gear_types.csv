@@ -4,6 +4,7 @@ Active water sampler,,In situ filtration of sea water,
 ADCP,,,
 ARGO,,Float,
 ASSIST,,Arctic Shipborne Sea Ice Standardization Tool,
+AUV,,,
 Beam trawl,,,Bunntrål
 Bongonet 180 um,,,
 Bongonet 64 um,,,
@@ -30,6 +31,7 @@ L-ADCP,,,
 Macroplankton trawl,,,
 MIK-net 1500 um,,,Mik
 Mooring,,,
+MSS,,,MSS-Profiling
 Multicorer,,,Multicorer
 Multinet 180 um,,,
 Multinet 64 um,,,
