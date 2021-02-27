@@ -480,7 +480,25 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions, data, metadata_
         'font_size': DEFAULT_SIZE + 1,
         'bg_color': '#B9F6F5'
     })
+    
+    date_format = workbook.add_format({
+        'font_name': DEFAULT_FONT,
+        'bold': False,
+        'text_wrap': False,
+        'valign': 'vcenter',
+        'font_size': DEFAULT_SIZE,
+        'num_format': 'dd/mm/yy'
+        })
 
+    time_format = workbook.add_format({
+        'font_name': DEFAULT_FONT,
+        'bold': False,
+        'text_wrap': False,
+        'valign': 'vcenter',
+        'font_size': DEFAULT_SIZE,
+        'num_format': 'hh:mm:ss'
+        })
+    
     title_row = 1  # starting row
     start_row = title_row + 2
     parameter_row = title_row + 1  # Parameter row, hidden
@@ -546,10 +564,16 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions, data, metadata_
         else:
             data_sheet.set_column(first_col=ii, last_col=ii, width=field.width)
 
+    
     # Write optional data to data sheet
     if type(data) == pd.core.frame.DataFrame:
         for col_num, field in enumerate(data):
-            data_sheet.write_column(start_row,col_num,list(data[field]))
+            if field in ['eventDate', 'start_date', 'end_date']:
+                data_sheet.write_column(start_row,col_num,list(data[field]), date_format)
+            elif field in ['eventTime', 'start_time', 'end_time']:
+                data_sheet.write_column(start_row,col_num,list(data[field]), time_format)
+            else:
+                data_sheet.write_column(start_row,col_num,list(data[field]))
             
     # Add header, done after the other to get correct format
     data_sheet.write(0, 0, file_def['disp_name'], header_format)

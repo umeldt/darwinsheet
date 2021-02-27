@@ -117,10 +117,9 @@ def json_to_df(toktlogger):
             for key, val in key_map.items():
                     
                 if key in ['eventDate', 'end_date', 'start_date']:
-                    dic[key] = date_only(activity[val])
-                    
+                    dic[key] = dt.strptime(activity[val], '%Y-%m-%dT%H:%M:%S.%fZ').date()
                 elif key in ['eventTime', 'end_time', 'start_time']:
-                    dic[key] = time_only(activity[val])
+                    dic[key] = dt.strptime(activity[val], '%Y-%m-%dT%H:%M:%S.%fZ').time()
                     
                 elif key in ['decimalLatitude','endDecimalLatitude']:
                     dic[key] = activity[val][1]
