@@ -17,6 +17,7 @@ CTD,,For CTDs attached to moorings
 d13C DIC,,These are not taken for primary production
 d13C,,
 d18O,,
+Data: no physical sample,,To be used when no physical sample is taken and no other option is available in this list.
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
 Dilution culture,,
