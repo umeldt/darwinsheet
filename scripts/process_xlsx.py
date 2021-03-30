@@ -34,12 +34,11 @@ import fields as fields  # noqa: E402
 __all__ = []
 __version__ = 0.1
 __date__ = '2018-08-11'
-__updated__ = '2019-03-06'
+__updated__ = '2021-03-09'
 
 DEBUG = 1
 
 # REQUIERED = ['eventID',
-# 'cruiseNumber',
 # 'stationName',
 # 'eventTime',
 # 'eventDate',
@@ -773,12 +772,12 @@ def check_meta(metadata, checker_list, skipcols=1):
         A string per error, describing where the error was found
         On the form: paramName: disp_name : row
     """
+    
     good = True
     errors = []
     for row in range(metadata.shape[0]):
         if is_nan(metadata[row, 0]):
             continue
-        # print(metadata[0,col])
         try:
             checker = checker_list[metadata[row, 0]]
         except KeyError:
@@ -790,7 +789,14 @@ def check_meta(metadata, checker_list, skipcols=1):
             good = False
             errors.append("Metadata sheet: Content missing, Cell: " +
                           xl.utility.xl_rowcol_to_cell(row, 1+skipcols))
-
+        
+        elif metadata[row][0] == 'cruiseNumber' or metadata[row][0] == 'vesselName':
+            if not(check_value(metadata[row][1], checker)):
+                field = metadata[row][0]
+                val = metadata[row][1]
+                errors.append(f'"{str(val)}" is not a valid {field}')
+                good = False      
+                
     return good, errors
 
 
@@ -1026,7 +1032,7 @@ def main(argv=None):  # IGNORE:C0111
                   Takk for hjelpe!
                   ''')
         else:
-            print("Errors found. They were:")
+            print("Errors found. They are:")
             for line in error:
                 print(line)
 

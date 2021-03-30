@@ -67,10 +67,6 @@ def json_to_df(toktlogger):
     response = requests.get(url)
     json_activities = response.json()
     
-    url = "http://"+toktlogger+"/api/cruises/current?format=json"
-    response = requests.get(url)
-    json_cruise = response.json()
-    
     json_activities = list(map( lambda x: flattenjson( x, "__" ), json_activities ))
 
     key_map = {
@@ -79,8 +75,6 @@ def json_to_df(toktlogger):
             'gearType': '',
             'eventDate': 'startTime',
             'eventTime': 'startTime',
-            'cruiseNumber': 'json_cruise',
-            'vesselName': 'json_cruise', # Cruise number and vessel name are taken from separate JSON data
             'stationName': 'fields',
             'decimalLatitude': 'startPosition__coordinates',
             'decimalLongitude': 'startPosition__coordinates',
@@ -104,7 +98,7 @@ def json_to_df(toktlogger):
     
     gear_df = pd.read_csv(config_dir+'/list_gear_types.csv')
     
-    df = pd.DataFrame(columns=key_map.keys())
+    data = pd.DataFrame(columns=key_map.keys())
     
     for idx, activity in enumerate(json_activities):
         
@@ -168,12 +162,6 @@ def json_to_df(toktlogger):
                             dic[key] = ''
                     if numFields == 0:
                         dic[key] = ''
-                        
-                elif key == 'cruiseNumber':
-                    dic[key] = int(json_cruise['cruiseNumber'])
-                    
-                elif key == 'vesselName':
-                    dic[key] = json_cruise['vesselName']
                 
                 # Getting gear type from IMR activities list if possible by using the mapping in the list_gear_types.csv file
                 elif key == 'gearType':
@@ -188,6 +176,29 @@ def json_to_df(toktlogger):
                 else:
                     dic[key] = activity[val]
                       
-            df = df.append(dic, ignore_index=True)
+            data = data.append(dic, ignore_index=True)
         
-    return df
+    return data
+
+def pull_metadata(toktlogger):
+    
+    url = "http://"+toktlogger+"/api/cruises/current?format=json"
+    response = requests.get(url)
+    json_cruise = response.json()
+    
+    metadata_dic = {
+        'title': [''],
+        'abstract': [''],
+        'pi_name': [''],
+        'pi_email': [''],
+        'pi_institution': [''],
+        'pi_address': [''],
+        'recordedBy': [''],
+        'projectID': [''],
+        'cruiseNumber': [int(json_cruise['cruiseNumber'])],
+        'vesselName': [json_cruise['vesselName']]
+        }
+
+    metadata_df = pd.DataFrame.from_dict(metadata_dic)
+    
+    return metadata_df

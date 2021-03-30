@@ -86,6 +86,7 @@ if method == "POST":
         path = "/tmp/" + next(tempfile._get_candidate_names()) + '.xlsx'
 
         data = tl.json_to_df(toktlogger)
+        metadata_df = tl.pull_metadata(toktlogger)
 
         if "editfile" in form: # If a file has been uploaded, take data from that and append new activities to it.
             oldfilename = '/tmp/oldactivitylog.xlsx'
@@ -98,9 +99,6 @@ if method == "POST":
             metadata_df = pd.read_excel(oldfilename, sheet_name='Metadata', usecols="B,C", index_col=0, header=None).transpose()
             metadata_df = metadata_df.reset_index(drop=True)
             metadata_df = metadata_df.fillna('')
-
-        if 'metadata_df' not in globals():
-            metadata_df = False
 
         terms = list(data.columns)
         field_dict = mx.make_dict_of_fields()

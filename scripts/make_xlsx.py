@@ -352,7 +352,7 @@ def write_metadata(args, workbook, field_dict, metadata_df):
     sheet = workbook.add_worksheet('Metadata')
 
     metadata_fields = ['title', 'abstract', 'pi_name', 'pi_email', 'pi_institution',
-                       'pi_address', 'recordedBy', 'projectID']
+                       'pi_address', 'recordedBy', 'projectID', 'cruiseNumber', 'vesselName']
 
     parameter_format = workbook.add_format({
         'font_name': DEFAULT_FONT,
@@ -615,7 +615,7 @@ def write_file(url, fields, field_dict, metadata=True, conversions=True, data=Fa
     fields : list
         A list of the wanted fields
 
-    fields: dict
+    fields_dict: dict
         A list of the wanted fields on the format shown in config.fields
 
     metadata: Boolean
