@@ -17,6 +17,7 @@ CTD,,For CTDs attached to moorings
 d13C DIC,,These are not taken for primary production
 d13C,,
 d18O,,
+Data: no physical sample,,To be used when no physical sample is taken and no other option is available in this list.
 dCSP,,dissolved Coomassie stainable particles
 dD and d18O,, Samples taken for both dD and d18O
 Dilution culture,,
@@ -32,6 +33,7 @@ Electron microscopy (SEM filter),,
 Experiments,,For instance water samples to be used in experiments. IntendedMethod should be set
 Fatty acids,,
 Fecal pellet flux,, Taken from sediment traps
+Fecal pellets,,
 Female:egg ratio,,New
 FDOM,,Flourescent dissolved organic matter
 Fish,,
@@ -53,7 +55,7 @@ iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
 Isotopes,, Carbon and nitrogen stable isotopes
 ISUS,,
-L-ADCP,,For where L-ADCP is together with CTD, therefore it's child
+L-ADCP,,For where L-ADCP is together with CTD therefore it's child
 Macrofauna taxonomy,,
 Macrozooplankton biomass,,
 Macrozooplankton diet,,New
