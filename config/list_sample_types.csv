@@ -49,6 +49,7 @@ Grain size,, Sediment grain size
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
 Ice meiofauna,,
+Ice density,,
 ICP,,
 iDNA,, intestinal DNA
 IP25,,Ice algal biomarker
@@ -105,12 +106,16 @@ Sediment porosity,,
 Sediment slice,, Part of a sediment core used for further splitting
 Seston elemental composition,, Method can be XRF
 Single cell isolate,,
+Site coordinates,,
 Small meiofauna abundance,,New
 Small meiofauna diet,,New
 Small meiofauna taxonomy,,New
 Small mesozooplankton diet,,New
 Small mesozooplankton biomass,,New
 Small mesozooplankton taxonomy,,
+Snow salinity,,New
+Snow temperature,,New
+Snow thickness,,New
 Stable isotopes,,
 Station,,Needed for defining specific stations (NLEG01….)
 Temperature logger,,attached to moorings
@@ -119,6 +124,7 @@ Tissue,, Specify type in tissueType
 Total Mercury,, Remarks can be Glass vial
 Total nitrogen,,
 Total organic carbon,,
+Total thickness ice+snow,,
 Trace elements,,sampling with GO-FLO in a clean lab
 Viral decay,,
 Viral diversity (FeCl3),,

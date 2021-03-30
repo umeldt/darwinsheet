@@ -143,7 +143,8 @@ vesselName = {'name': 'vesselName',
                 'valid': {
                     'validate': 'list',
                     'source': ['Kronprins Haakon',
-                               'G.O.Sars'
+                               'G.O.Sars',
+                               'Kristine Bonnevie'
                                ],
                     'input_title': 'Vessel Name',
                     'input_message': '''Name of the vessel''',
@@ -925,6 +926,7 @@ For the Nansen Legacy this is:
 The Nansen Legacy (RCN # 276730)'''
              }
              }
+
 
 # ==============================================================================
 # Species names
