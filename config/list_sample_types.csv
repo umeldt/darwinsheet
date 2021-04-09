@@ -48,6 +48,7 @@ Gel trap,, Gel collecting particles from short time sediment trap
 Gelatinous zooplankton taxonomy,,New
 Gelatinous zooplankton volume,,New
 Grain size,, Sediment grain size
+Highly branched isoprenoids (HBI),,
 HPLC Pigments,,
 Ice core,, Needed to link sections to one common ice core
 ICP,,
@@ -110,8 +111,9 @@ Site coordinates,,
 Small meiofauna abundance,,New
 Small meiofauna diet,,New
 Small meiofauna taxonomy,,New
-Small mesozooplankton diet,,New
 Small mesozooplankton biomass,,New
+Small mesozooplankton diet,,New
+Small mesozooplankton metagenomics,,New
 Small mesozooplankton taxonomy,,
 Snow,,New
 Stable isotopes,,
