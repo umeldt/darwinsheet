@@ -53,7 +53,7 @@ if method == "POST":
 
     #toktlogger = '10.3.32.62' # GO Sars toktlogger
     toktlogger = 'toktlogger-khaakon.hi.no' # KPH toktlogger
-    #toktlogger = '158.39.47.78' # VM of toktlogger at UNIS on my laptop"
+    #toktlogger = '172.16.0.167' # VM of toktlogger at UNIS on my laptop"
 
     form = cgi.FieldStorage()
 
