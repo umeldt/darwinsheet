@@ -43,9 +43,7 @@ columns = [
         'pi_institution',
         'pi_email',
         'sampleLocation',
-        'dataFilename',
-        #'seaWaterPracticalSalinity',
-        #'seaWaterTemperatureInCelsius'
+        'dataFilename'
         ]
 
 def create_dataframe():
@@ -77,40 +75,41 @@ def generate_UUID(id_url):
     return str(uuid.uuid5(uuid.NAMESPACE_URL,id_url))
 
 def pull_columns(df_ctd,ctd_file):
+    '''
+    Pull columns from .btl file to a pandas dataframe
+    '''
+    # Creating a new temporary file to read from as .btl file needs cleaning to be understood by Pandas.
+    # Note that some columns that I am not interested in are still merged together.
+    with open(ctd_file, 'r') as f:
+        n = 0 # counter of lines in new temporary file
+        try:
+            os.remove('/tmp/'+ctd_file)
+        except OSError:
+            pass
+        with open('/tmp/'+ctd_file, 'a') as tmpfile:
+            for line in f: # Iterate over lines
+                if not line.startswith('*') and not line.startswith('#'): # Ignore header rows
+                    if 'sdev' not in line and 'Position' not in line:
+                        line = line.replace('(avg)','') # Removing (avg) from end of line - not a column value
+                        line = re.sub(r"^\s+", "", line) # Removing whitespace at beginning of line
+                        if n == 0: # For header line only
+                            line = re.sub("\s+", ",", line)
+                        line = re.sub("\s\s+" , ",", line)
+                        tmpfile.write(line+'\n')
+                    n += 1
     
-    data = pd.read_csv(btl_files_folder+ctd_file, header=None, skiprows=range(0,279), delim_whitespace=True,names=('bottleNumber',
-                                                                                                  1,
-                                                                                                  2,
-                                                                                                  3,
-                                                                                                  4,#'seaWaterPracticalSalinity',
-                                                                                                  5,
-                                                                                                  6,
-                                                                                                  'sampleDepthInMeters',
-                                                                                                  8,#'seaWaterTemperatureInCelsius',
-                                                                                                  9,
-                                                                                                  10,
-                                                                                                  11,
-                                                                                                  12,
-                                                                                                  13,
-                                                                                                  14,
-                                                                                                  15,
-                                                                                                  16,
-                                                                                                  17,
-                                                                                                  18,
-                                                                                                  19))
-    data = data.loc[data[19] == '(avg)']
-    data.reset_index(inplace=True)
+    data = pd.read_csv('/tmp/'+ctd_file, delimiter=',', usecols=['Bottle', 'PrDM'])
     
-    df_ctd['bottleNumber'] = data['bottleNumber']
-    #df_ctd['seaWaterPracticalSalinity'] = data['seaWaterPracticalSalinity']
-    #df_ctd['seaWaterTemperatureInCelsius'] = data['seaWaterTemperatureInCelsius']
+    df_ctd['bottleNumber'] = data['Bottle']
+    df_ctd['sampleDepthInMeters'] = data['PrDM']
+    
     
     data['eventID'] = ''
     for index, row in data.iterrows():
-        id_url = f'File {ctd_file} niskin bottle {row["bottleNumber"]}' 
+        id_url = f'File {ctd_file} niskin bottle {row["Bottle"]}' 
         eventID = generate_UUID(id_url)
         df_ctd['eventID'].iloc[index] = eventID
-        df_ctd['sampleDepthInMeters'].iloc[index] = row['sampleDepthInMeters']
+        #df_ctd['sampleDepthInMeters'].iloc[index] = row['sampleDepthInMeters']
 
     return df_ctd
 
@@ -125,7 +124,24 @@ def pull_from_toktlogger():
 
 
 def pull_global_attributes(df_ctd,ctd_file, df_tl):
-    
+    '''
+    Add global attributes that are constant for each individual .btl file (corresponding to one CTD cast)
+
+    Parameters
+    ----------
+    df_ctd : pandas dataframe
+        Dataframe to be written to niskin log, for a single CTD deployment 
+    ctd_file : string
+        Name of .btl file
+    df_tl : pandas dataframe
+        Data from toktlogger
+
+    Returns
+    -------
+    df_ctd : pandas dataframe
+        Dataframe to be written to niskin log, for a single CTD deployment 
+
+    '''
     df_ctd['dataFilename'] = ctd_file
     
     localStationNumber = int(ctd_file.split('.')[0].split('sta')[1])
@@ -153,8 +169,8 @@ def get_niskin_data():
 
     Returns
     -------
-    df_cruise : TYPE
-        DESCRIPTION.
+    df_cruise : pandas dataframe
+        Dataframe to be written to niskin log 
 
     '''
     df_cruise = create_dataframe()
