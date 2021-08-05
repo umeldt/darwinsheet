@@ -568,12 +568,15 @@ def make_xlsx(args, file_def, field_dict, metadata, conversions, data, metadata_
     # Write optional data to data sheet
     if type(data) == pd.core.frame.DataFrame:
         for col_num, field in enumerate(data):
-            if field in ['eventDate', 'start_date', 'end_date']:
-                data_sheet.write_column(start_row,col_num,list(data[field]), date_format)
-            elif field in ['eventTime', 'start_time', 'end_time']:
-                data_sheet.write_column(start_row,col_num,list(data[field]), time_format)
-            else:
-                data_sheet.write_column(start_row,col_num,list(data[field]))
+            try:
+                if field in ['eventDate', 'start_date', 'end_date']:
+                    data_sheet.write_column(start_row,col_num,list(data[field]), date_format)
+                elif field in ['eventTime', 'start_time', 'end_time']:
+                    data_sheet.write_column(start_row,col_num,list(data[field]), time_format)
+                else:
+                    data_sheet.write_column(start_row,col_num,list(data[field]))
+            except:
+                pass
             
     # Add header, done after the other to get correct format
     data_sheet.write(0, 0, file_def['disp_name'], header_format)

@@ -79,7 +79,7 @@ def json_to_df(toktlogger):
             'decimalLatitude': 'startPosition__coordinates',
             'decimalLongitude': 'startPosition__coordinates',
             'bottomDepthInMeters': 'fields',
-            'statID': 'superstationNumber',
+            'statID': 'localstationNumber',
             'sampleDepthInMeters': '',#
             'maximumDepthInMeters': '',# 
             'minimumDepthInMeters': '',#
