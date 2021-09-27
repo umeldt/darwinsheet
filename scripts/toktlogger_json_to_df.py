@@ -123,15 +123,11 @@ def json_to_df(toktlogger):
                     
                 elif key in ['bottomDepthInMeters']:
                     
-                    # Retrieving start time and end time of activity so it can be used to pull bottom depth between these times
+                    # Taking bottom depth for 2 seconds from start time of activity
+                    # Previously took as medium between start and end time, but was taking too long for long activities.
 
                     start_dt = dt.strptime(activity['startTime'], '%Y-%m-%dT%H:%M:%S.%fZ')
-                    end_dt = dt.strptime(activity['endTime'], '%Y-%m-%dT%H:%M:%S.%fZ')
-                    timediff = end_dt - start_dt
-                    
-                    # Start time and end time are sometimes the same so need to make them different to pull data.
-                    if (timediff).seconds < 2:
-                        start_dt = end_dt - datetime.timedelta(seconds=2)
+                    end_dt = start_dt + datetime.timedelta(seconds=2) 
                     
                     start_date = start_dt.strftime('%Y-%m-%d')
                     sthh = "{:02d}".format(start_dt.hour)
