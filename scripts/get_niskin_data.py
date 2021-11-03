@@ -11,7 +11,7 @@ import os
 import sys
 import re
 import uuid
-#import requests
+import requests
 
 import os.path
 aen_config_dir = (os.path.abspath(
@@ -46,6 +46,21 @@ columns = [
         'dataFilename'
         ]
 
+def get_cruise_number():
+    '''
+    Getting the cruise number from the toklogger
+
+    Returns
+    -------
+    cruiseNum: Integer of cruise number
+
+    '''
+    url = "http://toktlogger-khaakon.hi.no/api/cruises/current?format=json"
+    response = requests.get(url)
+    json_cruise = response.json()
+    cruisenum = int(json_cruise['cruiseNumber'])
+    return cruisenum
+    
 def create_dataframe():
     '''
     Create empty dataframe to append data from each file to
@@ -103,10 +118,11 @@ def pull_columns(df_ctd,ctd_file):
     df_ctd['bottleNumber'] = data['Bottle']
     df_ctd['sampleDepthInMeters'] = data['PrDM']
     
+    cruisenum = get_cruise_number()
     
     data['eventID'] = ''
     for index, row in data.iterrows():
-        id_url = f'File {ctd_file} niskin bottle {row["Bottle"]}' 
+        id_url = f'File {ctd_file} niskin bottle {row["Bottle"]} cruise {cruisenum}' 
         eventID = generate_UUID(id_url)
         df_ctd['eventID'].iloc[index] = eventID
         #df_ctd['sampleDepthInMeters'].iloc[index] = row['sampleDepthInMeters']
