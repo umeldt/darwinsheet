@@ -55,12 +55,14 @@ def get_cruise_number():
     cruiseNum: Integer of cruise number
 
     '''
-    url = "http://toktlogger-khaakon.hi.no/api/cruises/current?format=json"
+    
+    toktlogger = 'toktlogger-khaakon.hi.no'
+    url = "http://"+toktlogger+"/api/cruises/current?format=json"
     response = requests.get(url)
     json_cruise = response.json()
     cruisenum = int(json_cruise['cruiseNumber'])
     return cruisenum
-    
+
 def create_dataframe():
     '''
     Create empty dataframe to append data from each file to
