@@ -65,7 +65,7 @@ Optional fields are:
             has not been taken from a controlled vocabulary.
 
 
-@author:     Pål Ellingsen
+@author:     Pål Ellingsen, Luke Marsden
 @contact:    pale@unis.no
 @deffield    updated: Updated
 '''
@@ -76,7 +76,7 @@ import copy
 import csv
 
 __date__ = '2018-05-22'
-__updated__ = '2019-04-12'
+__updated__ = '2021-11-05'
 
 __config_dir = os.path.abspath(os.path.join(
     os.path.dirname(__file__), '..', 'config'))
