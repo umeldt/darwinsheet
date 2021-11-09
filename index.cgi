@@ -7,7 +7,7 @@
  Fork of https://github.com/umeldt/darwinsheet
 
 
-@author:     Pål Ellingsen
+@author:     Pål Ellingsen, Luke Marsden
 @author:     Christian Svindseth
 @deffield    updated: Updated
 '''
@@ -30,11 +30,11 @@ import scripts.make_xlsx as mx
 from scripts.process_xlsx import Term
 import config.fields as fields
 
-__updated__ = '2019-05-03'
+__updated__ = '2021-11-09'
 
 
 #cgitb.enable()
-SETUP_DEFAULT = 'darwin'
+SETUP_DEFAULT = 'aen'
 
 cookie = Cookie.SimpleCookie(os.environ.get("HTTP_COOKIE"))
 
