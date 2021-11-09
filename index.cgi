@@ -55,7 +55,7 @@ else:
 # print(setup)
 
 
-cores = yaml.load(
+cores = yaml.full_load(
     open(os.path.join("config", "config.yaml"), encoding='utf-8'))['cores']
 
 names = []  # For holding a list over the possible setups
@@ -66,7 +66,7 @@ for core in cores:
 
 
 # Put the language in an ordered place
-config['languages'] = yaml.load(
+config['languages'] = yaml.full_load(
     open(os.path.join("config", "config.yaml"), encoding='utf-8'))['languages']
 
 if 'site_language' in cookie:
