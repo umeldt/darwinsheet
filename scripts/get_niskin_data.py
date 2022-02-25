@@ -97,7 +97,7 @@ def pull_columns(df_ctd,ctd_file):
     '''
     # Creating a new temporary file to read from as .btl file needs cleaning to be understood by Pandas.
     # Note that some columns that I am not interested in are still merged together.
-    with open(ctd_file, 'r') as f:
+    with open(btl_files_folder + ctd_file, 'r') as f:
         n = 0 # counter of lines in new temporary file
         try:
             os.remove('/tmp/'+ctd_file)
